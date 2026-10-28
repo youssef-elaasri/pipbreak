@@ -1,0 +1,66 @@
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+from dataclasses import asdict
+from pathlib import Path
+
+from .checker import check_paths
+
+
+def parse_args(argv):
+    parser = argparse.ArgumentParser(
+        prog="apicheck",
+        description="Flag calls to APIs that don't exist in your installed package versions.")
+    parser.add_argument("paths", nargs="*", default=["."], help="files or directories to check")
+    parser.add_argument("--python", help="interpreter of the environment to check against "
+                                         "(e.g. .venv/bin/python); defaults to the current one")
+    parser.add_argument("--format", choices=["text", "json", "github"], default="text")
+    parser.add_argument("--local", action="append", default=[],
+                        help="top-level module name that belongs to your project (repeatable)")
+    parser.add_argument("--strict", action="store_true", help="exit non-zero on warnings too")
+    return parser.parse_args(argv)
+
+
+def run_in(python: str, argv: list[str]) -> int:
+    """Re-run ourselves under the target interpreter, so we see *its* installed packages."""
+    forwarded, skip = [], False
+    for arg in argv:
+        if skip:
+            skip = False
+        elif arg == "--python":
+            skip = True
+        elif not arg.startswith("--python="):
+            forwarded.append(arg)
+    env = dict(os.environ)
+    package_root = str(Path(__file__).resolve().parent.parent)
+    env["PYTHONPATH"] = os.pathsep.join(filter(None, [package_root, env.get("PYTHONPATH")]))
+    return subprocess.call([python, "-m", "apicheck", *forwarded], env=env)
+
+
+def main(argv=None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    args = parse_args(argv)
+    if args.python:
+        return run_in(args.python, argv)
+
+    findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
+    errors = sum(f.severity == "error" for f in findings)
+    warnings = len(findings) - errors
+
+    if args.format == "json":
+        print(json.dumps([asdict(f) for f in findings], indent=2))
+    elif args.format == "github":
+        for f in findings:
+            print(f"::{f.severity} file={f.path},line={f.line},col={f.col},title={f.code}::{f.message}")
+    else:
+        for f in findings:
+            print(f"{f.path}:{f.line}:{f.col}: {f.severity} {f.code} {f.message}")
+        version = f"{sys.version_info.major}.{sys.version_info.minor}"
+        print(f"\nChecked {file_count} file(s) against Python {version} at {sys.executable}: "
+              f"{errors} error(s), {warnings} warning(s).")
+
+    return 1 if errors or (args.strict and warnings) else 0
