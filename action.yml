@@ -1,7 +1,5 @@
 name: pipbreak dependency update
-description: >
-  On a dependency-update PR (Dependabot, Renovate), install the dependencies before and after the
-  update and report installed packages that call APIs the update removed - breakage pip can't see.
+description: Catch installed packages a Dependabot or Renovate update breaks - calls to APIs the new version removed.
 branding:
   icon: package
   color: orange

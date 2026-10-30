@@ -559,6 +559,7 @@ class Action(unittest.TestCase):
             self.skipTest("PyYAML not installed")
         action = yaml.safe_load(Path(__file__).parent.parent.joinpath("action.yml").read_text(encoding="utf-8"))
         self.assertEqual(action["runs"]["using"], "composite")
+        self.assertLess(len(action["description"]), 125)  # GitHub Marketplace limit
         self.assertTrue(all(isinstance(v["description"], str) for v in action["inputs"].values()))
 
 
