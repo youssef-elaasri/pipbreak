@@ -1,0 +1,14 @@
+{
+  "agent": "devin",
+  "repo": "BerriAI/litellm",
+  "number": 48945,
+  "state": "open",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T22:39:47Z",
+  "title": "fix(vertex-ai): add batch and flex above 200k and image output tier prices for gemini models",
+  "url": "https://github.com/BerriAI/litellm/pull/48945",
+  "stars": 62251,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

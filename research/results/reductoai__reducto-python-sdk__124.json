@@ -1,0 +1,426 @@
+{
+  "agent": "devin",
+  "repo": "reductoai/reducto-python-sdk",
+  "number": 124,
+  "state": "merged",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T04:19:35Z",
+  "title": "Add ReductoSageMaker, a client for an r-1 endpoint on SageMaker",
+  "url": "https://github.com/reductoai/reducto-python-sdk/pull/124",
+  "stars": 26,
+  "python_files": 33,
+  "added_lines": 4079,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "pydantic>=1.9.0, <3",
+      "typing-extensions>=4.14, <5",
+      "anyio>=3.5.0, <5; python_version < '3.10'",
+      "anyio>=4.14.2, <5; python_version >= '3.10'",
+      "distro>=1.7.0, <2",
+      "sniffio"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 44,
+  "findings": [
+    {
+      "path": "src/reducto/__init__.py",
+      "line": 118,
+      "col": 22,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'_t.List' is deprecated in Python 3.13: Deprecated alias to list.",
+      "source": "def __dir__() -> _t.List[str]:"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/_deps.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Callable' is deprecated in Python 3.13: Deprecated alias to collections.abc.Callable.",
+      "source": "from typing import TYPE_CHECKING, Callable, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/client.py",
+      "line": 11,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Dict' is deprecated in Python 3.13: Deprecated alias to dict.",
+      "source": "from typing import TYPE_CHECKING, Dict, Mapping, Optional, AbstractSet"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/client.py",
+      "line": 11,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import TYPE_CHECKING, Dict, Mapping, Optional, AbstractSet"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/client.py",
+      "line": 11,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.AbstractSet' is deprecated in Python 3.13: Deprecated alias to collections.abc.Set.",
+      "source": "from typing import TYPE_CHECKING, Dict, Mapping, Optional, AbstractSet"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/client.py",
+      "line": 15,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'httpx' is not installed in this environment",
+      "source": "import httpx"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/documents.py",
+      "line": 11,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Tuple' is deprecated in Python 3.13: Deprecated alias to builtins.tuple.",
+      "source": "from typing import IO, TYPE_CHECKING, Tuple, Union, Iterator, Optional, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/documents.py",
+      "line": 11,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Iterator' is deprecated in Python 3.13: Deprecated alias to collections.abc.Iterator.",
+      "source": "from typing import IO, TYPE_CHECKING, Tuple, Union, Iterator, Optional, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/errors.py",
+      "line": 3,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.List' is deprecated in Python 3.13: Deprecated alias to list.",
+      "source": "from typing import List, Optional"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/options.py",
+      "line": 3,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Tuple' is deprecated in Python 3.13: Deprecated alias to builtins.tuple.",
+      "source": "from typing import Tuple, Mapping, Optional, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/options.py",
+      "line": 3,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import Tuple, Mapping, Optional, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/response.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.List' is deprecated in Python 3.13: Deprecated alias to list.",
+      "source": "from typing import List, Tuple, Union, Mapping, Sequence, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/response.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Tuple' is deprecated in Python 3.13: Deprecated alias to builtins.tuple.",
+      "source": "from typing import List, Tuple, Union, Mapping, Sequence, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/response.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import List, Tuple, Union, Mapping, Sequence, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/response.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Sequence' is deprecated in Python 3.13: Deprecated alias to collections.abc.Sequence.",
+      "source": "from typing import List, Tuple, Union, Mapping, Sequence, cast"
+    },
+    {
+      "path": "src/reducto/lib/_page_parse/runner.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.List' is deprecated in Python 3.13: Deprecated alias to list.",
+      "source": "from typing import List, Optional"
+    },
+    {
+      "path": "src/reducto/lib/sagemaker/_transport.py",
+      "line": 3,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import TYPE_CHECKING, Mapping, cast"
+    },
+    {
+      "path": "tests/lib/_page_parse/_helpers.py",
+      "line": 8,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Callable' is deprecated in Python 3.13: Deprecated alias to collections.abc.Callable.",
+      "source": "from typing import Callable, Iterable, Optional, Sequence"
+    },
+    {
+      "path": "tests/lib/_page_parse/_helpers.py",
+      "line": 8,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Iterable' is deprecated in Python 3.13: Deprecated alias to collections.abc.Iterable.",
+      "source": "from typing import Callable, Iterable, Optional, Sequence"
+    },
+    {
+      "path": "tests/lib/_page_parse/_helpers.py",
+      "line": 8,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Sequence' is deprecated in Python 3.13: Deprecated alias to collections.abc.Sequence.",
+      "source": "from typing import Callable, Iterable, Optional, Sequence"
+    },
+    {
+      "path": "tests/lib/_page_parse/_helpers.py",
+      "line": 10,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pypdfium2' is not installed in this environment",
+      "source": "import pypdfium2 as pdfium  # pyright: ignore[reportMissingTypeStubs]"
+    },
+    {
+      "path": "tests/lib/_page_parse/_helpers.py",
+      "line": 11,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'PIL' is not installed in this environment",
+      "source": "from PIL import Image"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_client_base.py",
+      "line": 3,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_documents.py",
+      "line": 8,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_documents.py",
+      "line": 9,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'PIL' is not installed in this environment",
+      "source": "from PIL import Image"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_options.py",
+      "line": 3,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_render.py",
+      "line": 8,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_render.py",
+      "line": 9,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'PIL' is not installed in this environment",
+      "source": "from PIL import Image, ImageDraw"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_response.py",
+      "line": 5,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_runner.py",
+      "line": 8,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/_page_parse/test_runner.py",
+      "line": 9,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'PIL' is not installed in this environment",
+      "source": "from PIL import Image"
+    },
+    {
+      "path": "tests/lib/conftest.py",
+      "line": 3,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/sagemaker/_stubs.py",
+      "line": 7,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import Any, Mapping, Callable, Iterator"
+    },
+    {
+      "path": "tests/lib/sagemaker/_stubs.py",
+      "line": 7,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Callable' is deprecated in Python 3.13: Deprecated alias to collections.abc.Callable.",
+      "source": "from typing import Any, Mapping, Callable, Iterator"
+    },
+    {
+      "path": "tests/lib/sagemaker/_stubs.py",
+      "line": 7,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Iterator' is deprecated in Python 3.13: Deprecated alias to collections.abc.Iterator.",
+      "source": "from typing import Any, Mapping, Callable, Iterator"
+    },
+    {
+      "path": "tests/lib/sagemaker/_stubs.py",
+      "line": 13,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/sagemaker/_stubs.py",
+      "line": 14,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'botocore' is not installed in this environment",
+      "source": "from botocore.stub import ANY, Stubber"
+    },
+    {
+      "path": "tests/lib/sagemaker/_stubs.py",
+      "line": 15,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'botocore' is not installed in this environment",
+      "source": "from botocore.response import StreamingBody"
+    },
+    {
+      "path": "tests/lib/sagemaker/conftest.py",
+      "line": 5,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/sagemaker/test_client.py",
+      "line": 8,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import Any, Mapping"
+    },
+    {
+      "path": "tests/lib/sagemaker/test_client.py",
+      "line": 12,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/sagemaker/test_session.py",
+      "line": 6,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/sagemaker/test_transport.py",
+      "line": 5,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/lib/sagemaker/test_transport.py",
+      "line": 6,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'botocore' is not installed in this environment",
+      "source": "from botocore.exceptions import (  # pyright: ignore[reportMissingTypeStubs]"
+    }
+  ]
+}

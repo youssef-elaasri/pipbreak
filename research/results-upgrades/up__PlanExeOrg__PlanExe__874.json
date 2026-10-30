@@ -1,0 +1,44 @@
+{
+  "lib": "marshmallow",
+  "import": "marshmallow",
+  "repo": "PlanExeOrg/PlanExe",
+  "number": 874,
+  "url": "https://github.com/PlanExeOrg/PlanExe/pull/874",
+  "title": "chore(deps): bump marshmallow from 3.26.2 to 4.3.1 in /worker_plan",
+  "old": {
+    "failed": [],
+    "declared": 94,
+    "version": "3.26.2"
+  },
+  "new": {
+    "failed": [
+      "dataclasses-json==0.6.7",
+      "llama-index-core==0.14.12",
+      "llama-index-llms-anthropic==0.11.9",
+      "llama-index-llms-lmstudio==0.5.0",
+      "llama-index-llms-ollama==0.10.1",
+      "llama-index-llms-openai==0.6.12",
+      "llama-index-llms-openai-like==0.7.0",
+      "llama-index-llms-openrouter==0.5.1",
+      "llama-index-readers-file==0.6.0",
+      "llama-index-readers-llama-parse==0.6.1",
+      "llama-parse==0.6.94"
+    ],
+    "declared": 94,
+    "version": "4.3.1"
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-08-30T01:22:49Z",
+  "ci": "failure",
+  "head": "765b8935d43b596c66f13dfc5e2e35f26e53ba86",
+  "dependency_files": [
+    "worker_plan/pyproject.toml"
+  ],
+  "stars": 402,
+  "status": "ok",
+  "findings_before": 1247,
+  "findings_after": 1485,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "microsoft/vscode-black-formatter",
+  "number": 832,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T21:35:46Z",
+  "title": "Add Python 3.15 to CI test matrices",
+  "url": "https://github.com/microsoft/vscode-black-formatter/pull/832",
+  "stars": 198,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

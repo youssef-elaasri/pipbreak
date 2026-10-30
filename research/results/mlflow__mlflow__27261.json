@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "mlflow/mlflow",
+  "number": 27261,
+  "state": "closed",
+  "author": "Copilot",
+  "created": "2026-10-28T13:43:21Z",
+  "title": "Enable web search in the triage skill",
+  "url": "https://github.com/mlflow/mlflow/pull/27261",
+  "stars": 28575,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

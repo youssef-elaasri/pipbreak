@@ -1,0 +1,14 @@
+{
+  "agent": "devin",
+  "repo": "e2b-dev/E2B",
+  "number": 2049,
+  "state": "open",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T21:59:32Z",
+  "title": "test: rewrite implementation-coupled SDK tests to assert at public seams",
+  "url": "https://github.com/e2b-dev/E2B/pull/2049",
+  "stars": 14596,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

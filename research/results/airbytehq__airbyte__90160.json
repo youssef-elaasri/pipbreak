@@ -1,0 +1,41 @@
+{
+  "agent": "devin",
+  "repo": "airbytehq/airbyte",
+  "number": 90160,
+  "state": "closed",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T19:27:46Z",
+  "title": "fix(source-faker): use defaults for omitted settings in connection check",
+  "url": "https://github.com/airbytehq/airbyte/pull/90160",
+  "stars": 22283,
+  "python_files": 2,
+  "added_lines": 49,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 7,
+  "findings": [
+    {
+      "path": "airbyte-integrations/connectors/source-faker/unit_tests/test_config_defaults.py",
+      "line": 3,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "airbyte-integrations/connectors/source-faker/unit_tests/test_config_defaults.py",
+      "line": 6,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'airbyte_cdk' is not installed in this environment",
+      "source": "from airbyte_cdk.models import Status, SyncMode"
+    }
+  ]
+}

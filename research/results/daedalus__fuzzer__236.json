@@ -1,0 +1,35 @@
+{
+  "agent": "claude-code",
+  "repo": "daedalus/fuzzer",
+  "number": 236,
+  "state": "open",
+  "author": "daedalus",
+  "created": "2026-10-28T22:44:27Z",
+  "title": "feat(sarif): export crashes as SARIF 2.1.0",
+  "url": "https://github.com/daedalus/fuzzer/pull/236",
+  "stars": 45,
+  "python_files": 6,
+  "added_lines": 736,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "numpy>=2.0",
+      "ppmd>=0.1.1"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 1,
+  "findings": [
+    {
+      "path": "tests/test_sarif.py",
+      "line": 317,
+      "col": 9,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    }
+  ]
+}

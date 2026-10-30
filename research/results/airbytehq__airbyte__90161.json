@@ -1,0 +1,50 @@
+{
+  "agent": "devin",
+  "repo": "airbytehq/airbyte",
+  "number": 90161,
+  "state": "closed",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T19:41:19Z",
+  "title": "fix(source-faker): re-emit all users on syncs after a completed pass",
+  "url": "https://github.com/airbytehq/airbyte/pull/90161",
+  "stars": 22283,
+  "python_files": 2,
+  "added_lines": 58,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 15,
+  "findings": [
+    {
+      "path": "airbyte-integrations/connectors/source-faker/unit_tests/unit_test.py",
+      "line": 299,
+      "col": 5,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'airbyte_cdk' is not installed in this environment",
+      "source": "from airbyte_cdk.models import AirbyteStateMessage, AirbyteStateType"
+    },
+    {
+      "path": "airbyte-integrations/connectors/source-faker/unit_tests/unit_test.py",
+      "line": 330,
+      "col": 5,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'airbyte_cdk' is not installed in this environment",
+      "source": "from airbyte_cdk.models import AirbyteStateMessage, AirbyteStateType, AirbyteStreamState, StreamDescriptor"
+    },
+    {
+      "path": "airbyte-integrations/connectors/source-faker/unit_tests/unit_test.py",
+      "line": 331,
+      "col": 5,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'airbyte_cdk' is not installed in this environment",
+      "source": "from airbyte_cdk.models.airbyte_protocol import AirbyteStateBlob"
+    }
+  ]
+}

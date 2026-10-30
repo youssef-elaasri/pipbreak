@@ -1,0 +1,28 @@
+{
+  "lib": "httpx",
+  "import": "httpx",
+  "repo": "fhempy/fhempy",
+  "number": 670,
+  "url": "https://github.com/fhempy/fhempy/pull/670",
+  "title": "fix(deps-dev): bump httpx from 0.27.0 to 0.28.1",
+  "old": {
+    "failed": [],
+    "declared": 13,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 13,
+    "version": null
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-10-16T06:13:36Z",
+  "ci": "success",
+  "head": "e225dc505e682de75e542870aa0231834c7a12a6",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 49,
+  "status": "bump-not-reproduced"
+}

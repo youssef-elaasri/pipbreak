@@ -1,0 +1,32 @@
+{
+  "lib": "openai",
+  "import": "openai",
+  "repo": "thomast1906/terraform-review-ai-action",
+  "number": 43,
+  "url": "https://github.com/thomast1906/terraform-review-ai-action/pull/43",
+  "title": "Update dependency openai to v1.109.1",
+  "old": {
+    "failed": [],
+    "declared": 1,
+    "version": "1.109.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 1,
+    "version": "1.109.1"
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-04-09T00:23:36Z",
+  "ci": "success",
+  "head": "27a0bf5ebbf2546f0c55b4894ac84ee76cf9b60a",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 11,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

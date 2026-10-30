@@ -1,0 +1,28 @@
+{
+  "lib": "httpx",
+  "import": "httpx",
+  "repo": "GustavoMartins123/supabase-multitenant",
+  "number": 35,
+  "url": "https://github.com/GustavoMartins123/supabase-multitenant/pull/35",
+  "title": "chore(deps): bump httpx from 0.27.2 to 0.28.1 in /servidor/api-internal",
+  "old": {
+    "failed": [],
+    "declared": 11,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 11,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-06T00:28:57Z",
+  "ci": "success",
+  "head": "75fbea48c504ddda58abcad53c5e21873cc67fd8",
+  "dependency_files": [
+    "servidor/api-internal/requirements.txt"
+  ],
+  "stars": 23,
+  "status": "bump-not-reproduced"
+}

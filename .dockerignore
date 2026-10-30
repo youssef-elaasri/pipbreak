@@ -1,0 +1,6 @@
+*
+!apicheck/
+!research/mine.py
+!research/upgrades.py
+!research/run_check.py
+**/__pycache__

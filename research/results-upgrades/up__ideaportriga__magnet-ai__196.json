@@ -1,0 +1,28 @@
+{
+  "lib": "marshmallow",
+  "import": "marshmallow",
+  "repo": "ideaportriga/magnet-ai",
+  "number": 196,
+  "url": "https://github.com/ideaportriga/magnet-ai/pull/196",
+  "title": "chore(deps): bump marshmallow from 3.26.1 to 4.3.1 in /api",
+  "old": {
+    "failed": [],
+    "declared": 242,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 242,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-12T19:50:39Z",
+  "ci": "failure",
+  "head": "c084c2fc17de1ce7555418786776d50c40f151a4",
+  "dependency_files": [
+    "api/requirements.txt"
+  ],
+  "stars": 12,
+  "status": "bump-not-reproduced"
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
 import subprocess
@@ -47,7 +48,10 @@ def main(argv=None) -> int:
     if args.python:
         return run_in(args.python, argv)
 
-    findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
+    # Introspection imports the checked code's dependencies, and some print on import (pygame's
+    # banner) - keep that off stdout, or it corrupts --format json.
+    with contextlib.redirect_stdout(sys.stderr):
+        findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
     errors = sum(f.severity == "error" for f in findings)
     warnings = len(findings) - errors
 

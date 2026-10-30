@@ -1,0 +1,49 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "fabston/TradingView-Webhook-Bot",
+  "number": 189,
+  "url": "https://github.com/fabston/TradingView-Webhook-Bot/pull/189",
+  "title": "Bump werkzeug from 2.0.1 to 3.1.9",
+  "old": {
+    "failed": [
+      "black==21.5b1",
+      "Flask==2.0.1",
+      "Jinja2==3.0.1",
+      "MarkupSafe==2.0.1",
+      "python-telegram-bot==13.6",
+      "regex==2021.4.4",
+      "tornado==6.1"
+    ],
+    "declared": 36,
+    "version": "2.0.1"
+  },
+  "new": {
+    "failed": [
+      "black==21.5b1",
+      "Flask==2.0.1",
+      "Jinja2==3.0.1",
+      "MarkupSafe==2.0.1",
+      "python-telegram-bot==13.6",
+      "regex==2021.4.4",
+      "tornado==6.1",
+      "Werkzeug==3.1.9"
+    ],
+    "declared": 36,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T04:19:01Z",
+  "ci": "none",
+  "head": "eb5f8a3bd50dcae12b58ae1ea08ba09aa37be454",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 1889,
+  "status": "ok",
+  "findings_before": 2,
+  "findings_after": 2,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

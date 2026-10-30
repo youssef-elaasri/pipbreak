@@ -1,0 +1,28 @@
+{
+  "lib": "httpx",
+  "import": "httpx",
+  "repo": "aeshef/obsidian-agent",
+  "number": 45,
+  "url": "https://github.com/aeshef/obsidian-agent/pull/45",
+  "title": "Bump httpx from 0.27.2 to 0.28.1 in /finance_bot",
+  "old": {
+    "failed": [],
+    "declared": 16,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 16,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-09-30T16:32:27Z",
+  "ci": "success",
+  "head": "25085935923d0834b3f0e80536cb7dcb6eddfc31",
+  "dependency_files": [
+    "finance_bot/requirements.txt"
+  ],
+  "stars": 10,
+  "status": "bump-not-reproduced"
+}

@@ -1,0 +1,45 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "Merck/matcher",
+  "number": 17,
+  "url": "https://github.com/Merck/matcher/pull/17",
+  "title": "Bump werkzeug from 2.0.2 to 3.1.9 in /frontend",
+  "old": {
+    "failed": [
+      "aiohttp==3.8.1",
+      "gevent==21.12.0",
+      "orjson==3.6.7",
+      "pandas==1.4.1",
+      "python-multipart==0.0.5"
+    ],
+    "declared": 12,
+    "version": "2.0.2"
+  },
+  "new": {
+    "failed": [
+      "aiohttp==3.8.1",
+      "dash==2.11.1",
+      "gevent==21.12.0",
+      "orjson==3.6.7",
+      "pandas==1.4.1",
+      "python-multipart==0.0.5"
+    ],
+    "declared": 12,
+    "version": "3.1.9"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-20T10:16:21Z",
+  "ci": "failure",
+  "head": "7758b2b7fd226b3976143dca5ffa3cef14ff9c79",
+  "dependency_files": [
+    "frontend/requirements.txt"
+  ],
+  "stars": 71,
+  "status": "ok",
+  "findings_before": 19,
+  "findings_after": 33,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

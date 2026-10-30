@@ -1,0 +1,105 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "Septem151/gifsync",
+  "number": 61,
+  "url": "https://github.com/Septem151/gifsync/pull/61",
+  "title": "Bump werkzeug from 2.2.3 to 3.1.9",
+  "old": {
+    "failed": [],
+    "declared": 22,
+    "version": "2.2.3"
+  },
+  "new": {
+    "failed": [],
+    "declared": 22,
+    "version": "3.1.9"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T04:20:23Z",
+  "ci": "failure",
+  "head": "4d9b3100fc45452737a57ba1846b7fca3e3865eb",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 18,
+  "status": "ok",
+  "findings_before": 1,
+  "findings_after": 1,
+  "introduced": [],
+  "introduced_in_dependencies": [
+    {
+      "path": "flask/app.py",
+      "line": 30,
+      "col": 1,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug.urls' has no attribute 'url_quote' in Werkzeug==3.1.9. Did you mean 'unquote'?",
+      "source": "from werkzeug.urls import url_quote"
+    },
+    {
+      "path": "flask/cli.py",
+      "line": 250,
+      "col": 21,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.",
+      "source": "f\"Werkzeug {werkzeug.__version__}\","
+    },
+    {
+      "path": "flask/testing.py",
+      "line": 10,
+      "col": 1,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug.urls' has no attribute 'url_parse' in Werkzeug==3.1.9.",
+      "source": "from werkzeug.urls import url_parse"
+    },
+    {
+      "path": "flask/testing.py",
+      "line": 117,
+      "col": 44,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.",
+      "source": "\"HTTP_USER_AGENT\": f\"werkzeug/{werkzeug.__version__}\","
+    },
+    {
+      "path": "flask_login/utils.py",
+      "line": 14,
+      "col": 1,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug.urls' has no attribute 'url_decode' in Werkzeug==3.1.9. Did you mean 'urlencode'?",
+      "source": "from werkzeug.urls import url_decode"
+    },
+    {
+      "path": "flask_login/utils.py",
+      "line": 15,
+      "col": 1,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug.urls' has no attribute 'url_encode' in Werkzeug==3.1.9. Did you mean 'urlencode'?",
+      "source": "from werkzeug.urls import url_encode"
+    },
+    {
+      "path": "flask_wtf/recaptcha/validators.py",
+      "line": 6,
+      "col": 1,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug.urls' has no attribute 'url_encode' in Werkzeug==3.1.9. Did you mean 'urlencode'?",
+      "source": "from werkzeug.urls import url_encode"
+    },
+    {
+      "path": "flask_wtf/recaptcha/widgets.py",
+      "line": 3,
+      "col": 1,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug.urls' has no attribute 'url_encode' in Werkzeug==3.1.9. Did you mean 'urlencode'?",
+      "source": "from werkzeug.urls import url_encode"
+    }
+  ]
+}

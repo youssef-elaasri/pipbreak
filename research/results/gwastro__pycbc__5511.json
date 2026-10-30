@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "gwastro/pycbc",
+  "number": 5511,
+  "state": "closed",
+  "author": "Copilot",
+  "created": "2026-10-28T14:04:03Z",
+  "title": "Fix tutorial CI: upgrade matplotlib so matplotlib-inline 0.2.2 loads",
+  "url": "https://github.com/gwastro/pycbc/pull/5511",
+  "stars": 393,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

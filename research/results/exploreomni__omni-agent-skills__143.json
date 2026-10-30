@@ -1,0 +1,14 @@
+{
+  "agent": "claude-code",
+  "repo": "exploreomni/omni-agent-skills",
+  "number": 143,
+  "state": "open",
+  "author": "barberscott",
+  "created": "2026-10-28T22:46:45Z",
+  "title": "omni-content-builder: layer-compiled cartesian charts (1.24.0)",
+  "url": "https://github.com/exploreomni/omni-agent-skills/pull/143",
+  "stars": 45,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

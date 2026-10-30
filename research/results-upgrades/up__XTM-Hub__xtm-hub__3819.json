@@ -1,0 +1,40 @@
+{
+  "lib": "numpy",
+  "import": "numpy",
+  "repo": "XTM-Hub/xtm-hub",
+  "number": 3819,
+  "url": "https://github.com/XTM-Hub/xtm-hub/pull/3819",
+  "title": "chore(deps): update dependency numpy to v2.5.4",
+  "old": {
+    "failed": [
+      "contourpy==1.4.0",
+      "matplotlib==3.11.2",
+      "numpy==2.5.3",
+      "pandas==2.3.3",
+      "ta==0.11.0"
+    ],
+    "declared": 56,
+    "version": null
+  },
+  "new": {
+    "failed": [
+      "contourpy==1.4.0",
+      "matplotlib==3.11.2",
+      "numpy==2.5.4",
+      "pandas==2.3.3",
+      "ta==0.11.0"
+    ],
+    "declared": 56,
+    "version": null
+  },
+  "state": "MERGED",
+  "merged": true,
+  "created": "2026-10-13T23:39:43Z",
+  "ci": "none",
+  "head": "292e2fa2f30ab3ee5f36ddb14c370ca85edd7c05",
+  "dependency_files": [
+    "docs/requirements.txt"
+  ],
+  "stars": 16,
+  "status": "bump-not-reproduced"
+}

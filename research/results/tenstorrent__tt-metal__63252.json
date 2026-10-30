@@ -1,0 +1,14 @@
+{
+  "agent": "claude-code",
+  "repo": "tenstorrent/tt-metal",
+  "number": 63252,
+  "state": "open",
+  "author": "FConstantinos",
+  "created": "2026-10-28T22:44:24Z",
+  "title": "[Feature] ttnn: guide and Quasar CI for generic_op on a ProgramSpec",
+  "url": "https://github.com/tenstorrent/tt-metal/pull/63252",
+  "stars": 1731,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

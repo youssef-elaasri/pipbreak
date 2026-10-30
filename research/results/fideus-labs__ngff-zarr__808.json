@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "fideus-labs/ngff-zarr",
+  "number": 808,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T15:25:13Z",
+  "title": "ci: pin Copilot CLI to 1.0.98 in daily agentic workflows",
+  "url": "https://github.com/fideus-labs/ngff-zarr/pull/808",
+  "stars": 74,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

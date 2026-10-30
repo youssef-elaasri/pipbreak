@@ -1,0 +1,40 @@
+{
+  "agent": "devin",
+  "repo": "usestrix/strix",
+  "number": 1603,
+  "state": "merged",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T01:18:04Z",
+  "title": "feat(llm): send app attribution headers to Vercel AI Gateway",
+  "url": "https://github.com/usestrix/strix/pull/1603",
+  "stars": 72563,
+  "python_files": 3,
+  "added_lines": 28,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "openai-agents[litellm]>=0.19.0,<0.20",
+      "openai>=2.45.0,<3",
+      "litellm>=1.101.0",
+      "google-auth>=2.0.0",
+      "boto3>=1.28.0",
+      "pydantic>=2.11.3",
+      "pydantic-settings>=2.13.0",
+      "rich",
+      "docker>=7.1.0",
+      "requests>=2.32.0",
+      "cvss>=3.2",
+      "caido-sdk-client>=0.2.0",
+      "markdown-it-py>=3.0.0",
+      "reportlab>=4.0",
+      "pypdf>=5.0",
+      "cryptography>=48.0.1,<49",
+      "pyyaml>=6.0"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 1,
+  "findings": []
+}

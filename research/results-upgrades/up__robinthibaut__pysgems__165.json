@@ -1,0 +1,21 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "robinthibaut/pysgems",
+  "number": 165,
+  "url": "https://github.com/robinthibaut/pysgems/pull/165",
+  "title": "Bump pandas from 1.5.0 to 3.1.0",
+  "old": "1.5.0",
+  "new": "3.1.0",
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T04:03:41Z",
+  "ci": "none",
+  "head": "636f1def88f51a5063ef0f26de7dcdcc29ab40aa",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 64,
+  "status": "fetch-error",
+  "error": "Command '['/usr/local/bin/python', '-m', 'pip', 'install', '-q', '--disable-pip-version-check', '--no-cache-dir', '--only-binary=:all:', '--target', '/work/up__robinthibaut__pysgems__165/deps-new', '--upgrade', '-c', '/work/up__robinthibaut__pysgems__165/deps-new-constraints.txt', 'geocube~=0.3.3']' timed out after 900 seconds"
+}

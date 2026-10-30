@@ -1,0 +1,14 @@
+{
+  "agent": "devin",
+  "repo": "TracecatHQ/tracecat",
+  "number": 4007,
+  "state": "open",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T19:44:15Z",
+  "title": "feat(integrations): add incident.io API actions",
+  "url": "https://github.com/TracecatHQ/tracecat/pull/4007",
+  "stars": 3872,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

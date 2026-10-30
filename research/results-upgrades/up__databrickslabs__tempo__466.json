@@ -1,0 +1,28 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "databrickslabs/tempo",
+  "number": 466,
+  "url": "https://github.com/databrickslabs/tempo/pull/466",
+  "title": "Bump pandas from 1.5.3 to 2.3.3 in /python",
+  "old": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-07-06T15:34:56Z",
+  "ci": "none",
+  "head": "5805c3410bd6818a6cdd4184f8bdcd20049a09aa",
+  "dependency_files": [
+    "python/pyproject.toml"
+  ],
+  "stars": 347,
+  "status": "bump-not-reproduced"
+}

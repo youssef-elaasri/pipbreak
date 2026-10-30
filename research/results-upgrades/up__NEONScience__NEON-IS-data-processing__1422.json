@@ -1,0 +1,32 @@
+{
+  "lib": "marshmallow",
+  "import": "marshmallow",
+  "repo": "NEONScience/NEON-IS-data-processing",
+  "number": 1422,
+  "url": "https://github.com/NEONScience/NEON-IS-data-processing/pull/1422",
+  "title": "Bump marshmallow from 3.21.3 to 3.26.2 in /modules/l0_gcs_loader",
+  "old": {
+    "failed": [],
+    "declared": 9,
+    "version": "3.21.3"
+  },
+  "new": {
+    "failed": [],
+    "declared": 9,
+    "version": "3.26.2"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-20T19:12:27Z",
+  "ci": "success",
+  "head": "c8a4b1355785753d1f0a0b966b3a2ca0bb3fe888",
+  "dependency_files": [
+    "modules/l0_gcs_loader/requirements.txt"
+  ],
+  "stars": 13,
+  "status": "ok",
+  "findings_before": 679,
+  "findings_after": 679,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,14 @@
+{
+  "agent": "cursor",
+  "repo": "elevenlabs/skills",
+  "number": 146,
+  "state": "merged",
+  "author": "cursor[bot]",
+  "created": "2026-10-28T15:38:01Z",
+  "title": "Update skills from changelog 2026-10-26",
+  "url": "https://github.com/elevenlabs/skills/pull/146",
+  "stars": 516,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

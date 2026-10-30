@@ -1,0 +1,28 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "apache/flagon",
+  "number": 165,
+  "url": "https://github.com/apache/flagon/pull/165",
+  "title": "Bump pandas from 1.5.3 to 2.0.3 in /products/distill",
+  "old": {
+    "failed": [],
+    "declared": 10,
+    "version": "3.1.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 10,
+    "version": "3.1.0"
+  },
+  "state": "MERGED",
+  "merged": true,
+  "created": "2026-08-01T02:55:53Z",
+  "ci": "success",
+  "head": "3dc2dd921a9710e40da5e06665fa3185c0182d9f",
+  "dependency_files": [
+    "products/distill/pyproject.toml"
+  ],
+  "stars": 30,
+  "status": "bump-not-reproduced"
+}

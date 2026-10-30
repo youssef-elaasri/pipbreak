@@ -1,0 +1,769 @@
+[
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "mercure-imaging/mercure",
+    "number": 123,
+    "url": "https://github.com/mercure-imaging/mercure/pull/123",
+    "title": "deps(deps): bump pydantic from 1.10.15 to 2.14.1 in /app",
+    "old": "1.10.15",
+    "new": "2.14.1",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-10-27T18:01:29Z",
+    "ci": "success",
+    "head": "d79f696e9b57413d2c33329f350a8bffd86ab89e",
+    "dependency_files": [
+      "app/pyproject.toml",
+      "app/requirements.in"
+    ],
+    "stars": 104
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "FaserF/hassio-addons",
+    "number": 1258,
+    "url": "https://github.com/FaserF/hassio-addons/pull/1258",
+    "title": "\u2b06\ufe0f Update dependency pydantic to v2.14.2 [skip-tests]",
+    "old": null,
+    "new": "2.14.2",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-10-29T19:53:29Z",
+    "ci": "success",
+    "head": "f37ecd62cd7c363c0d59640d6711b6c18505a3a3",
+    "dependency_files": [
+      ".dev/AegisBot/requirements.txt",
+      ".dev/Alivro/requirements.txt",
+      ".dev/EntraMirror/requirements.txt",
+      ".dev/antigravity/requirements.txt"
+    ],
+    "stars": 134
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "Hyunk3l/hexagonal-architecture-kotlin-template",
+    "number": 919,
+    "url": "https://github.com/Hyunk3l/hexagonal-architecture-kotlin-template/pull/919",
+    "title": "Update dependency pydantic to v2.14.2",
+    "old": null,
+    "new": "2.14.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-29T19:32:20Z",
+    "ci": "success",
+    "head": "52b217219739ec22d56ee3a5a4438c67fa7b4049",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 21
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "ast-grep/ast-grep-mcp",
+    "number": 56,
+    "url": "https://github.com/ast-grep/ast-grep-mcp/pull/56",
+    "title": "fix(deps): update dependency pydantic to v2.14.2",
+    "old": null,
+    "new": "2.14.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-29T17:51:20Z",
+    "ci": "success",
+    "head": "d7feae76d2304bb41621db7a52452d9d85014db5",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 487
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "frenck/probatio",
+    "number": 513,
+    "url": "https://github.com/frenck/probatio/pull/513",
+    "title": "\u2b06\ufe0f Update dependency pydantic to v2.14.2",
+    "old": null,
+    "new": "2.14.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-29T17:43:37Z",
+    "ci": "failure",
+    "head": "d26e2fda5d98b8c1cdc7b9abec62c0ce697bd1c9",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 21
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "AndreasHeine/i3x2ua",
+    "number": 149,
+    "url": "https://github.com/AndreasHeine/i3x2ua/pull/149",
+    "title": "Update dependency pydantic to v2.14.2",
+    "old": null,
+    "new": "2.14.2",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-10-29T16:42:36Z",
+    "ci": "success",
+    "head": "246ea0dc74bf483dcc984b0ecc351d3cfb2feda9",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 19
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "closeio/sync-engine",
+    "number": 1207,
+    "url": "https://github.com/closeio/sync-engine/pull/1207",
+    "title": "Bump sqlalchemy from 1.4.54 to 2.1.6",
+    "old": "1.4.54",
+    "new": "2.1.6",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-29T03:06:53Z",
+    "ci": "failure",
+    "head": "26df70e213e437f2b1150dc6a20f9078f5f89dcb",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 30
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "OCHA-DAP/hdx-ckan",
+    "number": 7133,
+    "url": "https://github.com/OCHA-DAP/hdx-ckan/pull/7133",
+    "title": "Bump sqlalchemy from 1.4.52 to 2.1.6",
+    "old": "1.4.52",
+    "new": "2.1.6",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-27T05:48:23Z",
+    "ci": "failure",
+    "head": "4765ec1a748021a3089a29ddf556cddc38b4cdfa",
+    "dependency_files": [
+      "requirements.in",
+      "requirements.txt"
+    ],
+    "stars": 80
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "aio-libs/aiomysql",
+    "number": 1093,
+    "url": "https://github.com/aio-libs/aiomysql/pull/1093",
+    "title": "Bump sqlalchemy from 1.3.24 to 2.0.55",
+    "old": "1.3.24",
+    "new": "2.0.55",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-27T01:52:46Z",
+    "ci": "failure",
+    "head": "0d77198205d0d176884cc020f2d1e3bb1b0235ff",
+    "dependency_files": [
+      "pyproject.toml",
+      "requirements-dev.txt"
+    ],
+    "stars": 1897
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "mozilla/bugbot",
+    "number": 3085,
+    "url": "https://github.com/mozilla/bugbot/pull/3085",
+    "title": "Bump sqlalchemy from 1.3.24 to 2.0.55",
+    "old": "1.3.24",
+    "new": "2.0.55",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T13:06:50Z",
+    "ci": "failure",
+    "head": "3f2d7a47b2cc64f047b65158ed5af5cd3385eb6b",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 69
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "UofTCoders/studyGroup",
+    "number": 571,
+    "url": "https://github.com/UofTCoders/studyGroup/pull/571",
+    "title": "Bump sqlalchemy from 1.1.2 to 1.3.0b3 in /lessons/misc/sql-intro/requirements in the pip group across 1 directory",
+    "old": "1.1.2",
+    "new": "1.3.0b3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T04:04:59Z",
+    "ci": "none",
+    "head": "fde6185d60cadcb81cd2baaebf7e2c9ed9553a85",
+    "dependency_files": [
+      "lessons/misc/sql-intro/requirements/requirements.txt"
+    ],
+    "stars": 102
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "c2corg/v6_api",
+    "number": 2280,
+    "url": "https://github.com/c2corg/v6_api/pull/2280",
+    "title": "build(deps): bump sqlalchemy from 1.3.24 to 2.1.4",
+    "old": "1.3.24",
+    "new": "2.1.4",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-10-13T22:41:56Z",
+    "ci": "failure",
+    "head": "c22e3b89c052e99f45ff50a92ca5369a70158876",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 25
+  },
+  {
+    "lib": "numpy",
+    "import": "numpy",
+    "repo": "KarelZe/tclf",
+    "number": 289,
+    "url": "https://github.com/KarelZe/tclf/pull/289",
+    "title": "build(deps): bump numpy from 1.26.4 to 2.2.6",
+    "old": "1.26.4",
+    "new": "2.2.6",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-10-23T15:15:14Z",
+    "ci": "success",
+    "head": "b162871a1c2ab48a9b1ee403f401fce5a838b34e",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 22
+  },
+  {
+    "lib": "numpy",
+    "import": "numpy",
+    "repo": "XTM-Hub/xtm-hub",
+    "number": 3819,
+    "url": "https://github.com/XTM-Hub/xtm-hub/pull/3819",
+    "title": "chore(deps): update dependency numpy to v2.5.4",
+    "old": null,
+    "new": "2.5.4",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-10-13T23:39:43Z",
+    "ci": "none",
+    "head": "292e2fa2f30ab3ee5f36ddb14c370ca85edd7c05",
+    "dependency_files": [
+      "docs/requirements.txt"
+    ],
+    "stars": 16
+  },
+  {
+    "lib": "numpy",
+    "import": "numpy",
+    "repo": "OCEANOFANYTHING/MailGrab",
+    "number": 345,
+    "url": "https://github.com/OCEANOFANYTHING/MailGrab/pull/345",
+    "title": "Update dependency numpy to v2.5.4",
+    "old": null,
+    "new": "2.5.4",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-10-12T10:41:03Z",
+    "ci": "success",
+    "head": "82fb42b64203ed176a3980faab393fb12c82c65b",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 11
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "NEONScience/NEON-IS-data-processing",
+    "number": 1422,
+    "url": "https://github.com/NEONScience/NEON-IS-data-processing/pull/1422",
+    "title": "Bump marshmallow from 3.21.3 to 3.26.2 in /modules/l0_gcs_loader",
+    "old": "3.21.3",
+    "new": "3.26.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-20T19:12:27Z",
+    "ci": "success",
+    "head": "c8a4b1355785753d1f0a0b966b3a2ca0bb3fe888",
+    "dependency_files": [
+      "modules/l0_gcs_loader/requirements.txt"
+    ],
+    "stars": 13
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "ideaportriga/magnet-ai",
+    "number": 196,
+    "url": "https://github.com/ideaportriga/magnet-ai/pull/196",
+    "title": "chore(deps): bump marshmallow from 3.26.1 to 4.3.1 in /api",
+    "old": "3.26.1",
+    "new": "4.3.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-12T19:50:39Z",
+    "ci": "failure",
+    "head": "c084c2fc17de1ce7555418786776d50c40f151a4",
+    "dependency_files": [
+      "api/requirements.txt"
+    ],
+    "stars": 12
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "jhd3197/ServerKit",
+    "number": 170,
+    "url": "https://github.com/jhd3197/ServerKit/pull/170",
+    "title": "Bump marshmallow from 3.26.2 to 4.3.1 in /backend",
+    "old": "3.26.2",
+    "new": "4.3.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-11T19:50:57Z",
+    "ci": "success",
+    "head": "6adc9d522f5e6572ecf91e5d6814f18c20cd230e",
+    "dependency_files": [
+      "backend/requirements.txt"
+    ],
+    "stars": 1801
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "wachawo/text-to-speech",
+    "number": 36,
+    "url": "https://github.com/wachawo/text-to-speech/pull/36",
+    "title": "Bump marshmallow from 3.26.2 to 4.3.1 in /ttssrv",
+    "old": "3.26.2",
+    "new": "4.3.1",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-09-16T01:40:32Z",
+    "ci": "success",
+    "head": "cd5fcaf54aa0c470044a3b71d08ecbb5e690fd74",
+    "dependency_files": [
+      "ttssrv/requirements.txt"
+    ],
+    "stars": 36
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "Azure-Samples/ai-rag-chat-evaluator",
+    "number": 171,
+    "url": "https://github.com/Azure-Samples/ai-rag-chat-evaluator/pull/171",
+    "title": "Bump marshmallow from 3.23.2 to 4.3.1",
+    "old": "3.23.2",
+    "new": "4.3.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-09-09T13:57:10Z",
+    "ci": "failure",
+    "head": "bb07791fbbaff92ab8373ece5b02aeca2836c980",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 336
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "PlanExeOrg/PlanExe",
+    "number": 874,
+    "url": "https://github.com/PlanExeOrg/PlanExe/pull/874",
+    "title": "chore(deps): bump marshmallow from 3.26.2 to 4.3.1 in /worker_plan",
+    "old": "3.26.2",
+    "new": "4.3.1",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-08-30T01:22:49Z",
+    "ci": "failure",
+    "head": "765b8935d43b596c66f13dfc5e2e35f26e53ba86",
+    "dependency_files": [
+      "worker_plan/pyproject.toml"
+    ],
+    "stars": 402
+  },
+  {
+    "lib": "httpx",
+    "import": "httpx",
+    "repo": "fhempy/fhempy",
+    "number": 670,
+    "url": "https://github.com/fhempy/fhempy/pull/670",
+    "title": "fix(deps-dev): bump httpx from 0.27.0 to 0.28.1",
+    "old": "0.27.0",
+    "new": "0.28.1",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-10-16T06:13:36Z",
+    "ci": "success",
+    "head": "e225dc505e682de75e542870aa0231834c7a12a6",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 49
+  },
+  {
+    "lib": "httpx",
+    "import": "httpx",
+    "repo": "aixisstudio/Snitch",
+    "number": 30,
+    "url": "https://github.com/aixisstudio/Snitch/pull/30",
+    "title": "chore(deps-dev): bump httpx from 0.27.2 to 0.28.1 in /backend",
+    "old": "0.27.2",
+    "new": "0.28.1",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-10-15T11:34:32Z",
+    "ci": "success",
+    "head": "a1d3a21c5ea60a624784c4ec90f5b24f85532788",
+    "dependency_files": [
+      "backend/requirements-dev.txt"
+    ],
+    "stars": 659
+  },
+  {
+    "lib": "httpx",
+    "import": "httpx",
+    "repo": "GustavoMartins123/supabase-multitenant",
+    "number": 35,
+    "url": "https://github.com/GustavoMartins123/supabase-multitenant/pull/35",
+    "title": "chore(deps): bump httpx from 0.27.2 to 0.28.1 in /servidor/api-internal",
+    "old": "0.27.2",
+    "new": "0.28.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-06T00:28:57Z",
+    "ci": "success",
+    "head": "75fbea48c504ddda58abcad53c5e21873cc67fd8",
+    "dependency_files": [
+      "servidor/api-internal/requirements.txt"
+    ],
+    "stars": 23
+  },
+  {
+    "lib": "httpx",
+    "import": "httpx",
+    "repo": "aeshef/obsidian-agent",
+    "number": 45,
+    "url": "https://github.com/aeshef/obsidian-agent/pull/45",
+    "title": "Bump httpx from 0.27.2 to 0.28.1 in /finance_bot",
+    "old": "0.27.2",
+    "new": "0.28.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-09-30T16:32:27Z",
+    "ci": "success",
+    "head": "25085935923d0834b3f0e80536cb7dcb6eddfc31",
+    "dependency_files": [
+      "finance_bot/requirements.txt"
+    ],
+    "stars": 10
+  },
+  {
+    "lib": "httpx",
+    "import": "httpx",
+    "repo": "Altinn/altinn-studio",
+    "number": 19534,
+    "url": "https://github.com/Altinn/altinn-studio/pull/19534",
+    "title": "chore(deps): update dependency httpx to v0.28.1",
+    "old": null,
+    "new": "0.28.1",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-07-13T15:44:56Z",
+    "ci": "success",
+    "head": "da730f3958619920a331b72499bf02860410473a",
+    "dependency_files": [
+      "src/tools/altinn-fleet-stats/backend/requirements.txt"
+    ],
+    "stars": 169
+  },
+  {
+    "lib": "httpx",
+    "import": "httpx",
+    "repo": "open-telemetry/opentelemetry-python-genai",
+    "number": 67,
+    "url": "https://github.com/open-telemetry/opentelemetry-python-genai/pull/67",
+    "title": "Update dependency httpx to v0.28.1",
+    "old": null,
+    "new": "0.28.1",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-05-22T20:32:53Z",
+    "ci": "success",
+    "head": "ec1320c404d541f53313787016ee37c826fffa43",
+    "dependency_files": [
+      "instrumentation/opentelemetry-instrumentation-genai-openai-agents/tests/requirements.latest.txt",
+      "instrumentation/opentelemetry-instrumentation-genai-openai/tests/requirements.latest.txt"
+    ],
+    "stars": 47
+  },
+  {
+    "lib": "openai",
+    "import": "openai",
+    "repo": "thomast1906/terraform-review-ai-action",
+    "number": 43,
+    "url": "https://github.com/thomast1906/terraform-review-ai-action/pull/43",
+    "title": "Update dependency openai to v1.109.1",
+    "old": null,
+    "new": "1.109.1",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-04-09T00:23:36Z",
+    "ci": "success",
+    "head": "27a0bf5ebbf2546f0c55b4894ac84ee76cf9b60a",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 11
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "IBM/ada",
+    "number": 17,
+    "url": "https://github.com/IBM/ada/pull/17",
+    "title": "Bump werkzeug from 2.2.3 to 3.1.9",
+    "old": "2.2.3",
+    "new": "3.1.9",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-10-28T18:36:04Z",
+    "ci": "failure",
+    "head": "39eeea0b97725e0d5f40783c91f1ec4d2c43425f",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 55
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "Septem151/gifsync",
+    "number": 61,
+    "url": "https://github.com/Septem151/gifsync/pull/61",
+    "title": "Bump werkzeug from 2.2.3 to 3.1.9",
+    "old": "2.2.3",
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T04:20:23Z",
+    "ci": "failure",
+    "head": "4d9b3100fc45452737a57ba1846b7fca3e3865eb",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 18
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "fabston/TradingView-Webhook-Bot",
+    "number": 189,
+    "url": "https://github.com/fabston/TradingView-Webhook-Bot/pull/189",
+    "title": "Bump werkzeug from 2.0.1 to 3.1.9",
+    "old": "2.0.1",
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T04:19:01Z",
+    "ci": "none",
+    "head": "eb5f8a3bd50dcae12b58ae1ea08ba09aa37be454",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 1889
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "jacebrowning/pomace",
+    "number": 257,
+    "url": "https://github.com/jacebrowning/pomace/pull/257",
+    "title": "Bump werkzeug from 2.3.8 to 3.1.9",
+    "old": "2.3.8",
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-23T21:57:12Z",
+    "ci": "failure",
+    "head": "a7889d080caf2f7eef26a1c2261261120899d5e9",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 10
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "Azure/containerization-assist",
+    "number": 803,
+    "url": "https://github.com/Azure/containerization-assist/pull/803",
+    "title": "build(deps): bump werkzeug from 2.3.6 to 3.1.9 in /test/__support__/fixtures/python-flask",
+    "old": "2.3.6",
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-20T22:17:29Z",
+    "ci": "success",
+    "head": "05cba2d86294f7cf7ce8c0923b9d9eea3087f648",
+    "dependency_files": [
+      "test/__support__/fixtures/python-flask/requirements.txt"
+    ],
+    "stars": 43
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "Merck/matcher",
+    "number": 17,
+    "url": "https://github.com/Merck/matcher/pull/17",
+    "title": "Bump werkzeug from 2.0.2 to 3.1.9 in /frontend",
+    "old": "2.0.2",
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-20T10:16:21Z",
+    "ci": "failure",
+    "head": "7758b2b7fd226b3976143dca5ffa3cef14ff9c79",
+    "dependency_files": [
+      "frontend/requirements.txt"
+    ],
+    "stars": 71
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "robinthibaut/pysgems",
+    "number": 165,
+    "url": "https://github.com/robinthibaut/pysgems/pull/165",
+    "title": "Bump pandas from 1.5.0 to 3.1.0",
+    "old": "1.5.0",
+    "new": "3.1.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T04:03:41Z",
+    "ci": "none",
+    "head": "636f1def88f51a5063ef0f26de7dcdcc29ab40aa",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 64
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "apache/flagon",
+    "number": 165,
+    "url": "https://github.com/apache/flagon/pull/165",
+    "title": "Bump pandas from 1.5.3 to 2.0.3 in /products/distill",
+    "old": "1.5.3",
+    "new": "2.0.3",
+    "state": "MERGED",
+    "merged": true,
+    "created": "2026-08-01T02:55:53Z",
+    "ci": "success",
+    "head": "3dc2dd921a9710e40da5e06665fa3185c0182d9f",
+    "dependency_files": [
+      "products/distill/pyproject.toml"
+    ],
+    "stars": 30
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "databrickslabs/tempo",
+    "number": 466,
+    "url": "https://github.com/databrickslabs/tempo/pull/466",
+    "title": "Bump pandas from 1.5.3 to 2.3.3 in /python",
+    "old": "1.5.3",
+    "new": "2.3.3",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-07-06T15:34:56Z",
+    "ci": "none",
+    "head": "5805c3410bd6818a6cdd4184f8bdcd20049a09aa",
+    "dependency_files": [
+      "python/pyproject.toml"
+    ],
+    "stars": 347
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "mftnakrsu/Automatic_Number_Plate_Recognition_YOLO_OCR",
+    "number": 41,
+    "url": "https://github.com/mftnakrsu/Automatic_Number_Plate_Recognition_YOLO_OCR/pull/41",
+    "title": "chore(deps)(deps): bump pandas from 1.2.4 to 3.0.2",
+    "old": "1.2.4",
+    "new": "3.0.2",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-05-10T23:31:14Z",
+    "ci": "success",
+    "head": "4ea3269e891a3c258f6ea305381df9a4c820b51c",
+    "dependency_files": [
+      "legacy/requirements.txt"
+    ],
+    "stars": 205
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "databrickslabs/dbldatagen",
+    "number": 411,
+    "url": "https://github.com/databrickslabs/dbldatagen/pull/411",
+    "title": "Bump pandas from 1.4.4 to 2.3.3",
+    "old": "1.4.4",
+    "new": "2.3.3",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-04-29T00:46:53Z",
+    "ci": "success",
+    "head": "e3e31755095557d02a23fe61dc26fa76eb868be0",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 505
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "tuhinmallick/InsiderTrader",
+    "number": 110,
+    "url": "https://github.com/tuhinmallick/InsiderTrader/pull/110",
+    "title": "Update dependency pandas to v2.3.3 - autoclosed",
+    "old": null,
+    "new": "2.3.3",
+    "state": "CLOSED",
+    "merged": false,
+    "created": "2026-10-25T09:57:52Z",
+    "ci": "failure",
+    "head": "a5feefcc02a906940d863eed71033d5c99f02f22",
+    "dependency_files": [
+      "docs/requirements.txt"
+    ],
+    "stars": 52
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "agent": "claude-code",
+  "repo": "lbx154/Argus",
+  "number": 383,
+  "state": "open",
+  "author": "nssmd",
+  "created": "2026-10-28T22:47:22Z",
+  "title": "refactor: derived state is computed, not stored (L3.1 state model, L3.4 storage decision)",
+  "url": "https://github.com/lbx154/Argus/pull/383",
+  "stars": 329,
+  "python_files": 26,
+  "added_lines": 597,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "certifi>=2024.2.2",
+      "rich>=13.7",
+      "PyYAML>=6",
+      "portalocker>=3",
+      "psutil>=5.9",
+      "jsonschema>=4",
+      "pypdf>=5,<7",
+      "fastapi>=0.110",
+      "python-multipart>=0.0.9",
+      "ijson>=3.3,<4",
+      "uvicorn[standard]>=0.29",
+      "websockets>=12",
+      "mcp>=1.20,<2",
+      "pydantic-settings>=2.5.2,<2.15",
+      "tzdata>=2024.1; platform_system == 'Windows'"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 18,
+  "findings": [
+    {
+      "path": "tests/mission_view_events.py",
+      "line": 5,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'typing.Mapping' is deprecated in Python 3.13: Deprecated alias to collections.abc.Mapping.",
+      "source": "from typing import Any, Mapping"
+    }
+  ]
+}

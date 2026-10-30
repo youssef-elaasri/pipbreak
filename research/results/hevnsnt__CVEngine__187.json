@@ -1,0 +1,22 @@
+{
+  "agent": "claude-code",
+  "repo": "hevnsnt/CVEngine",
+  "number": 187,
+  "state": "open",
+  "author": "hevnsnt",
+  "created": "2026-10-28T22:41:34Z",
+  "title": "Host score counts hygiene issues; attack surface shows hosts over 40",
+  "url": "https://github.com/hevnsnt/CVEngine/pull/187",
+  "stars": 443,
+  "python_files": 4,
+  "added_lines": 62,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 121,
+  "findings": []
+}

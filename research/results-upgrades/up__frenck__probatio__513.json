@@ -1,0 +1,28 @@
+{
+  "lib": "pydantic",
+  "import": "pydantic",
+  "repo": "frenck/probatio",
+  "number": 513,
+  "url": "https://github.com/frenck/probatio/pull/513",
+  "title": "\u2b06\ufe0f Update dependency pydantic to v2.14.2",
+  "old": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-29T17:43:37Z",
+  "ci": "failure",
+  "head": "d26e2fda5d98b8c1cdc7b9abec62c0ce697bd1c9",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 21,
+  "status": "bump-not-reproduced"
+}

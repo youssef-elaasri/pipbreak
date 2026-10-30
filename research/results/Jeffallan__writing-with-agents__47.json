@@ -1,0 +1,14 @@
+{
+  "agent": "claude-code",
+  "repo": "Jeffallan/writing-with-agents",
+  "number": 47,
+  "state": "merged",
+  "author": "Jeffallan",
+  "created": "2026-10-28T22:45:18Z",
+  "title": "ci: submit changed pages to IndexNow from the deploy build",
+  "url": "https://github.com/Jeffallan/writing-with-agents/pull/47",
+  "stars": 36,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

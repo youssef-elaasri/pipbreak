@@ -1,0 +1,51 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "IBM/ada",
+  "number": 17,
+  "url": "https://github.com/IBM/ada/pull/17",
+  "title": "Bump werkzeug from 2.2.3 to 3.1.9",
+  "old": {
+    "failed": [],
+    "declared": 21,
+    "version": "2.2.3"
+  },
+  "new": {
+    "failed": [],
+    "declared": 21,
+    "version": "3.1.9"
+  },
+  "state": "MERGED",
+  "merged": true,
+  "created": "2026-10-28T18:36:04Z",
+  "ci": "failure",
+  "head": "39eeea0b97725e0d5f40783c91f1ec4d2c43425f",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 55,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": [
+    {
+      "path": "flask/cli.py",
+      "line": 250,
+      "col": 21,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.",
+      "source": "f\"Werkzeug {werkzeug.__version__}\","
+    },
+    {
+      "path": "flask/testing.py",
+      "line": 116,
+      "col": 44,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.",
+      "source": "\"HTTP_USER_AGENT\": f\"werkzeug/{werkzeug.__version__}\","
+    }
+  ]
+}

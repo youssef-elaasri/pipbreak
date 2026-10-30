@@ -1,0 +1,637 @@
+{
+  "lib": "sqlalchemy",
+  "import": "sqlalchemy",
+  "repo": "closeio/sync-engine",
+  "number": 1207,
+  "url": "https://github.com/closeio/sync-engine/pull/1207",
+  "title": "Bump sqlalchemy from 1.4.54 to 2.1.6",
+  "old": {
+    "failed": [
+      "ciso8601==2.2.0",
+      "gdata==2.0.18",
+      "ipython==9.12.0",
+      "json_log_formatter==1.0",
+      "limitlion==1.1.0",
+      "mysqlclient==2.2.5",
+      "Pympler==0.9",
+      "vobject==0.9.6.1"
+    ],
+    "declared": 42,
+    "version": "1.4.54"
+  },
+  "new": {
+    "failed": [
+      "ciso8601==2.2.0",
+      "gdata==2.0.18",
+      "ipython==9.12.0",
+      "json_log_formatter==1.0",
+      "limitlion==1.1.0",
+      "mysqlclient==2.2.5",
+      "Pympler==0.9",
+      "vobject==0.9.6.1"
+    ],
+    "declared": 42,
+    "version": "2.1.6"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-29T03:06:53Z",
+  "ci": "failure",
+  "head": "26df70e213e437f2b1150dc6a20f9078f5f89dcb",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 30,
+  "status": "ok",
+  "findings_before": 285,
+  "findings_after": 232,
+  "introduced": [
+    {
+      "path": "new/inbox/api/filtering.py",
+      "line": 9,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.orm.noload' is deprecated in SQLAlchemy==2.1.6: 2.1 The :func:`_orm.noload` option is deprecated and will be removed in a future release.  This option produces incorrect results by returning ``None`` for related items.",
+      "source": "from sqlalchemy.orm import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/inbox/models/base.py",
+      "line": 2,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.as_declarative' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``as_declarative()`` function is now available as :func:`sqlalchemy.orm.as_declarative` (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/inbox/models/message.py",
+      "line": 30,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.orm.noload' is deprecated in SQLAlchemy==2.1.6: 2.1 The :func:`_orm.noload` option is deprecated and will be removed in a future release.  This option produces incorrect results by returning ``None`` for related items.",
+      "source": "from sqlalchemy.orm import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/inbox/util/db.py",
+      "line": 26,
+      "col": 17,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'reflection.Inspector.from_engine' is deprecated in SQLAlchemy==2.1.6: 1.4 The from_engine() method on :class:`_reflection.Inspector` is deprecated and will be removed in a future release.  Please use the :func:`.sqlalchemy.inspect` function on an :class:`_engine.Engine` or :class:`_engine.Connection` in order to acquire an :class:`_reflection.Inspector`. or :class:`~sqlalchemy.engine.Engine`.",
+      "source": "inspector = reflection.Inspector.from_engine(engine)"
+    },
+    {
+      "path": "new/migrations/versions/2014_03_17_1900_import_old_accounts.py",
+      "line": 17,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_03_19_1755_per_provider_table_split.py",
+      "line": 16,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_04_15_0221_move_google_userinfo_fields_to_.py",
+      "line": 16,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_04_28_2209_blocks_to_parts.py",
+      "line": 19,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_01_0220_remote_folders_and_inbox_tags_split.py",
+      "line": 19,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_08_1926_tighten_nullable_constraints_on_.py",
+      "line": 19,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_09_2216_add_audit_timestamps_to_all_objects.py",
+      "line": 18,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_13_0320_tag_api_migration.py",
+      "line": 20,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_15_2257_set_inbox_folder_exposed_name.py",
+      "line": 14,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_15_2357_add_is_read_attribute_to_messages.py",
+      "line": 17,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_20_0545_add_indexes_to_timestamps.py",
+      "line": 15,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_20_2331_add_public_ids_to_transactions.py",
+      "line": 20,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_21_1743_tighten_easuid.py",
+      "line": 16,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_05_23_2243_add_more_indexes.py",
+      "line": 15,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_06_10_1950_add_sync_status_columns_to_foldersync.py",
+      "line": 16,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_06_12_2244_change_easfoldersync_unique_constraint.py",
+      "line": 15,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_06_17_2248_gmailaccount.py",
+      "line": 49,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_06_30_2036_new_password_storage.py",
+      "line": 55,
+      "col": 20,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "OriginalBase = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_06_30_2036_new_password_storage.py",
+      "line": 62,
+      "col": 16,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_01_1856_imap_table_cleanups.py",
+      "line": 97,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_07_1503_store_secrets_in_local_vault.py",
+      "line": 21,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_07_1503_store_secrets_in_local_vault.py",
+      "line": 97,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import declarative_base"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_15_2211_canonicalize_addresses.py",
+      "line": 65,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_15_2211_canonicalize_addresses.py",
+      "line": 132,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import declarative_base"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_17_0607_consolidate_account_sync_status_columns.py",
+      "line": 27,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_17_2213_make_address_fields_non_null.py",
+      "line": 23,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_18_2200_enforce_length_limit_of_255_on_message_.py",
+      "line": 34,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_19_0028_cascade_folder_deletes_to_easuid.py",
+      "line": 21,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_19_0028_remove_easfoldersyncstatus_folder_rows_.py",
+      "line": 24,
+      "col": 9,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_21_1735_kill_spoolmessage.py",
+      "line": 21,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_28_1857_fix_folder_easfoldersyncstatus_unique_constraints.py",
+      "line": 25,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_07_31_0937_recompute_snippets.py",
+      "line": 14,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_01_1436_generic_providers.py",
+      "line": 23,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_01_1436_generic_providers.py",
+      "line": 107,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import declarative_base"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_02_0312_add_eas_thrid_index.py",
+      "line": 22,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_02_0312_add_eas_thrid_index.py",
+      "line": 39,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_11_2306_events_longer_uids.py",
+      "line": 16,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_26_2243_event_date_times.py",
+      "line": 16,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_08_28_0527_calendar_descriptions.py",
+      "line": 19,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2014_09_06_0324_revert_encryption.py",
+      "line": 46,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_09_14_2215_eas_passwords.py",
+      "line": 34,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_09_18_0303_migrate_secret_data.py",
+      "line": 26,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_10_01_1931_drop_eas_state.py",
+      "line": 24,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_10_04_0759_easaccount_username.py",
+      "line": 39,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2014_10_21_2038_eas_twodevices_turn.py",
+      "line": 32,
+      "col": 12,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sa.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "Base = sa.ext.declarative.declarative_base()  # noqa: N806"
+    },
+    {
+      "path": "new/migrations/versions/2015_02_16_1603_remote_remote_contacts.py",
+      "line": 17,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2015_03_20_1850_extend_eas_folder_id.py",
+      "line": 15,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2015_05_10_0316_migrate_body_format.py",
+      "line": 15,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2015_05_19_0114_update_easuid_schema_2.py",
+      "line": 18,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2015_05_19_2121_update_easuid_schema_3.py",
+      "line": 18,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2015_07_01_0026_backfill_gmail_auth_credentials_table.py",
+      "line": 18,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    },
+    {
+      "path": "new/migrations/versions/2015_08_06_1405_create_outlook_account_column.py",
+      "line": 15,
+      "col": 1,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.1.6: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)",
+      "source": "from sqlalchemy.ext.declarative import (  # type: ignore[import-untyped]"
+    }
+  ],
+  "introduced_in_dependencies": [
+    {
+      "path": "alembic/autogenerate/render.py",
+      "line": 44,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqlalchemy.sql.type_api.Variant' is deprecated in SQLAlchemy==2.1.6: deprecated.  symbol is present for backwards-compatibility with",
+      "source": "from sqlalchemy.sql.type_api import Variant"
+    },
+    {
+      "path": "alembic/autogenerate/render.py",
+      "line": 842,
+      "col": 27,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'sqltypes.Variant' is deprecated in SQLAlchemy==2.1.6: deprecated.  symbol is present for backwards-compatibility with",
+      "source": "if type(type_) is sqltypes.Variant:"
+    },
+    {
+      "path": "alembic/testing/assertions.py",
+      "line": 89,
+      "col": 22,
+      "severity": "error",
+      "code": "API002",
+      "message": "'util' has no attribute 'text_type' in SQLAlchemy==2.1.6.",
+      "source": "msg, util.text_type(err), re.UNICODE"
+    },
+    {
+      "path": "alembic/testing/assertions.py",
+      "line": 93,
+      "col": 15,
+      "severity": "error",
+      "code": "API002",
+      "message": "'util' has no attribute 'text_type' in SQLAlchemy==2.1.6.",
+      "source": "print(util.text_type(err).encode(\"utf-8\"))"
+    },
+    {
+      "path": "alembic/testing/assertions.py",
+      "line": 171,
+      "col": 29,
+      "severity": "error",
+      "code": "API002",
+      "message": "'sa_exc' has no attribute 'RemovedIn20Warning' in SQLAlchemy==2.1.6. Did you mean 'MovedIn20Warning'?",
+      "source": "return _expect_warnings(sa_exc.RemovedIn20Warning, messages, **kw)"
+    },
+    {
+      "path": "alembic/testing/schemacompare.py",
+      "line": 13,
+      "col": 23,
+      "severity": "error",
+      "code": "API002",
+      "message": "'util' has no attribute 'zip_longest' in SQLAlchemy==2.1.6.",
+      "source": "for c1, c2 in util.zip_longest(self.table.c, other.c):"
+    },
+    {
+      "path": "alembic/testing/schemacompare.py",
+      "line": 89,
+      "col": 23,
+      "severity": "error",
+      "code": "API002",
+      "message": "'util' has no attribute 'zip_longest' in SQLAlchemy==2.1.6.",
+      "source": "for c1, c2 in util.zip_longest(self.constraint.columns, other.columns):"
+    },
+    {
+      "path": "alembic/testing/schemacompare.py",
+      "line": 116,
+      "col": 23,
+      "severity": "error",
+      "code": "API002",
+      "message": "'util' has no attribute 'zip_longest' in SQLAlchemy==2.1.6.",
+      "source": "for c1, c2 in util.zip_longest(self.constraint.columns, other.columns):"
+    },
+    {
+      "path": "alembic/testing/schemacompare.py",
+      "line": 144,
+      "col": 23,
+      "severity": "error",
+      "code": "API002",
+      "message": "'util' has no attribute 'zip_longest' in SQLAlchemy==2.1.6.",
+      "source": "for c1, c2 in util.zip_longest(self.constraint.columns, other.columns):"
+    }
+  ]
+}

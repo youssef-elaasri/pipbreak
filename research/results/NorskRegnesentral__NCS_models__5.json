@@ -1,0 +1,42 @@
+{
+  "agent": "copilot",
+  "repo": "NorskRegnesentral/NCS_models",
+  "number": 5,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T14:32:53Z",
+  "title": "Update inference examples for overlap and feature normalization",
+  "url": "https://github.com/NorskRegnesentral/NCS_models/pull/5",
+  "stars": 24,
+  "python_files": 2,
+  "added_lines": 58,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "torch~=2.4",
+      "torchvision~=0.19",
+      "transformers[torch]~=4.50.2",
+      "huggingface-hub~=0.24",
+      "tqdm~=4.67"
+    ],
+    "failed": [
+      "torch~=2.4",
+      "torchvision~=0.19",
+      "transformers[torch]~=4.50.2"
+    ],
+    "skipped": false
+  },
+  "findings_all_lines": 1,
+  "findings": [
+    {
+      "path": "tests/test_examples.py",
+      "line": 5,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'numpy' is not installed in this environment",
+      "source": "import numpy as np"
+    }
+  ]
+}

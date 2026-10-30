@@ -1,0 +1,30 @@
+{
+  "agent": "copilot",
+  "repo": "tskit-dev/tsdate",
+  "number": 520,
+  "state": "merged",
+  "author": "Copilot",
+  "created": "2026-10-28T16:20:48Z",
+  "title": "Replace skipped sample-as-parent failure test for variational_gamma with a passing test",
+  "url": "https://github.com/tskit-dev/tsdate/pull/520",
+  "stars": 27,
+  "python_files": 1,
+  "added_lines": 7,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "tskit>=1.0.0",
+      "numpy",
+      "scipy>=1.13.0",
+      "numba>=0.58.1",
+      "mpmath",
+      "tqdm",
+      "appdirs"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 3,
+  "findings": []
+}

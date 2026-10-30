@@ -1,0 +1,28 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "databrickslabs/dbldatagen",
+  "number": 411,
+  "url": "https://github.com/databrickslabs/dbldatagen/pull/411",
+  "title": "Bump pandas from 1.4.4 to 2.3.3",
+  "old": {
+    "failed": [],
+    "declared": 3,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 3,
+    "version": null
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-04-29T00:46:53Z",
+  "ci": "success",
+  "head": "e3e31755095557d02a23fe61dc26fa76eb868be0",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 505,
+  "status": "bump-not-reproduced"
+}

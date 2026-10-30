@@ -1,0 +1,14 @@
+{
+  "agent": "claude-code",
+  "repo": "rjmurillo/ai-agents",
+  "number": 6966,
+  "state": "open",
+  "author": "renovate[bot]",
+  "created": "2026-10-28T22:44:16Z",
+  "title": "chore(deps): update dependency @anthropic-ai/claude-code to v2.1.307",
+  "url": "https://github.com/rjmurillo/ai-agents/pull/6966",
+  "stars": 49,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

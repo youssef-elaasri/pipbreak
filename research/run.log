@@ -1,0 +1,110 @@
+﻿== fetch (online: clone + install wheels) ==
+copilot      vishalsachdev/canvas-mcp#548: ok
+copilot      microsoft/vscode-black-formatter#832: no-python-changes
+copilot      bentoml/BentoML#5768: no-python-changes
+copilot      pytest-dev/pytest-bdd#851: ok
+copilot      metatensor/metatrain#1332: no-python-changes
+copilot      Xilinx/ross-ai-assistant#11: no-python-changes
+copilot      static-frame/static-frame#1207: ok
+copilot      OWASP/OWASP-Hunting#69: no-python-changes
+copilot      tskit-dev/tsdate#520: ok
+copilot      mlflow/mlflow#27265: no-python-changes
+copilot      fideus-labs/ngff-zarr#808: no-python-changes
+copilot      mylxsw/llm-gateway#145: ok
+copilot      NorskRegnesentral/NCS_models#5: ok
+copilot      gwastro/pycbc#5511: no-python-changes
+copilot      mlflow/mlflow#27261: no-python-changes
+devin        BerriAI/litellm#48945: no-python-changes
+devin        e2b-dev/E2B#2049: no-python-changes
+devin        e2b-dev/E2B#2048: ok
+devin        TracecatHQ/tracecat#4012: ok
+devin        e2b-dev/code-interpreter#362: no-python-changes
+devin        e2b-dev/desktop#280: no-python-changes
+devin        TracecatHQ/tracecat#4007: no-python-changes
+devin        airbytehq/airbyte#90161: ok
+devin        BerriAI/litellm#48884: ok
+devin        airbytehq/airbyte#90160: ok
+devin        PrefectHQ/prefect#23648: ok
+devin        e2b-dev/code-interpreter#360: ok
+devin        reductoai/reducto-python-sdk#124: ok
+devin        usestrix/strix#1603: ok
+devin        PrefectHQ/prefect#23644: ok
+cursor       Francis1998/scholar-rag-agent#407: ok
+cursor       Francis1998/scholar-rag-agent#405: ok
+cursor       Francis1998/nexus-llm-router#311: ok
+cursor       Francis1998/nexus-llm-router#310: ok
+cursor       Francis1998/agentic-career-search#302: ok
+cursor       Francis1998/agentic-career-search#301: ok
+cursor       elevenlabs/skills#146: no-python-changes
+cursor       getsentry/sentry#128991: ok
+cursor       GetStream/Vision-Agents#1406: no-python-changes
+claude-code  lbx154/Argus#383: ok
+claude-code  exploreomni/omni-agent-skills#143: no-python-changes
+claude-code  PrimeIntellect-ai/prime#1124: ok
+claude-code  PostHog/posthog#125190: ok
+claude-code  Jeffallan/claude-skills#301: no-python-changes
+claude-code  Jeffallan/writing-with-agents#47: no-python-changes
+claude-code  pydantic/pydantic-ai#11792: ok
+claude-code  daedalus/fuzzer#236: ok
+claude-code  tenstorrent/tt-metal#63252: no-python-changes
+claude-code  rjmurillo/ai-agents#6966: no-python-changes
+claude-code  tenstorrent/tt-metal#63251: ok
+claude-code  synth-laboratories/synth-ai#567: ok
+claude-code  lightspeed-core/lightspeed-evaluation#358: ok
+claude-code  PostHog/posthog#125187: ok
+claude-code  hevnsnt/CVEngine#187: ok
+== check (offline: run apicheck) ==
+copilot      vishalsachdev/canvas-mcp#548: ok, 8 added lines, 0 finding(s)
+copilot      microsoft/vscode-black-formatter#832: no-python-changes, 0 added lines, 0 finding(s)
+copilot      bentoml/BentoML#5768: no-python-changes, 0 added lines, 0 finding(s)
+copilot      pytest-dev/pytest-bdd#851: ok, 106 added lines, 0 finding(s)
+copilot      metatensor/metatrain#1332: no-python-changes, 0 added lines, 0 finding(s)
+copilot      Xilinx/ross-ai-assistant#11: no-python-changes, 0 added lines, 0 finding(s)
+copilot      static-frame/static-frame#1207: ok, 60 added lines, 17 finding(s)
+copilot      OWASP/OWASP-Hunting#69: no-python-changes, 0 added lines, 0 finding(s)
+copilot      tskit-dev/tsdate#520: ok, 7 added lines, 0 finding(s)
+copilot      mlflow/mlflow#27265: no-python-changes, 0 added lines, 0 finding(s)
+copilot      fideus-labs/ngff-zarr#808: no-python-changes, 0 added lines, 0 finding(s)
+copilot      mylxsw/llm-gateway#145: ok, 277 added lines, 0 finding(s)
+copilot      NorskRegnesentral/NCS_models#5: ok, 58 added lines, 1 finding(s)
+copilot      gwastro/pycbc#5511: no-python-changes, 0 added lines, 0 finding(s)
+copilot      mlflow/mlflow#27261: no-python-changes, 0 added lines, 0 finding(s)
+devin        BerriAI/litellm#48945: no-python-changes, 0 added lines, 0 finding(s)
+devin        e2b-dev/E2B#2049: no-python-changes, 0 added lines, 0 finding(s)
+devin        e2b-dev/E2B#2048: ok, 34 added lines, 6 finding(s)
+devin        TracecatHQ/tracecat#4012: ok, 28 added lines, 0 finding(s)
+devin        e2b-dev/code-interpreter#362: no-python-changes, 0 added lines, 0 finding(s)
+devin        e2b-dev/desktop#280: no-python-changes, 0 added lines, 0 finding(s)
+devin        TracecatHQ/tracecat#4007: no-python-changes, 0 added lines, 0 finding(s)
+devin        airbytehq/airbyte#90161: ok, 58 added lines, 3 finding(s)
+devin        BerriAI/litellm#48884: ok, 10 added lines, 0 finding(s)
+devin        airbytehq/airbyte#90160: ok, 49 added lines, 2 finding(s)
+devin        PrefectHQ/prefect#23648: ok, 128 added lines, 0 finding(s)
+devin        e2b-dev/code-interpreter#360: ok, 1 added lines, 0 finding(s)
+devin        reductoai/reducto-python-sdk#124: ok, 4079 added lines, 44 finding(s)
+devin        usestrix/strix#1603: ok, 28 added lines, 0 finding(s)
+devin        PrefectHQ/prefect#23644: ok, 390 added lines, 3 finding(s)
+cursor       Francis1998/scholar-rag-agent#407: ok, 145 added lines, 0 finding(s)
+cursor       Francis1998/scholar-rag-agent#405: ok, 145 added lines, 0 finding(s)
+cursor       Francis1998/nexus-llm-router#311: ok, 116 added lines, 1 finding(s)
+cursor       Francis1998/nexus-llm-router#310: ok, 116 added lines, 1 finding(s)
+cursor       Francis1998/agentic-career-search#302: ok, 158 added lines, 1 finding(s)
+cursor       Francis1998/agentic-career-search#301: ok, 156 added lines, 1 finding(s)
+cursor       elevenlabs/skills#146: no-python-changes, 0 added lines, 0 finding(s)
+cursor       getsentry/sentry#128991: ok, 10 added lines, 0 finding(s)
+cursor       GetStream/Vision-Agents#1406: no-python-changes, 0 added lines, 0 finding(s)
+claude-code  lbx154/Argus#383: ok, 597 added lines, 1 finding(s)
+claude-code  exploreomni/omni-agent-skills#143: no-python-changes, 0 added lines, 0 finding(s)
+claude-code  PrimeIntellect-ai/prime#1124: ok, 282 added lines, 2 finding(s)
+claude-code  PostHog/posthog#125190: ok, 546 added lines, 2 finding(s)
+claude-code  Jeffallan/claude-skills#301: no-python-changes, 0 added lines, 0 finding(s)
+claude-code  Jeffallan/writing-with-agents#47: no-python-changes, 0 added lines, 0 finding(s)
+claude-code  pydantic/pydantic-ai#11792: ok, 1190 added lines, 2 finding(s)
+claude-code  daedalus/fuzzer#236: ok, 736 added lines, 1 finding(s)
+claude-code  tenstorrent/tt-metal#63252: no-python-changes, 0 added lines, 0 finding(s)
+claude-code  rjmurillo/ai-agents#6966: no-python-changes, 0 added lines, 0 finding(s)
+claude-code  tenstorrent/tt-metal#63251: ok, 862 added lines, 2 finding(s)
+claude-code  synth-laboratories/synth-ai#567: ok, 470 added lines, 2 finding(s)
+claude-code  lightspeed-core/lightspeed-evaluation#358: ok, 1268 added lines, 1 finding(s)
+claude-code  PostHog/posthog#125187: ok, 229 added lines, 1 finding(s)
+claude-code  hevnsnt/CVEngine#187: ok, 62 added lines, 0 finding(s)

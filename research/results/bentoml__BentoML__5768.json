@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "bentoml/BentoML",
+  "number": 5768,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T21:28:32Z",
+  "title": "Update CI PDM pin for Unearth client compatibility",
+  "url": "https://github.com/bentoml/BentoML/pull/5768",
+  "stars": 8924,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

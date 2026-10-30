@@ -1,0 +1,28 @@
+{
+  "lib": "httpx",
+  "import": "httpx",
+  "repo": "Altinn/altinn-studio",
+  "number": 19534,
+  "url": "https://github.com/Altinn/altinn-studio/pull/19534",
+  "title": "chore(deps): update dependency httpx to v0.28.1",
+  "old": {
+    "failed": [],
+    "declared": 7,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 7,
+    "version": null
+  },
+  "state": "MERGED",
+  "merged": true,
+  "created": "2026-07-13T15:44:56Z",
+  "ci": "success",
+  "head": "da730f3958619920a331b72499bf02860410473a",
+  "dependency_files": [
+    "src/tools/altinn-fleet-stats/backend/requirements.txt"
+  ],
+  "stars": 169,
+  "status": "bump-not-reproduced"
+}

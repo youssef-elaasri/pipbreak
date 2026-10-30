@@ -1,0 +1,14 @@
+{
+  "agent": "devin",
+  "repo": "e2b-dev/code-interpreter",
+  "number": 362,
+  "state": "open",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T20:11:10Z",
+  "title": "Add SECURITY_MODEL.md",
+  "url": "https://github.com/e2b-dev/code-interpreter/pull/362",
+  "stars": 2422,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

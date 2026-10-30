@@ -1,0 +1,30 @@
+{
+  "agent": "cursor",
+  "repo": "Francis1998/scholar-rag-agent",
+  "number": 405,
+  "state": "merged",
+  "author": "cursor[bot]",
+  "created": "2026-10-28T16:30:56Z",
+  "title": "feat: InstrumentStrengthCueExtractor",
+  "url": "https://github.com/Francis1998/scholar-rag-agent/pull/405",
+  "stars": 149,
+  "python_files": 2,
+  "added_lines": 145,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "defusedxml>=0.7.1",
+      "fastapi>=0.111.0",
+      "pydantic>=2.7.0",
+      "pydantic-settings>=2.2.1",
+      "pypdf>=4.2.0",
+      "python-multipart>=0.0.9",
+      "uvicorn>=0.30.0"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 0,
+  "findings": []
+}

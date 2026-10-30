@@ -1,0 +1,41 @@
+{
+  "agent": "claude-code",
+  "repo": "pydantic/pydantic-ai",
+  "number": 11792,
+  "state": "open",
+  "author": "DouweM",
+  "created": "2026-10-28T22:44:42Z",
+  "title": "Add `CompactOnCacheExpiry`, which requests compaction once the prompt cache has expired",
+  "url": "https://github.com/pydantic/pydantic-ai/pull/11792",
+  "stars": 20929,
+  "python_files": 7,
+  "added_lines": 1190,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 10,
+  "findings": [
+    {
+      "path": "tests/harness/compaction/test_compact_on_cache_expiry.py",
+      "line": 21,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/harness/compaction/test_compact_on_cache_expiry.py",
+      "line": 22,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'inline_snapshot' is not installed in this environment",
+      "source": "from inline_snapshot import snapshot"
+    }
+  ]
+}

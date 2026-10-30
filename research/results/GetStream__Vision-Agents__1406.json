@@ -1,0 +1,14 @@
+{
+  "agent": "cursor",
+  "repo": "GetStream/Vision-Agents",
+  "number": 1406,
+  "state": "open",
+  "author": "cursor[bot]",
+  "created": "2026-10-28T07:16:45Z",
+  "title": "chore: update plugin dependencies (2026-10-28)",
+  "url": "https://github.com/GetStream/Vision-Agents/pull/1406",
+  "stars": 8193,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "metatensor/metatrain",
+  "number": 1332,
+  "state": "closed",
+  "author": "Copilot",
+  "created": "2026-10-28T18:37:57Z",
+  "title": "[WIP] Fix failing GitHub Actions job mace",
+  "url": "https://github.com/metatensor/metatrain/pull/1332",
+  "stars": 83,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

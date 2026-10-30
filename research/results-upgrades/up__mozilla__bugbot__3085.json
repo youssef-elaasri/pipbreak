@@ -1,0 +1,34 @@
+{
+  "lib": "sqlalchemy",
+  "import": "sqlalchemy",
+  "repo": "mozilla/bugbot",
+  "number": 3085,
+  "url": "https://github.com/mozilla/bugbot/pull/3085",
+  "title": "Bump sqlalchemy from 1.3.24 to 2.0.55",
+  "old": {
+    "failed": [
+      "alembic==1.14.1",
+      "libmozdata==0.2.19",
+      "sqlalchemy==1.3.24"
+    ],
+    "declared": 22,
+    "version": null
+  },
+  "new": {
+    "failed": [
+      "libmozdata==0.2.19"
+    ],
+    "declared": 22,
+    "version": "2.0.55"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T13:06:50Z",
+  "ci": "failure",
+  "head": "3f2d7a47b2cc64f047b65158ed5af5cd3385eb6b",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 69,
+  "status": "bump-not-reproduced"
+}

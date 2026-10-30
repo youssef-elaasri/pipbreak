@@ -1,0 +1,22 @@
+{
+  "agent": "devin",
+  "repo": "e2b-dev/code-interpreter",
+  "number": 360,
+  "state": "merged",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T15:28:04Z",
+  "title": "chore(deps): bump template and e2b-charts Python dependencies",
+  "url": "https://github.com/e2b-dev/code-interpreter/pull/360",
+  "stars": 2422,
+  "python_files": 1,
+  "added_lines": 1,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 0,
+  "findings": []
+}

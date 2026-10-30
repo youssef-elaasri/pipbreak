@@ -1,3 +1,6 @@
+import contextlib
+import io
+import json
 import sys
 import tempfile
 import textwrap
@@ -5,6 +8,8 @@ import unittest
 from pathlib import Path
 
 from apicheck import check_source
+from apicheck.checker import check_paths
+from apicheck.cli import main
 
 
 def codes(source, **kwargs):
@@ -156,6 +161,9 @@ class NoFalsePositives(unittest.TestCase):
                     return cls.value_parser(value)
         """
         self.assertEqual(codes(source), [])
+
+    def test_typing_aliases_are_not_deprecations(self):
+        self.assertEqual(codes("from typing import List, Callable, Mapping\nimport typing\ntyping.Dict\n"), [])
 
     def test_class_that_sets_attributes_dynamically(self):
         source = """
@@ -338,6 +346,14 @@ class Deprecations(unittest.TestCase):
 
             def fine(): pass
 
+            def param_deprecated(objects=None):
+                """Flush things.
+
+                :param objects:
+                    .. deprecated:: 2.0
+                        Pass nothing instead.
+                """
+
             class Client:
                 @deprecated("use send() instead")
                 def post(self): pass
@@ -345,6 +361,14 @@ class Deprecations(unittest.TestCase):
 
             def make() -> Client:
                 return Client()
+
+            class _Proxy:
+                def __getattribute__(self, name):
+                    raise RuntimeError("Working outside of request context.")
+                def __call__(self):
+                    pass
+
+            proxy = _Proxy()
         '''))
         sys.path.insert(0, cls.tmp.name)
 
@@ -374,6 +398,23 @@ class Deprecations(unittest.TestCase):
         """
         self.assertEqual(codes(source), ["API101", "API003"])
 
+    def test_deprecated_parameter_is_not_a_deprecated_function(self):
+        self.assertEqual(codes("from oldlib import param_deprecated\n"), [])
+
+    def test_sphinx_note_text_is_reported(self):
+        [finding] = check_source("from oldlib import sphinx_old\n")
+        self.assertIn("2.0", finding.message)
+
+    def test_objects_that_raise_when_inspected(self):
+        source = """
+            import oldlib
+            from oldlib import proxy
+            proxy.args.get("x")
+            oldlib.proxy.method(1, 2)
+            proxy()
+        """
+        self.assertEqual(codes(source), [])
+
     @unittest.skipIf(sys.version_info < (3, 13), "warnings.deprecated is new in 3.13")
     def test_return_annotation(self):
         self.assertEqual(codes("import oldlib\noldlib.make().post()\n"), ["API101"])
@@ -387,6 +428,48 @@ class Deprecations(unittest.TestCase):
                     self.post()
         """
         self.assertEqual(codes(source), ["API101"])
+
+
+class VersionFallbacks(unittest.TestCase):
+    def test_except_import_error_fallback(self):
+        source = "try:\n    from os import newname\nexcept ImportError:\n    from os import oldname\n"
+        self.assertEqual(codes(source), [])
+
+    def test_library_version_branch(self):
+        source = ("import os\nif np_version >= parse_version('2'):\n    os.path.newname()\n"
+                  "else:\n    os.path.oldname()\n")
+        self.assertEqual(codes(source), [])
+
+    def test_unrelated_except_still_checked(self):
+        source = "try:\n    pass\nexcept ValueError:\n    from os import oldname\n"
+        self.assertEqual(codes(source), ["API002"])
+
+
+class Cli(unittest.TestCase):
+    def test_json_survives_a_package_that_prints_on_import(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site, project = Path(tmp, "site"), Path(tmp, "project")
+            site.mkdir(), project.mkdir()
+            Path(site, "chatty.py").write_text("print('Hello from chatty')\ndef hi(): pass\n")
+            Path(project, "app.py").write_text("import chatty\nchatty.hi()\nchatty.bye()\n")
+            sys.path.insert(0, str(site))
+            out = io.StringIO()
+            try:
+                with contextlib.redirect_stdout(out), contextlib.redirect_stderr(io.StringIO()):
+                    main(["--format", "json", str(project)])
+            finally:
+                sys.path.remove(str(site))
+                sys.modules.pop("chatty", None)
+        self.assertEqual([f["code"] for f in json.loads(out.getvalue())], ["API002"])
+
+    def test_file_encodings(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "latin.py").write_bytes(b"# -*- coding: latin-1 -*-\nimport os\nos.path.exist('\xa4')\n")
+            Path(tmp, "broken.py").write_bytes(b"x = '\xa4'\n")
+            findings, count = check_paths([Path(tmp)])
+        self.assertEqual(count, 2)
+        self.assertEqual(sorted((Path(f.path).name, f.code) for f in findings),
+                         [("broken.py", "API000"), ("latin.py", "API002")])
 
 
 if __name__ == "__main__":

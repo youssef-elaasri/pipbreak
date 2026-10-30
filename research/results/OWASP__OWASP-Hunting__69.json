@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "OWASP/OWASP-Hunting",
+  "number": 69,
+  "state": "merged",
+  "author": "Copilot",
+  "created": "2026-10-28T17:09:24Z",
+  "title": "Add Website auto-labeling for frontend PRs",
+  "url": "https://github.com/OWASP/OWASP-Hunting/pull/69",
+  "stars": 22,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

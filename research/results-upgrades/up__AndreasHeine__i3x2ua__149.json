@@ -1,0 +1,32 @@
+{
+  "lib": "pydantic",
+  "import": "pydantic",
+  "repo": "AndreasHeine/i3x2ua",
+  "number": 149,
+  "url": "https://github.com/AndreasHeine/i3x2ua/pull/149",
+  "title": "Update dependency pydantic to v2.14.2",
+  "old": {
+    "failed": [],
+    "declared": 8,
+    "version": "2.14.1"
+  },
+  "new": {
+    "failed": [],
+    "declared": 8,
+    "version": "2.14.2"
+  },
+  "state": "MERGED",
+  "merged": true,
+  "created": "2026-10-29T16:42:36Z",
+  "ci": "success",
+  "head": "246ea0dc74bf483dcc984b0ecc351d3cfb2feda9",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 19,
+  "status": "ok",
+  "findings_before": 46,
+  "findings_after": 46,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

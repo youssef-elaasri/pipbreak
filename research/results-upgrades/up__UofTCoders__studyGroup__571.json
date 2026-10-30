@@ -1,0 +1,34 @@
+{
+  "lib": "sqlalchemy",
+  "import": "sqlalchemy",
+  "repo": "UofTCoders/studyGroup",
+  "number": 571,
+  "url": "https://github.com/UofTCoders/studyGroup/pull/571",
+  "title": "Bump sqlalchemy from 1.1.2 to 1.3.0b3 in /lessons/misc/sql-intro/requirements in the pip group across 1 directory",
+  "old": {
+    "failed": [
+      "sqlalchemy==1.1.2",
+      "pysqlite==2.8.3"
+    ],
+    "declared": 3,
+    "version": null
+  },
+  "new": {
+    "failed": [
+      "sqlalchemy==1.3.0b3",
+      "pysqlite==2.8.3"
+    ],
+    "declared": 3,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T04:04:59Z",
+  "ci": "none",
+  "head": "fde6185d60cadcb81cd2baaebf7e2c9ed9553a85",
+  "dependency_files": [
+    "lessons/misc/sql-intro/requirements/requirements.txt"
+  ],
+  "stars": 102,
+  "status": "bump-not-reproduced"
+}

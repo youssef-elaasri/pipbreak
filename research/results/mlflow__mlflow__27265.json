@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "mlflow/mlflow",
+  "number": 27265,
+  "state": "merged",
+  "author": "Copilot",
+  "created": "2026-10-28T16:07:35Z",
+  "title": "Disable `WebFetch` in triage",
+  "url": "https://github.com/mlflow/mlflow/pull/27265",
+  "stars": 28575,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

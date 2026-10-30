@@ -1,0 +1,51 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "Azure/containerization-assist",
+  "number": 803,
+  "url": "https://github.com/Azure/containerization-assist/pull/803",
+  "title": "build(deps): bump werkzeug from 2.3.6 to 3.1.9 in /test/__support__/fixtures/python-flask",
+  "old": {
+    "failed": [],
+    "declared": 5,
+    "version": "2.3.6"
+  },
+  "new": {
+    "failed": [],
+    "declared": 5,
+    "version": "3.1.9"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-20T22:17:29Z",
+  "ci": "success",
+  "head": "05cba2d86294f7cf7ce8c0923b9d9eea3087f648",
+  "dependency_files": [
+    "test/__support__/fixtures/python-flask/requirements.txt"
+  ],
+  "stars": 43,
+  "status": "ok",
+  "findings_before": 1,
+  "findings_after": 1,
+  "introduced": [],
+  "introduced_in_dependencies": [
+    {
+      "path": "flask/cli.py",
+      "line": 250,
+      "col": 21,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.",
+      "source": "f\"Werkzeug {werkzeug.__version__}\","
+    },
+    {
+      "path": "flask/testing.py",
+      "line": 118,
+      "col": 44,
+      "severity": "error",
+      "code": "API002",
+      "message": "'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.",
+      "source": "\"HTTP_USER_AGENT\": f\"werkzeug/{werkzeug.__version__}\","
+    }
+  ]
+}

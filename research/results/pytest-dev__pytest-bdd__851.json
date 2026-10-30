@@ -1,0 +1,30 @@
+{
+  "agent": "copilot",
+  "repo": "pytest-dev/pytest-bdd",
+  "number": 851,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T21:09:59Z",
+  "title": "Support pytest 9.2 fixture registry (`_arg2node2fixturedefs`)",
+  "url": "https://github.com/pytest-dev/pytest-bdd/pull/851",
+  "stars": 1473,
+  "python_files": 3,
+  "added_lines": 106,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "Mako",
+      "parse",
+      "parse-type",
+      "pytest>=7.0.0",
+      "typing-extensions",
+      "packaging",
+      "gherkin-official>=29.0.0,!=31.0.0,!=32.0.0"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 2,
+  "findings": []
+}

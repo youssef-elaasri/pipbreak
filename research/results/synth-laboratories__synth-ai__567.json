@@ -1,0 +1,44 @@
+{
+  "agent": "claude-code",
+  "repo": "synth-laboratories/synth-ai",
+  "number": 567,
+  "state": "merged",
+  "author": "JoshuaPurtell",
+  "created": "2026-10-28T22:43:56Z",
+  "title": "Refs SYN-5157: SDK client + stdio MCP tools for Forge report publish/revoke-inactive",
+  "url": "https://github.com/synth-laboratories/synth-ai/pull/567",
+  "stars": 81,
+  "python_files": 8,
+  "added_lines": 470,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "typing-extensions>=4.12,<5",
+      "pydantic>=2.11,<3"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 2,
+  "findings": [
+    {
+      "path": "tests/test_forge_reports.py",
+      "line": 7,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'httpx' is not installed in this environment",
+      "source": "import httpx"
+    },
+    {
+      "path": "tests/test_forge_reports.py",
+      "line": 8,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    }
+  ]
+}

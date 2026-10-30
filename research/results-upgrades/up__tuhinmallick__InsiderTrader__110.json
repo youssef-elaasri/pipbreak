@@ -1,0 +1,32 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "tuhinmallick/InsiderTrader",
+  "number": 110,
+  "url": "https://github.com/tuhinmallick/InsiderTrader/pull/110",
+  "title": "Update dependency pandas to v2.3.3 - autoclosed",
+  "old": {
+    "failed": [],
+    "declared": 20,
+    "version": "2.2.2"
+  },
+  "new": {
+    "failed": [],
+    "declared": 20,
+    "version": "2.3.3"
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-10-25T09:57:52Z",
+  "ci": "failure",
+  "head": "a5feefcc02a906940d863eed71033d5c99f02f22",
+  "dependency_files": [
+    "docs/requirements.txt"
+  ],
+  "stars": 52,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

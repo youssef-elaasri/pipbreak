@@ -1,0 +1,42 @@
+{
+  "lib": "numpy",
+  "import": "numpy",
+  "repo": "KarelZe/tclf",
+  "number": 289,
+  "url": "https://github.com/KarelZe/tclf/pull/289",
+  "title": "build(deps): bump numpy from 1.26.4 to 2.2.6",
+  "old": {
+    "failed": [],
+    "declared": 5,
+    "version": "1.26.4"
+  },
+  "new": {
+    "failed": [],
+    "declared": 5,
+    "version": "2.4.6"
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-10-23T15:15:14Z",
+  "ci": "success",
+  "head": "b162871a1c2ab48a9b1ee403f401fce5a838b34e",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 22,
+  "status": "ok",
+  "findings_before": 2,
+  "findings_after": 2,
+  "introduced": [],
+  "introduced_in_dependencies": [
+    {
+      "path": "scipy/sparse/_dok.py",
+      "line": 184,
+      "col": 34,
+      "severity": "error",
+      "code": "API003",
+      "message": "np.array() has no parameter 'stype' in numpy==2.4.6. Did you mean 'dtype'?",
+      "source": "return np.array(val, stype=self.dtype)"
+    }
+  ]
+}

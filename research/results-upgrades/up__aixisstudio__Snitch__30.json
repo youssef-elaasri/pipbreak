@@ -1,0 +1,56 @@
+{
+  "lib": "httpx",
+  "import": "httpx",
+  "repo": "aixisstudio/Snitch",
+  "number": 30,
+  "url": "https://github.com/aixisstudio/Snitch/pull/30",
+  "title": "chore(deps-dev): bump httpx from 0.27.2 to 0.28.1 in /backend",
+  "old": {
+    "failed": [
+      "fastapi==0.115.0",
+      "uvicorn[standard]==0.30.6",
+      "websockets==13.0.1",
+      "maxminddb==2.6.3",
+      "psutil==6.1.0",
+      "aiofiles==24.1.0",
+      "pytest==9.1.1",
+      "ruff==0.17.0",
+      "uvicorn[standard]==0.54.0",
+      "websockets==17.2",
+      "maxminddb==3.2.0",
+      "psutil==7.2.2",
+      "aiofiles==25.1.0"
+    ],
+    "declared": 13,
+    "version": null
+  },
+  "new": {
+    "failed": [
+      "fastapi==0.115.0",
+      "uvicorn[standard]==0.30.6",
+      "websockets==13.0.1",
+      "maxminddb==2.6.3",
+      "psutil==6.1.0",
+      "aiofiles==24.1.0",
+      "pytest==9.1.1",
+      "ruff==0.17.0",
+      "uvicorn[standard]==0.54.0",
+      "websockets==17.2",
+      "maxminddb==3.2.0",
+      "psutil==7.2.2",
+      "aiofiles==25.1.0"
+    ],
+    "declared": 13,
+    "version": null
+  },
+  "state": "MERGED",
+  "merged": true,
+  "created": "2026-10-15T11:34:32Z",
+  "ci": "success",
+  "head": "a1d3a21c5ea60a624784c4ec90f5b24f85532788",
+  "dependency_files": [
+    "backend/requirements-dev.txt"
+  ],
+  "stars": 659,
+  "status": "bump-not-reproduced"
+}

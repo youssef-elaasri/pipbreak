@@ -1,0 +1,43 @@
+{
+  "agent": "cursor",
+  "repo": "Francis1998/nexus-llm-router",
+  "number": 311,
+  "state": "merged",
+  "author": "cursor[bot]",
+  "created": "2026-10-28T16:18:18Z",
+  "title": "feat: ContinuousBatchTokenBubbleBandAdvisor",
+  "url": "https://github.com/Francis1998/nexus-llm-router/pull/311",
+  "stars": 122,
+  "python_files": 2,
+  "added_lines": 116,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "fastapi>=0.115.0",
+      "opentelemetry-api>=1.27.0",
+      "opentelemetry-instrumentation-fastapi>=0.48b0",
+      "opentelemetry-sdk>=1.27.0",
+      "prometheus-client>=0.21.0",
+      "pydantic>=2.9.0",
+      "pydantic-settings>=2.5.0",
+      "python-dotenv>=1.0.1",
+      "structlog>=24.4.0",
+      "uvicorn[standard]>=0.30.0"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 1,
+  "findings": [
+    {
+      "path": "tests/test_continuous_batch_token_bubble_band.py",
+      "line": 5,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    }
+  ]
+}

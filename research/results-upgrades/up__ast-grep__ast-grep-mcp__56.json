@@ -1,0 +1,32 @@
+{
+  "lib": "pydantic",
+  "import": "pydantic",
+  "repo": "ast-grep/ast-grep-mcp",
+  "number": 56,
+  "url": "https://github.com/ast-grep/ast-grep-mcp/pull/56",
+  "title": "fix(deps): update dependency pydantic to v2.14.2",
+  "old": {
+    "failed": [],
+    "declared": 3,
+    "version": "2.14.1"
+  },
+  "new": {
+    "failed": [],
+    "declared": 3,
+    "version": "2.14.2"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-29T17:51:20Z",
+  "ci": "success",
+  "head": "d7feae76d2304bb41621db7a52452d9d85014db5",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 487,
+  "status": "ok",
+  "findings_before": 2,
+  "findings_after": 2,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

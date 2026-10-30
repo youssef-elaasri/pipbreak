@@ -1,0 +1,53 @@
+{
+  "agent": "claude-code",
+  "repo": "tenstorrent/tt-metal",
+  "number": 63251,
+  "state": "open",
+  "author": "FConstantinos",
+  "created": "2026-10-28T22:44:12Z",
+  "title": "[Feature] ttnn: generic_op on a Metal 2.0 ProgramSpec and ProgramRunArgs",
+  "url": "https://github.com/tenstorrent/tt-metal/pull/63251",
+  "stars": 1731,
+  "python_files": 2,
+  "added_lines": 862,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "numpy>=1.24.4,<2",
+      "loguru>=0.6.0",
+      "networkx>=3.1",
+      "graphviz>=0.20.3",
+      "pyyaml>=5.4",
+      "click>=8.1.7",
+      "pandas>=2.0.3",
+      "seaborn>=0.13.2",
+      "ml_dtypes"
+    ],
+    "failed": [
+      "numpy>=1.24.4,<2"
+    ],
+    "skipped": false
+  },
+  "findings_all_lines": 2,
+  "findings": [
+    {
+      "path": "tests/ttnn/unit_tests/operations/debug/test_generic_op_program_spec.py",
+      "line": 15,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "tests/ttnn/unit_tests/operations/debug/test_generic_op_program_spec.py",
+      "line": 16,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'torch' is not installed in this environment",
+      "source": "import torch"
+    }
+  ]
+}

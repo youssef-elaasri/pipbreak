@@ -1,0 +1,32 @@
+{
+  "lib": "pydantic",
+  "import": "pydantic",
+  "repo": "Hyunk3l/hexagonal-architecture-kotlin-template",
+  "number": 919,
+  "url": "https://github.com/Hyunk3l/hexagonal-architecture-kotlin-template/pull/919",
+  "title": "Update dependency pydantic to v2.14.2",
+  "old": {
+    "failed": [],
+    "declared": 3,
+    "version": "2.14.1"
+  },
+  "new": {
+    "failed": [],
+    "declared": 3,
+    "version": "2.14.2"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-29T19:32:20Z",
+  "ci": "success",
+  "head": "52b217219739ec22d56ee3a5a4438c67fa7b4049",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 21,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

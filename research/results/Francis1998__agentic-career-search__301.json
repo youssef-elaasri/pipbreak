@@ -1,0 +1,41 @@
+{
+  "agent": "cursor",
+  "repo": "Francis1998/agentic-career-search",
+  "number": 301,
+  "state": "merged",
+  "author": "cursor[bot]",
+  "created": "2026-10-28T16:10:39Z",
+  "title": "feat: CaregivingLeaveTopUpGapAdvisor",
+  "url": "https://github.com/Francis1998/agentic-career-search/pull/301",
+  "stars": 101,
+  "python_files": 2,
+  "added_lines": 156,
+  "status": "ok",
+  "install": {
+    "source": "pyproject",
+    "declared": [
+      "alembic>=1.13.2",
+      "beautifulsoup4>=4.12.3",
+      "fastapi>=0.115.0",
+      "greenlet>=3.1.1",
+      "pydantic-settings>=2.4.0",
+      "sqlalchemy>=2.0.35",
+      "uvicorn[standard]>=0.30.6",
+      "aiosqlite>=0.20.0"
+    ],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 1,
+  "findings": [
+    {
+      "path": "tests/unit/test_caregiving_leave_top_up_gap.py",
+      "line": 7,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    }
+  ]
+}

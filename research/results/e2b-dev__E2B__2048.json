@@ -1,0 +1,77 @@
+{
+  "agent": "devin",
+  "repo": "e2b-dev/E2B",
+  "number": 2048,
+  "state": "open",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T21:59:30Z",
+  "title": "test: remove duplicate, dead and private-state SDK tests",
+  "url": "https://github.com/e2b-dev/E2B/pull/2048",
+  "stars": 14596,
+  "python_files": 8,
+  "added_lines": 34,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 43,
+  "findings": [
+    {
+      "path": "packages/python-sdk/tests/async/secret_async/test_secret.py",
+      "line": 11,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'e2b' is not installed in this environment",
+      "source": "from e2b.exceptions import SecretNotFoundException"
+    },
+    {
+      "path": "packages/python-sdk/tests/shared/secret/test_fill.py",
+      "line": 1,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'pytest' is not installed in this environment",
+      "source": "import pytest"
+    },
+    {
+      "path": "packages/python-sdk/tests/shared/secret/test_fill.py",
+      "line": 3,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'e2b' is not installed in this environment",
+      "source": "from e2b import Secret"
+    },
+    {
+      "path": "packages/python-sdk/tests/shared/secret/test_fill.py",
+      "line": 4,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'e2b' is not installed in this environment",
+      "source": "from e2b.exceptions import InvalidArgumentException"
+    },
+    {
+      "path": "packages/python-sdk/tests/sync/secret_sync/test_secret.py",
+      "line": 11,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'e2b' is not installed in this environment",
+      "source": "from e2b.exceptions import SecretNotFoundException"
+    },
+    {
+      "path": "packages/python-sdk/tests/test_logging_option.py",
+      "line": 4,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'e2b' is not installed in this environment",
+      "source": "from e2b import ConnectionConfig"
+    }
+  ]
+}

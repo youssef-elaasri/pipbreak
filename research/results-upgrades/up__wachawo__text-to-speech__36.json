@@ -1,0 +1,34 @@
+{
+  "lib": "marshmallow",
+  "import": "marshmallow",
+  "repo": "wachawo/text-to-speech",
+  "number": 36,
+  "url": "https://github.com/wachawo/text-to-speech/pull/36",
+  "title": "Bump marshmallow from 3.26.2 to 4.3.1 in /ttssrv",
+  "old": {
+    "failed": [],
+    "declared": 23,
+    "version": "3.26.2"
+  },
+  "new": {
+    "failed": [
+      "marshmallow>=3.26,<4"
+    ],
+    "declared": 23,
+    "version": "4.3.1"
+  },
+  "state": "CLOSED",
+  "merged": false,
+  "created": "2026-09-16T01:40:32Z",
+  "ci": "success",
+  "head": "cd5fcaf54aa0c470044a3b71d08ecbb5e690fd74",
+  "dependency_files": [
+    "ttssrv/requirements.txt"
+  ],
+  "stars": 36,
+  "status": "ok",
+  "findings_before": 3,
+  "findings_after": 3,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

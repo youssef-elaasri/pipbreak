@@ -1,0 +1,14 @@
+{
+  "agent": "devin",
+  "repo": "e2b-dev/desktop",
+  "number": 280,
+  "state": "open",
+  "author": "devin-ai-integration[bot]",
+  "created": "2026-10-28T20:11:06Z",
+  "title": "Add SECURITY_MODEL.md",
+  "url": "https://github.com/e2b-dev/desktop/pull/280",
+  "stars": 1544,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

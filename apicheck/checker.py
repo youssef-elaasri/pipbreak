@@ -18,6 +18,7 @@ import importlib.metadata
 import inspect
 import sys
 import textwrap
+import tokenize
 import typing
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
@@ -26,6 +27,7 @@ from pathlib import Path
 IGNORE_MARKER = "# apicheck: ignore"
 GUARD_ERRORS = {"ImportError", "ModuleNotFoundError", "AttributeError", "NameError", "TypeError",
                 "Exception", "BaseException"}
+FALLBACK_ERRORS = {"ImportError", "ModuleNotFoundError", "AttributeError"}
 SAFE_CLASS_DECORATORS = {"dataclass", "total_ordering", "final", "unique", "runtime_checkable"}
 PLAIN_METACLASSES = {"type", "ABCMeta"}
 
@@ -139,6 +141,13 @@ def owner_module(obj) -> str:
 def deprecation_note(obj) -> str | None:
     """PEP 702 `@deprecated` marker or a Sphinx `.. deprecated::` note on the object itself."""
     try:
+        return _deprecation_note(obj)
+    except Exception:  # live proxies (flask.request & co.) raise when inspected out of context
+        return None
+
+
+def _deprecation_note(obj) -> str | None:
+    try:
         own = vars(obj)
     except TypeError:
         own = {}
@@ -146,10 +155,25 @@ def deprecation_note(obj) -> str | None:
     if isinstance(note, str):
         return note or "deprecated"
     doc = own.get("__doc__") if inspect.isclass(obj) else getattr(obj, "__doc__", None)
-    if isinstance(doc, str):
-        stripped = doc.strip()
-        if ".. deprecated::" in stripped or stripped.lower().startswith("deprecated"):
-            return stripped.splitlines()[0]
+    if not isinstance(doc, str):
+        return None
+    lines = inspect.cleandoc(doc).splitlines()
+    if not lines:
+        return None
+    # typing.List & co. are "deprecated aliases" with no removal planned; everyone still uses them.
+    if lines[0].startswith("Deprecated alias") and owner_module(obj) in ("typing", "typing_extensions"):
+        return None
+    if lines[0].lower().startswith("deprecated"):
+        return lines[0]
+    # A module docstring documents its members too (numpy.typing: "NBitBase is deprecated").
+    if inspect.ismodule(obj):
+        return None
+    # Only a top-level directive; an indented one belongs to a parameter, not the object.
+    for i, line in enumerate(lines):
+        if line.startswith(".. deprecated::"):
+            body = [line.removeprefix(".. deprecated::").strip()]
+            body += [rest.strip() for rest in lines[i + 1:i + 4] if rest.startswith((" ", "\t"))]
+            return " ".join(filter(None, body))
     return None
 
 
@@ -344,6 +368,11 @@ def is_feature_probe(test: ast.AST, flags: set[str] = frozenset()) -> bool:
                 return True
             if (n.value.id, n.attr) == ("os", "name") or n.value.id == "platform":
                 return True
+        # Library version checks: `np_version >= parse_version("1.25")`, `__version__ < (2,)`...
+        if isinstance(n, ast.Compare) and any(
+                "version" in (getattr(v, "id", None) or getattr(v, "attr", None) or "").lower()
+                for o in (n.left, *n.comparators) for v in ast.walk(o)):
+            return True
     return False
 
 
@@ -396,6 +425,11 @@ def guarded_nodes(tree: ast.Module) -> set[ast.AST]:
         elif isinstance(node, ast.Try) and caught_names(node) & GUARD_ERRORS:
             for stmt in node.body:
                 guarded.update(ast.walk(stmt))
+            # `except ImportError: from numpy import RankWarning` - the fallback for other versions.
+            for handler in node.handlers:
+                if FALLBACK_ERRORS & {getattr(t, "id", None) or getattr(t, "attr", None)
+                                      for t in (ast.walk(handler.type) if handler.type else ())}:
+                    guarded.update(ast.walk(handler))
     return guarded
 
 
@@ -491,7 +525,7 @@ class FileChecker(ast.NodeVisitor):
 
     def report_missing_member(self, node: ast.AST, owner, name: str, value, what: str):
         where = self.env.label(owner_module(owner))
-        if isinstance(value, Removed):
+        if type(value) is Removed:
             self.report(node, "error", "API002", f"'{what}.{name}' is not available in {where}: {value.reason}")
         else:
             hint = moved_to(owner, name, what) or suggest(name, dir(owner))
@@ -541,7 +575,7 @@ class FileChecker(ast.NodeVisitor):
             if alias.name == "*":
                 continue
             value = self.env.member(mod, alias.name)
-            if value is MISSING or isinstance(value, Removed):
+            if value is MISSING or type(value) is Removed:
                 if not guarded:
                     self.report_missing_member(node, mod, alias.name, value, node.module)
                 continue
@@ -578,7 +612,7 @@ class FileChecker(ast.NodeVisitor):
             local.closed = False
         for base in d.bases:
             resolved = self.resolve(base)
-            if isinstance(resolved, LocalClass) or inspect.isclass(resolved):
+            if type(resolved) is LocalClass or inspect.isclass(resolved):
                 local.bases.append(resolved)
                 if inspect.isclass(resolved) and not plain_metaclass(resolved):
                     local.closed = False
@@ -593,13 +627,13 @@ class FileChecker(ast.NodeVisitor):
         seen.add(id(local))
         certain = local.closed
         for base in local.bases:
-            if isinstance(base, LocalClass):
+            if type(base) is LocalClass:
                 state, value, owner = self.lookup_local(base, attr, instance, seen)
                 if state != "missing":
                     return state, value, owner
                 continue
             value = self.env.member(base, attr)
-            if isinstance(value, Removed):
+            if type(value) is Removed:
                 return "unknown", None, None
             if value is not MISSING:
                 return "found", value, base
@@ -618,7 +652,7 @@ class FileChecker(ast.NodeVisitor):
         seen.add(id(local))
         names = set(local.attrs)
         for base in local.bases:
-            names |= self.local_candidates(base, seen) if isinstance(base, LocalClass) else set(dir(base))
+            names |= self.local_candidates(base, seen) if type(base) is LocalClass else set(dir(base))
         return names
 
     # -- scopes: what each name holds -----------------------------------------------------
@@ -705,7 +739,7 @@ class FileChecker(ast.NodeVisitor):
         if isinstance(ann, ast.Subscript) and self.resolve(ann.value) is typing.Optional:
             return self.annotation_type(ann.slice)
         resolved = self.resolve(ann)
-        if isinstance(resolved, LocalClass) or inspect.isclass(resolved):
+        if type(resolved) is LocalClass or inspect.isclass(resolved):
             return Instance(resolved, exact=False)
         return UNTYPED
 
@@ -731,14 +765,18 @@ class FileChecker(ast.NodeVisitor):
         """
         if not self.quiet and id(expr) in self._memo:
             return self._memo[id(expr)]
-        if isinstance(expr, ast.Name):
-            value = self.lookup_name(expr.id)
-        elif isinstance(expr, ast.Call):
-            value = self.call_result(expr)
-        elif isinstance(expr, ast.Attribute):
-            base = self.resolve(expr.value)
-            value = None if base is None else self.resolve_member(expr, base)
-        else:
+        try:
+            if isinstance(expr, ast.Name):
+                value = self.lookup_name(expr.id)
+            elif isinstance(expr, ast.Call):
+                value = self.call_result(expr)
+            elif isinstance(expr, ast.Attribute):
+                base = self.resolve(expr.value)
+                value = None if base is None else self.resolve_member(expr, base)
+            else:
+                value = None
+        except Exception:
+            # Inspecting live objects can run arbitrary code (proxies, lazy objects) that raises.
             value = None
         if not self.quiet:
             self._memo[id(expr)] = value
@@ -746,14 +784,14 @@ class FileChecker(ast.NodeVisitor):
 
     def call_result(self, call: ast.Call):
         func = self.resolve(call.func)
-        if isinstance(func, LocalClass):
+        if type(func) is LocalClass:
             return Instance(func, exact=func.closed)
         if inspect.isclass(func):
             # A metaclass with its own __call__ (Enum("A", ...)) may not return an instance.
             return Instance(func, exact=type(func).__call__ is type.__call__)
-        if isinstance(func, BoundMethod):
+        if type(func) is BoundMethod:
             return return_type(func.func)
-        if func is not None and not isinstance(func, Instance) and callable(func):
+        if func is not None and not type(func) is Instance and callable(func):
             return return_type(func)
         return None
 
@@ -769,12 +807,12 @@ class FileChecker(ast.NodeVisitor):
         attr = expr.attr
         if inspect.ismodule(base) or inspect.isclass(base):
             value = self.env.member(base, attr)
-            if value is MISSING or isinstance(value, Removed):
+            if value is MISSING or type(value) is Removed:
                 self.report_missing_member(expr, base, attr, value, ast.unparse(expr.value))
                 return None
             self.check_deprecated(expr, value, ast.unparse(expr))
             return self.as_reference(value)
-        if isinstance(base, LocalClass):
+        if type(base) is LocalClass:
             state, value, _ = self.lookup_local(base, attr, instance=False)
             if state == "missing":
                 hint = suggest(attr, self.local_candidates(base))
@@ -783,13 +821,13 @@ class FileChecker(ast.NodeVisitor):
                 self.check_deprecated(expr, value, f"{base.name}.{attr}")
                 return self.as_reference(value)
             return None
-        if isinstance(base, Instance):
+        if type(base) is Instance:
             return self.instance_member(expr, base)
         return None
 
     def instance_member(self, expr: ast.Attribute, inst: Instance):
         cls, attr = inst.cls, expr.attr
-        if isinstance(cls, LocalClass):
+        if type(cls) is LocalClass:
             state, value, owner = self.lookup_local(cls, attr, instance=True)
             if state == "found":
                 self.check_deprecated(expr, value, f"{cls.name}.{attr}")
@@ -803,7 +841,7 @@ class FileChecker(ast.NodeVisitor):
         if is_proxy(cls):
             return None
         value = self.env.member(cls, attr)
-        if isinstance(value, Removed):
+        if type(value) is Removed:
             return None
         if value is not MISSING:
             self.check_deprecated(expr, value, f"{cls.__name__}.{attr}")
@@ -869,16 +907,16 @@ class FileChecker(ast.NodeVisitor):
 
     def visit_Call(self, node: ast.Call):
         func = self.resolve(node.func)
-        if isinstance(func, BoundMethod):
+        if type(func) is BoundMethod:
             self.check_call(node, func.func, drop_first=func.drop_first)
-        elif func is not None and not isinstance(func, (LocalClass, Instance)) and callable(func):
+        elif func is not None and type(func) not in (LocalClass, Instance) and callable(func):
             self.check_call(node, func)
         self.generic_visit(node)
 
     def check_call(self, node: ast.Call, func, drop_first: bool = False):
         try:
             sig = inspect.signature(func)
-        except (TypeError, ValueError):
+        except Exception:
             return
         params = list(sig.parameters.values())
         if drop_first:
@@ -942,7 +980,12 @@ def check_paths(paths: list[Path], extra_local: set[str] = frozenset()) -> tuple
     count = 0
     for file in iter_python_files(paths):
         count += 1
-        source = file.read_text(encoding="utf-8")
+        try:
+            with tokenize.open(file) as f:  # honours a PEP 263 coding cookie, as Python does
+                source = f.read()
+        except (SyntaxError, UnicodeDecodeError) as exc:
+            findings.append(Finding(str(file), 1, 1, "error", "API000", f"could not read: {exc}"))
+            continue
         try:
             findings.extend(FileChecker(env, str(file), source, local).run())
         except SyntaxError as exc:

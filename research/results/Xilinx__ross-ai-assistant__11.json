@@ -1,0 +1,14 @@
+{
+  "agent": "copilot",
+  "repo": "Xilinx/ross-ai-assistant",
+  "number": 11,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T17:26:39Z",
+  "title": "Clarify GitHub Copilot Chat bug report",
+  "url": "https://github.com/Xilinx/ross-ai-assistant/pull/11",
+  "stars": 219,
+  "python_files": 0,
+  "added_lines": 0,
+  "status": "no-python-changes"
+}

@@ -1,0 +1,22 @@
+{
+  "agent": "copilot",
+  "repo": "mylxsw/llm-gateway",
+  "number": 145,
+  "state": "open",
+  "author": "Copilot",
+  "created": "2026-10-28T15:00:39Z",
+  "title": "Emit function_call items when converting Chat SSE to Responses SSE",
+  "url": "https://github.com/mylxsw/llm-gateway/pull/145",
+  "stars": 76,
+  "python_files": 2,
+  "added_lines": 277,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 7,
+  "findings": []
+}

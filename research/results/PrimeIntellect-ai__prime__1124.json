@@ -1,0 +1,41 @@
+{
+  "agent": "claude-code",
+  "repo": "PrimeIntellect-ai/prime",
+  "number": 1124,
+  "state": "open",
+  "author": "DamianB-BitFlipper",
+  "created": "2026-10-28T22:45:54Z",
+  "title": "feat(sandbox): add localhost forwards to the CLI and SDK",
+  "url": "https://github.com/PrimeIntellect-ai/prime/pull/1124",
+  "stars": 340,
+  "python_files": 6,
+  "added_lines": 282,
+  "status": "ok",
+  "install": {
+    "source": "none",
+    "declared": [],
+    "failed": [],
+    "skipped": false
+  },
+  "findings_all_lines": 34,
+  "findings": [
+    {
+      "path": "packages/prime-sandboxes/tests/test_egress_policy.py",
+      "line": 6,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'httpx' is not installed in this environment",
+      "source": "import httpx"
+    },
+    {
+      "path": "packages/prime/tests/test_sandbox_network_lan.py",
+      "line": 4,
+      "col": 1,
+      "severity": "error",
+      "code": "API001",
+      "message": "package 'prime_cli' is not installed in this environment",
+      "source": "from prime_cli.commands.sandbox import _lan_rule_text, _parse_lan_rule, _parse_localhost_forward"
+    }
+  ]
+}
