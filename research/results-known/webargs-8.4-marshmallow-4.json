@@ -1,0 +1,12 @@
+{
+  "case": "webargs-8.4-marshmallow-4",
+  "pins": [
+    "webargs==8.4.0"
+  ],
+  "old": "marshmallow==3.21.3",
+  "new": "marshmallow==4.0.0",
+  "smoke_base": null,
+  "smoke_head": null,
+  "status": "quiet",
+  "report": "changed: backports-datetime-fromisoformat (new) -> 2.0.3\nchanged: marshmallow 3.21.3 -> 4.0.0\nchanged: typing_extensions (new) -> 4.16.0\n\n0 new error(s), 0 new warning(s) from this update.\n"
+}

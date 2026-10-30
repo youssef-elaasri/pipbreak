@@ -1,0 +1,16 @@
+{
+  "case": "flask-1.1-itsdangerous-2.1",
+  "pins": [
+    "Flask==1.1.2",
+    "Werkzeug==1.0.1",
+    "click==7.1.2",
+    "Jinja2==2.11.3",
+    "MarkupSafe==2.0.1"
+  ],
+  "old": "itsdangerous==1.1.0",
+  "new": "itsdangerous==2.1.2",
+  "smoke_base": null,
+  "smoke_head": "ImportError: cannot import name 'json' from 'itsdangerous' (/work/known/flask-1.1-itsdangerous-2.1/head/lib/python3.10/site-packages/itsdangerous/__init__.py)",
+  "status": "caught",
+  "report": "changed: itsdangerous 1.1.0 -> 2.1.2\nflask/json/__init__.py:15:1: error API002 Flask==1.1.2: 'itsdangerous' has no attribute 'json' in itsdangerous==2.1.2. Did you mean 'itsdangerous.serializer.json'?\n\n1 new error(s), 0 new warning(s) from this update.\n"
+}

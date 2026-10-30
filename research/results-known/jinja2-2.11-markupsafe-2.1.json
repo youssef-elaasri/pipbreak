@@ -1,0 +1,12 @@
+{
+  "case": "jinja2-2.11-markupsafe-2.1",
+  "pins": [
+    "Jinja2==2.11.3"
+  ],
+  "old": "MarkupSafe==2.0.1",
+  "new": "MarkupSafe==2.1.5",
+  "smoke_base": null,
+  "smoke_head": "ImportError: cannot import name 'soft_unicode' from 'markupsafe' (/work/known/jinja2-2.11-markupsafe-2.1/head/lib/python3.10/site-packages/markupsafe/__init__.py)",
+  "status": "caught",
+  "report": "changed: MarkupSafe 2.0.1 -> 2.1.5\njinja2/filters.py:13:1: error API002 Jinja2==2.11.3: 'markupsafe' has no attribute 'soft_unicode' in MarkupSafe==2.1.5.\njinja2/runtime.py:9:1: error API002 Jinja2==2.11.3: 'markupsafe' has no attribute 'soft_unicode' in MarkupSafe==2.1.5.\njinja2/utils.py:729:5: error API002 Jinja2==2.11.3: 'markupsafe' has no attribute 'soft_unicode' in MarkupSafe==2.1.5.\n\n3 new error(s), 0 new warning(s) from this update.\n"
+}

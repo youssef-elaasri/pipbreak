@@ -125,13 +125,36 @@ class Environment:
         if top in sys.stdlib_module_names or top == "builtins":
             return f"Python {sys.version_info.major}.{sys.version_info.minor}"
         if self._dists is None:
-            self._dists = importlib.metadata.packages_distributions()
+            self._dists = packages_distributions()
         for dist in self._dists.get(top, []):
             try:
                 return f"{dist}=={importlib.metadata.version(dist)}"
             except importlib.metadata.PackageNotFoundError:
                 continue
         return top
+
+
+def packages_distributions() -> dict[str, list[str]]:
+    """Top-level module -> distributions providing it.
+
+    importlib.metadata's version only reads top_level.txt before Python 3.11, and wheels built
+    with flit (Jinja2 3.1, Werkzeug 3) don't have one - so infer from RECORD, as 3.11 does.
+    """
+    found: dict[str, list[str]] = defaultdict(list)
+    for dist in importlib.metadata.distributions():
+        name = dist.metadata["Name"]
+        if not name:
+            continue
+        tops = set((dist.read_text("top_level.txt") or "").split())
+        for path in dist.files or ():
+            if len(path.parts) == 1 and path.suffix == ".py":
+                tops.add(path.stem)
+            elif len(path.parts) > 1 and "." not in path.parts[0] and path.parts[0] != "__pycache__":
+                tops.add(path.parts[0])
+        for top in tops:
+            if name not in found[top]:
+                found[top].append(name)
+    return dict(found)
 
 
 def owner_module(obj) -> str:
@@ -1023,7 +1046,7 @@ def check_paths(paths: list[Path], extra_local: set[str] = frozenset()) -> tuple
 def installed_distributions() -> dict[str, tuple[importlib.metadata.Distribution, set[str]]]:
     """Each installed distribution (first on sys.path wins, as for imports) and its top-level modules."""
     tops: dict[str, set[str]] = defaultdict(set)
-    for top, dists in importlib.metadata.packages_distributions().items():
+    for top, dists in packages_distributions().items():
         for dist in dists:
             tops[canonical(dist)].add(top)
     found = {}

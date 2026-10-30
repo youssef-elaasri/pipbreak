@@ -1,0 +1,26 @@
+== fetch (online: clone + install wheels) ==
+jinja2-2.11-markupsafe-2.1                 {'base': 'ok', 'head': 'ok'}
+flask-1.1-jinja2-3.1                       {'base': 'ok', 'head': 'ok'}
+flask-1.1-itsdangerous-2.1                 {'base': 'ok', 'head': 'ok'}
+flask-2.0-werkzeug-2.1                     {'base': 'ok', 'head': 'ok'}
+flask-2.2-werkzeug-3.1                     {'base': 'ok', 'head': 'ok'}
+flask-login-0.6.2-werkzeug-3.0             {'base': 'ok', 'head': 'ok'}
+flask-sqlalchemy-2.5-sqlalchemy-2.0        {'base': 'ok', 'head': 'ok'}
+pandas-1.5-sqlalchemy-2.0                  {'base': 'ok', 'head': 'ok'}
+openai-1.40-httpx-0.28                     {'base': 'ok', 'head': 'ok'}
+pandas-1.5-numpy-2.0                       {'base': 'ok', 'head': 'ok'}
+webargs-8.4-marshmallow-4                  {'base': 'ok', 'head': 'ok'}
+marshmallow-sqlalchemy-1.0-marshmallow-4   {'base': 'ok', 'head': 'ok'}
+== check (offline: run apicheck) ==
+jinja2-2.11-markupsafe-2.1                 caught          head: ImportError: cannot import name 'soft_unicode' from 'markupsafe' (/work/known/jinja2-
+flask-1.1-jinja2-3.1                       caught          head: ImportError: cannot import name 'escape' from 'jinja2' (/work/known/flask-1.1-jinja2-
+flask-1.1-itsdangerous-2.1                 caught          head: ImportError: cannot import name 'json' from 'itsdangerous' (/work/known/flask-1.1-its
+flask-2.0-werkzeug-2.1                     not-a-break     head: None
+flask-2.2-werkzeug-3.1                     caught          head: AttributeError: module 'werkzeug' has no attribute '__version__'
+flask-login-0.6.2-werkzeug-3.0             caught          head: ImportError: cannot import name 'url_decode' from 'werkzeug.urls' (/work/known/flask-
+flask-sqlalchemy-2.5-sqlalchemy-2.0        caught          head: AttributeError: module 'sqlalchemy' has no attribute '__all__'. Did you mean: '__file
+pandas-1.5-sqlalchemy-2.0                  missed          head: AttributeError: 'OptionEngine' object has no attribute 'execute'
+openai-1.40-httpx-0.28                     caught          head: TypeError: Client.__init__() got an unexpected keyword argument 'proxies'
+pandas-1.5-numpy-2.0                       caught          head: ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 9
+webargs-8.4-marshmallow-4                  not-a-break     head: None
+marshmallow-sqlalchemy-1.0-marshmallow-4   not-a-break     head: None

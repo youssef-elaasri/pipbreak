@@ -9,7 +9,7 @@
 # Neither stage gets credentials or sees your files: only the sample (read-only), a Docker volume
 # for checkouts, and the results folder.
 param(
-    [ValidateSet("agents", "upgrades")][string]$Study = "agents",
+    [ValidateSet("agents", "upgrades", "known")][string]$Study = "agents",
     [string]$Python = "3.13",
     [string]$Only,
     [int]$Limit
@@ -21,6 +21,7 @@ $volume = "apicheck-work-py$Python"
 $script, $sample, $results = switch ($Study) {
     "agents"   { "/app/research/mine.py", "sample.json", "results" }
     "upgrades" { "/app/research/upgrades.py", "upgrades.json", "results-upgrades" }
+    "known"    { "/app/research/known_breaks.py", "known_breaks.py", "results-known" }  # cases live in the script
 }
 
 docker build -q --build-arg "PYTHON=$Python" -t $image -f "$root\research\Dockerfile" $root | Out-Null
@@ -36,8 +37,12 @@ $sandbox = @(
     "-v", "$root\research\${sample}:/data/sample.json:ro"
 )
 $selection = @()
-if ($Only) { $selection += @("--only", $Only) }
-if ($Limit) { $selection += @("--limit", $Limit) }
+if ($Study -eq "known") {
+    if ($Only) { $selection += @($Only) }
+} else {
+    if ($Only) { $selection += @("--only", $Only) }
+    if ($Limit) { $selection += @("--limit", $Limit) }
+}
 
 Write-Host "== fetch (online: clone + install wheels) =="
 docker run @sandbox $image $script fetch @selection

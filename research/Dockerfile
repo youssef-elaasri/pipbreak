@@ -12,7 +12,7 @@ RUN useradd --uid 10001 --create-home miner \
  && chown miner:miner /work /results
 
 COPY --chown=root:root apicheck /app/apicheck
-COPY --chown=root:root research/mine.py research/upgrades.py research/run_check.py /app/research/
+COPY --chown=root:root research/mine.py research/upgrades.py research/run_check.py research/known_breaks.py /app/research/
 
 ENV APICHECK_SAMPLE=/data/sample.json \
     APICHECK_WORK=/work \

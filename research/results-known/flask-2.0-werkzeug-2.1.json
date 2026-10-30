@@ -1,0 +1,15 @@
+{
+  "case": "flask-2.0-werkzeug-2.1",
+  "pins": [
+    "Flask==2.0.3",
+    "Jinja2==3.0.3",
+    "itsdangerous==2.0.1",
+    "click==8.0.4"
+  ],
+  "old": "Werkzeug==2.0.3",
+  "new": "Werkzeug==2.1.2",
+  "smoke_base": null,
+  "smoke_head": null,
+  "status": "quiet",
+  "report": "changed: Werkzeug 2.0.3 -> 2.1.2\n\n0 new error(s), 0 new warning(s) from this update.\n"
+}

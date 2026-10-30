@@ -1,0 +1,16 @@
+{
+  "case": "flask-1.1-jinja2-3.1",
+  "pins": [
+    "Flask==1.1.2",
+    "Werkzeug==1.0.1",
+    "itsdangerous==1.1.0",
+    "click==7.1.2",
+    "MarkupSafe==2.0.1"
+  ],
+  "old": "Jinja2==2.11.3",
+  "new": "Jinja2==3.1.4",
+  "smoke_base": null,
+  "smoke_head": "ImportError: cannot import name 'escape' from 'jinja2' (/work/known/flask-1.1-jinja2-3.1/head/lib/python3.10/site-packages/jinja2/__init__.py)",
+  "status": "caught",
+  "report": "changed: Jinja2 2.11.3 -> 3.1.4\nflask/__init__.py:14:1: error API002 Flask==1.1.2: 'jinja2' has no attribute 'escape' in Jinja2==3.1.4. Did you mean 'jinja2.compiler.escape'?\nflask/__init__.py:15:1: error API002 Flask==1.1.2: 'jinja2' has no attribute 'Markup' in Jinja2==3.1.4. Did you mean 'jinja2.compiler.Markup'?\nflask/json/__init__.py:16:1: error API002 Flask==1.1.2: 'jinja2' has no attribute 'Markup' in Jinja2==3.1.4. Did you mean 'jinja2.compiler.Markup'?\nflask/json/tag.py:49:1: error API002 Flask==1.1.2: 'jinja2' has no attribute 'Markup' in Jinja2==3.1.4. Did you mean 'jinja2.compiler.Markup'?\n\n4 new error(s), 0 new warning(s) from this update.\n"
+}

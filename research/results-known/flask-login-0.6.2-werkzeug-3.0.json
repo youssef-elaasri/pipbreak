@@ -1,0 +1,13 @@
+{
+  "case": "flask-login-0.6.2-werkzeug-3.0",
+  "pins": [
+    "Flask==2.3.3",
+    "Flask-Login==0.6.2"
+  ],
+  "old": "Werkzeug==2.3.8",
+  "new": "Werkzeug==3.0.1",
+  "smoke_base": null,
+  "smoke_head": "ImportError: cannot import name 'url_decode' from 'werkzeug.urls' (/work/known/flask-login-0.6.2-werkzeug-3.0/head/lib/python3.10/site-packages/werkzeug/urls.py)",
+  "status": "caught",
+  "report": "changed: Werkzeug 2.3.8 -> 3.0.1\nflask_login/utils.py:14:1: error API002 Flask-Login==0.6.2: 'werkzeug.urls' has no attribute 'url_decode' in Werkzeug==3.0.1. Did you mean 'urlencode'?\nflask_login/utils.py:15:1: error API002 Flask-Login==0.6.2: 'werkzeug.urls' has no attribute 'url_encode' in Werkzeug==3.0.1. Did you mean 'urlencode'?\n\n2 new error(s), 0 new warning(s) from this update.\n"
+}

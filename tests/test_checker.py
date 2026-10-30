@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 from apicheck import check_source, compare
-from apicheck.checker import check_installed, check_paths
+from apicheck.checker import check_installed, check_paths, packages_distributions
 from apicheck.cli import main
 
 
@@ -514,6 +514,12 @@ class InstalledPackages(unittest.TestCase):
         self.assertEqual([(f.path, f.code, f.target) for f in findings],
                          [("consumer/__init__.py", "API002", "libnew")])
         self.assertTrue(findings[0].message.startswith("consumer==1.0: 'libnew' has no attribute 'gone'"))
+
+    def test_modules_found_without_top_level_txt(self):
+        # flit-built wheels (Jinja2 3.1, Werkzeug 3) ship no top_level.txt; Python < 3.11 can't map them.
+        dists = packages_distributions()
+        self.assertEqual(dists["libnew"], ["Lib-New"])
+        self.assertEqual(dists["bystander"], ["bystander"])
 
     def test_distribution_name_selects_its_modules(self):
         self.assertEqual(len(check_installed({"lib-new"})[0]), 1)

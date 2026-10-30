@@ -1,0 +1,14 @@
+{
+  "case": "flask-sqlalchemy-2.5-sqlalchemy-2.0",
+  "pins": [
+    "Flask==2.2.5",
+    "Werkzeug==2.3.8",
+    "Flask-SQLAlchemy==2.5.1"
+  ],
+  "old": "SQLAlchemy==1.4.52",
+  "new": "SQLAlchemy==2.0.30",
+  "smoke_base": null,
+  "smoke_head": "AttributeError: module 'sqlalchemy' has no attribute '__all__'. Did you mean: '__file__'?",
+  "status": "caught",
+  "report": "changed: SQLAlchemy 1.4.52 -> 2.0.30\nchanged: typing_extensions (new) -> 4.16.0\nflask_sqlalchemy/__init__.py:31:5: warning API101 Flask-SQLAlchemy==2.5.1: 'sqlalchemy.ext.declarative.declarative_base' is deprecated in SQLAlchemy==2.0.30: 2.0 The ``declarative_base()`` function is now available as :func:`sqlalchemy.orm.declarative_base`. (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)\nflask_sqlalchemy/__init__.py:205:16: error API004 Flask-SQLAlchemy==2.5.1: SessionBase.get_bind() takes at most 2 positional argument(s) in SQLAlchemy==2.0.30, got 3\nflask_sqlalchemy/__init__.py:460:14: warning API101 Flask-SQLAlchemy==2.5.1: 'BaseQuery.get' is deprecated in SQLAlchemy==2.0.30: 2.0 The :meth:`_orm.Query.get` method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as :meth:`_orm.Session.get` (Background on SQLAlchemy 2.0 at: :ref:`migration_20_toplevel`)\n\n1 new error(s), 2 new warning(s) from this update.\n"
+}

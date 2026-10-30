@@ -4,3 +4,4 @@
 !research/upgrades.py
 !research/run_check.py
 **/__pycache__
+!research/known_breaks.py
