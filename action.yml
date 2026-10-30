@@ -1,0 +1,109 @@
+name: apicheck dependency update
+description: >
+  On a dependency-update PR (Dependabot, Renovate), install the dependencies before and after the
+  update and report installed packages that call APIs the update removed - breakage pip can't see.
+branding:
+  icon: package
+  color: orange
+
+inputs:
+  install:
+    description: >
+      Command that installs your dependencies into the active virtualenv, run from
+      working-directory on each side. Default: `pip install -r requirements.txt` if that file
+      exists, else `pip install .`.
+    default: ""
+  working-directory:
+    description: Directory of the project inside the repository.
+    default: "."
+  base-ref:
+    description: Commit to compare against. Default the PR's base commit.
+    default: ${{ github.event.pull_request.base.sha }}
+  comment:
+    description: Post (and keep updating) a PR comment when the update breaks or deprecates something.
+    default: "true"
+  fail-on-break:
+    description: Fail the job when the update breaks a call in an installed package.
+    default: "true"
+  github-token:
+    description: Token for the PR comment; needs `pull-requests: write`.
+    default: ${{ github.token }}
+
+outputs:
+  breaks:
+    description: Number of calls the update breaks.
+    value: ${{ steps.compare.outputs.breaks }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install both sides
+      shell: bash
+      env:
+        INSTALL: ${{ inputs.install }}
+        BASE_REF: ${{ inputs.base-ref }}
+        PROJECT: ${{ inputs.working-directory }}
+      run: |
+        set -euo pipefail
+        if [ -z "$BASE_REF" ]; then
+          echo "::error::apicheck needs a base commit: run it on pull_request, or set base-ref."
+          exit 2
+        fi
+        work="$RUNNER_TEMP/apicheck"
+        rm -rf "$work" && mkdir -p "$work"
+        git -C "$GITHUB_WORKSPACE" fetch --quiet --no-tags --depth=1 origin "$BASE_REF"
+        git -C "$GITHUB_WORKSPACE" worktree add --quiet --detach "$work/base" "$BASE_REF"
+
+        install() {  # $1 = side, $2 = checkout
+          python3 -m venv "$work/venv-$1"
+          (
+            cd "$2/$PROJECT"
+            export VIRTUAL_ENV="$work/venv-$1" PATH="$work/venv-$1/bin:$PATH"
+            if [ -n "$INSTALL" ]; then eval "$INSTALL"
+            elif [ -f requirements.txt ]; then pip install --quiet -r requirements.txt
+            else pip install --quiet .
+            fi
+          )
+        }
+        echo "::group::Install before the update ($BASE_REF)"; install base "$work/base"; echo "::endgroup::"
+        echo "::group::Install after the update"; install head "$GITHUB_WORKSPACE"; echo "::endgroup::"
+
+    - name: Compare
+      id: compare
+      shell: bash
+      run: |
+        set -uo pipefail
+        work="$RUNNER_TEMP/apicheck"
+        status=0  # runners use bash -e: exit 1 ("breaks found") must not end the step here
+        PYTHONPATH="$GITHUB_ACTION_PATH" python3 -m apicheck.compare \
+          --base "$work/venv-base/bin/python" --head "$work/venv-head/bin/python" \
+          --markdown "$work/report.md" | tee "$work/report.txt" || status=$?
+        [ "$status" -le 1 ] || exit "$status"
+        echo "breaks=$(grep -c ': error ' "$work/report.txt" || true)" >> "$GITHUB_OUTPUT"
+        cat "$work/report.md" >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Comment on the PR
+      if: inputs.comment == 'true' && github.event.pull_request.number
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        PR: ${{ github.event.pull_request.number }}
+        BREAKS: ${{ steps.compare.outputs.breaks }}
+      run: |
+        set -uo pipefail
+        report="$RUNNER_TEMP/apicheck/report.md"
+        existing=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
+          --jq '[.[] | select(.body | startswith("<!-- apicheck -->")) | .id][0] // empty' || true)
+        # Only speak up when there's something to say - or to correct an earlier comment.
+        if [ -n "$existing" ]; then
+          gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$existing" -F "body=@$report" > /dev/null
+        elif grep -q "^| " "$report"; then
+          gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F "body=@$report" > /dev/null
+        fi || echo "::warning::apicheck could not comment on the PR (the token needs pull-requests: write)."
+
+    - name: Result
+      if: inputs.fail-on-break == 'true' && steps.compare.outputs.breaks != '0'
+      shell: bash
+      run: |
+        echo "::error::This update breaks ${{ steps.compare.outputs.breaks }} call(s) in installed packages - see the job summary."
+        exit 1

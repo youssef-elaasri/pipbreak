@@ -56,7 +56,45 @@ Checked 32 file(s) against Python 3.11 at /usr/bin/python: 2 error(s), 0 warning
   missing optional extras, vendored copies and shipped test suites are skipped.
 - Combine with `--python .venv/bin/python` to check another environment, e.g. on a Dependabot PR.
 
-### GitHub Actions
+### On Dependabot / Renovate PRs
+
+The action installs your dependencies twice - from the PR's base commit and from the PR - and
+reports only what the update breaks, as a job summary and a PR comment. It fails the check when an
+installed package calls an API the update removed.
+
+```yaml
+# .github/workflows/apicheck.yml
+name: apicheck
+on: pull_request
+permissions:
+  contents: read
+  pull-requests: write   # for the comment; Dependabot PRs get a read-only token without this
+jobs:
+  dependency-update:
+    if: github.actor == 'dependabot[bot]' || github.actor == 'renovate[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"   # the Python you deploy on
+      - uses: youssef-elaasri/apicheck@main
+        # with:
+        #   install: pip install -r requirements/prod.txt   # default: requirements.txt, else `pip install .`
+        #   working-directory: backend
+        #   fail-on-break: false
+```
+
+Use `pull_request`, not `pull_request_target`: installing the PR's dependencies runs their build
+code, which must not see a write token for your repository.
+
+Locally, the same comparison between any two environments:
+
+```bash
+python -m apicheck.compare --base .venv-old/bin/python --head .venv/bin/python --markdown report.md
+```
+
+### GitHub Actions (your own code)
 
 ```yaml
 - run: pip install -r requirements.txt   # your pinned versions

@@ -7,7 +7,7 @@ import textwrap
 import unittest
 from pathlib import Path
 
-from apicheck import check_source
+from apicheck import check_source, compare
 from apicheck.checker import check_installed, check_paths
 from apicheck.cli import main
 
@@ -517,6 +517,30 @@ class InstalledPackages(unittest.TestCase):
 
     def test_distribution_name_selects_its_modules(self):
         self.assertEqual(len(check_installed({"lib-new"})[0]), 1)
+
+
+class Compare(unittest.TestCase):
+    BREAK = {"path": "flask/testing.py", "line": 116, "col": 44, "severity": "error", "code": "API002",
+             "message": "Flask==2.2.5: 'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9."}
+
+    def test_changed_distributions(self):
+        base = {"werkzeug": ("Werkzeug", "2.3.8"), "flask": ("Flask", "2.2.5"), "gone": ("Gone", "1")}
+        head = {"werkzeug": ("Werkzeug", "3.1.9"), "flask": ("Flask", "2.2.5"), "fresh": ("Fresh", "2")}
+        self.assertEqual(compare.changed_distributions(base, head),
+                         [("Fresh", None, "2"), ("Gone", "1", None), ("Werkzeug", "2.3.8", "3.1.9")])
+
+    def test_only_new_findings_count(self):
+        old = dict(self.BREAK, line=110, message=self.BREAK["message"].replace("2.2.5", "2.2.4"))
+        self.assertEqual(compare.introduced([old], [self.BREAK]), [])  # same problem, moved and re-versioned
+        self.assertEqual(compare.introduced([], [self.BREAK]), [self.BREAK])
+
+    def test_markdown_report(self):
+        report = compare.markdown([("Werkzeug", "2.3.8", "3.1.9")], [self.BREAK])
+        self.assertTrue(report.startswith(compare.MARKER))
+        self.assertIn("breaks 1 call(s)", report)
+        self.assertIn("Werkzeug 2.3.8 → 3.1.9", report)
+        self.assertIn("| Flask 2.2.5 | `flask/testing.py:116` | 'werkzeug' has no attribute '__version__'", report)
+        self.assertIn("no installed package uses an API", compare.markdown([], []))
 
 
 class Cli(unittest.TestCase):
