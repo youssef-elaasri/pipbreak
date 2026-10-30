@@ -9,7 +9,7 @@ import sys
 from dataclasses import asdict
 from pathlib import Path
 
-from .checker import check_paths
+from .checker import check_installed, check_paths
 
 
 def parse_args(argv):
@@ -23,7 +23,18 @@ def parse_args(argv):
     parser.add_argument("--local", action="append", default=[],
                         help="top-level module name that belongs to your project (repeatable)")
     parser.add_argument("--strict", action="store_true", help="exit non-zero on warnings too")
-    return parser.parse_args(argv)
+    parser.add_argument("--deps", action="store_true",
+                        help="instead of your code, check the installed packages against each other: "
+                             "calls one package makes into another that the installed version lacks")
+    parser.add_argument("--uses", action="append", default=[], metavar="LIB",
+                        help="with --deps, only check packages that import LIB, e.g. the one you "
+                             "just upgraded (repeatable)")
+    args = parser.parse_args(argv)
+    if args.uses and not args.deps:
+        parser.error("--uses only applies with --deps")
+    if args.deps and (args.paths != ["."] or args.local):
+        parser.error("--deps checks installed packages; it takes no paths or --local")
+    return args
 
 
 def run_in(python: str, argv: list[str]) -> int:
@@ -51,7 +62,10 @@ def main(argv=None) -> int:
     # Introspection imports the checked code's dependencies, and some print on import (pygame's
     # banner) - keep that off stdout, or it corrupts --format json.
     with contextlib.redirect_stdout(sys.stderr):
-        findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
+        if args.deps:
+            findings, file_count = check_installed(set(args.uses))
+        else:
+            findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
     errors = sum(f.severity == "error" for f in findings)
     warnings = len(findings) - errors
 

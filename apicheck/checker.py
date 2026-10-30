@@ -16,12 +16,13 @@ import difflib
 import importlib
 import importlib.metadata
 import inspect
+import re
 import sys
 import textwrap
 import tokenize
 import typing
 from collections import Counter, defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 IGNORE_MARKER = "# apicheck: ignore"
@@ -44,6 +45,7 @@ class Finding:
     severity: str  # "error" or "warning"
     code: str
     message: str
+    target: str = ""  # module whose API this is about; empty for the checked code's own classes
 
 
 @dataclass(frozen=True)
@@ -173,7 +175,12 @@ def _deprecation_note(obj) -> str | None:
         if line.startswith(".. deprecated::"):
             body = [line.removeprefix(".. deprecated::").strip()]
             body += [rest.strip() for rest in lines[i + 1:i + 4] if rest.startswith((" ", "\t"))]
-            return " ".join(filter(None, body))
+            note = " ".join(filter(None, body))
+            # "Use of argument(s) {'maxiter'} by position is deprecated", "The "autocommit" execution
+            # option is deprecated" - a way of calling it, not the object itself.
+            if re.search(r"\b(argument|parameter|keyword|option)", note, re.I):
+                return None
+            return note
     return None
 
 
@@ -190,9 +197,12 @@ def moved_to(owner, name: str, what: str) -> str:
     for attr in dir(owner):
         if attr.startswith("_"):
             continue
-        sub = getattr(owner, attr, None)
-        if inspect.ismodule(sub) and sub.__name__ == f"{owner.__name__}.{attr}" and hasattr(sub, name):
-            return f" Did you mean '{what}.{attr}.{name}'?"
+        try:
+            sub = getattr(owner, attr, None)
+            if inspect.ismodule(sub) and sub.__name__ == f"{owner.__name__}.{attr}" and hasattr(sub, name):
+                return f" Did you mean '{what}.{attr}.{name}'?"
+        except Exception:  # lazy attributes import on access (six.moves.tkinter without Tk)
+            continue
     return ""
 
 
@@ -502,7 +512,7 @@ class FileChecker(ast.NodeVisitor):
 
     # -- reporting ------------------------------------------------------------------------
 
-    def report(self, node: ast.AST, severity: str, code: str, message: str):
+    def report(self, node: ast.AST, severity: str, code: str, message: str, target: str = ""):
         if self.quiet:
             return
         line = self.lines[node.lineno - 1] if node.lineno <= len(self.lines) else ""
@@ -510,7 +520,8 @@ class FileChecker(ast.NodeVisitor):
         if IGNORE_MARKER in line or key in self._seen or (code != "API101" and node in self.guarded):
             return
         self._seen.add(key)
-        self.findings.append(Finding(self.path, node.lineno, node.col_offset + 1, severity, code, message))
+        self.findings.append(Finding(self.path, node.lineno, node.col_offset + 1, severity, code, message,
+                                     target))
 
     def report_missing_module(self, node: ast.AST, name: str):
         parent, _, child = name.rpartition(".")
@@ -521,21 +532,26 @@ class FileChecker(ast.NodeVisitor):
         else:
             hint = suggest(child, dir(parent_mod))
             self.report(node, "error", "API001",
-                        f"module '{name}' does not exist in {self.env.label(parent)}.{hint}")
+                        f"module '{name}' does not exist in {self.env.label(parent)}.{hint}", parent)
 
     def report_missing_member(self, node: ast.AST, owner, name: str, value, what: str):
-        where = self.env.label(owner_module(owner))
+        module = owner_module(owner)
+        if re.search(r"(^|\.)six\.moves\b", module):  # its contents depend on the platform (winreg)
+            return
+        where = self.env.label(module)
         if type(value) is Removed:
-            self.report(node, "error", "API002", f"'{what}.{name}' is not available in {where}: {value.reason}")
+            self.report(node, "error", "API002", f"'{what}.{name}' is not available in {where}: {value.reason}",
+                        module)
         else:
             hint = moved_to(owner, name, what) or suggest(name, dir(owner))
-            self.report(node, "error", "API002", f"'{what}' has no attribute '{name}' in {where}.{hint}")
+            self.report(node, "error", "API002", f"'{what}' has no attribute '{name}' in {where}.{hint}", module)
 
     def check_deprecated(self, node: ast.AST, value, display: str):
         note = deprecation_note(value)
         if note:
+            module = owner_module(value)
             self.report(node, "warning", "API101",
-                        f"'{display}' is deprecated in {self.env.label(owner_module(value))}: {note}")
+                        f"'{display}' is deprecated in {self.env.label(module)}: {note}", module)
 
     # -- imports --------------------------------------------------------------------------
 
@@ -927,7 +943,8 @@ class FileChecker(ast.NodeVisitor):
                 return
         kinds = {p.kind for p in params}
         name = ast.unparse(node.func)
-        where = self.env.label(owner_module(func))
+        module = owner_module(func)
+        where = self.env.label(module)
 
         if inspect.Parameter.VAR_KEYWORD not in kinds:
             accepted = [p.name for p in params
@@ -935,7 +952,8 @@ class FileChecker(ast.NodeVisitor):
             for kw in node.keywords:
                 if kw.arg and kw.arg not in accepted:
                     self.report(kw, "error", "API003",
-                                f"{name}() has no parameter '{kw.arg}' in {where}.{suggest(kw.arg, accepted)}")
+                                f"{name}() has no parameter '{kw.arg}' in {where}.{suggest(kw.arg, accepted)}",
+                                module)
 
         has_star = any(isinstance(a, ast.Starred) for a in node.args)
         if inspect.Parameter.VAR_POSITIONAL not in kinds and not has_star:
@@ -943,7 +961,7 @@ class FileChecker(ast.NodeVisitor):
             if len(node.args) > max_positional:
                 self.report(node, "error", "API004",
                             f"{name}() takes at most {max_positional} positional argument(s) "
-                            f"in {where}, got {len(node.args)}")
+                            f"in {where}, got {len(node.args)}", module)
 
 
 def local_names(paths: list[Path]) -> set[str]:
@@ -973,6 +991,22 @@ def iter_python_files(paths: list[Path]):
                     yield file
 
 
+def check_file(env: Environment, file: Path, local: set[str], display: str | None = None) -> list[Finding]:
+    display = display or str(file)
+    try:
+        with tokenize.open(file) as f:  # honours a PEP 263 coding cookie, as Python does
+            source = f.read()
+    except (SyntaxError, UnicodeDecodeError) as exc:
+        return [Finding(display, 1, 1, "error", "API000", f"could not read: {exc}")]
+    try:
+        return FileChecker(env, display, source, local).run()
+    except SyntaxError as exc:
+        return [Finding(display, exc.lineno or 1, exc.offset or 1, "error", "API000",
+                        f"could not parse: {exc.msg}")]
+    except Exception as exc:  # introspecting arbitrary packages; one odd file mustn't sink the run
+        return [Finding(display, 1, 1, "error", "API000", f"apicheck failed on this file: {exc!r}")]
+
+
 def check_paths(paths: list[Path], extra_local: set[str] = frozenset()) -> tuple[list[Finding], int]:
     env = Environment()
     local = local_names(paths) | set(extra_local)
@@ -980,17 +1014,72 @@ def check_paths(paths: list[Path], extra_local: set[str] = frozenset()) -> tuple
     count = 0
     for file in iter_python_files(paths):
         count += 1
-        try:
-            with tokenize.open(file) as f:  # honours a PEP 263 coding cookie, as Python does
-                source = f.read()
-        except (SyntaxError, UnicodeDecodeError) as exc:
-            findings.append(Finding(str(file), 1, 1, "error", "API000", f"could not read: {exc}"))
+        findings.extend(check_file(env, file, local))
+    return findings, count
+
+
+# -- installed packages: do they still agree with each other? ----------------------------------
+
+def installed_distributions() -> dict[str, tuple[importlib.metadata.Distribution, set[str]]]:
+    """Each installed distribution (first on sys.path wins, as for imports) and its top-level modules."""
+    tops: dict[str, set[str]] = defaultdict(set)
+    for top, dists in importlib.metadata.packages_distributions().items():
+        for dist in dists:
+            tops[canonical(dist)].add(top)
+    found = {}
+    for dist in importlib.metadata.distributions():
+        name = canonical(dist.metadata["Name"] or "")
+        if name and name not in found:
+            found[name] = (dist, tops.get(name, set()))
+    return found
+
+
+VENDORED = {"_vendor", "vendor", "_vendored", "vendored", "extern", "_extern"}
+
+
+def canonical(name: str) -> str:
+    return name.lower().replace("-", "_").replace(".", "_")
+
+
+def check_installed(uses: set[str] = frozenset()) -> tuple[list[Finding], int]:
+    """Check every installed package's code against the *other* installed packages.
+
+    pip only checks declared version ranges, and those are often open-ended (Flask 2.2 asks for
+    Werkzeug>=2.2.2), so a set of packages can install cleanly and still not work together. Only
+    calls into another distribution count - a package's own internals and the stdlib are its
+    maintainers' business - and missing optional dependencies are ignored. With `uses`, only
+    packages that import one of those modules are checked.
+    """
+    env = Environment()
+    dists = installed_distributions()
+    owner = {top: name for name, (_, tops) in dists.items() for top in tops}
+    # Accept distribution names too: --uses Werkzeug means the `werkzeug` module.
+    uses = {top for u in uses for top in (dists[canonical(u)][1] if canonical(u) in dists else {u})}
+    imports = re.compile(r"^\s*(?:import|from)\s+(" + "|".join(map(re.escape, sorted(uses))) + r")\b", re.M)
+    findings: list[Finding] = []
+    count = 0
+    for name, (dist, tops) in sorted(dists.items()):
+        if name == "apicheck" or uses & tops:
             continue
-        try:
-            findings.extend(FileChecker(env, str(file), source, local).run())
-        except SyntaxError as exc:
-            findings.append(Finding(str(file), exc.lineno or 1, exc.offset or 1, "error", "API000",
-                                    f"could not parse: {exc.msg}"))
+        roots = tops | {f"{t}.py" for t in tops}
+        # Vendored copies (setuptools/_vendor/wheel) import themselves by their original names
+        # through sys.path tricks, so they'd be checked against the separately installed package.
+        # A package's own test suite doesn't run in your application, and is full of platform and
+        # version skips we can't see (np.float96 exists only on some platforms).
+        files = [(f.as_posix(), Path(dist.locate_file(f))) for f in dist.files or ()
+                 if f.suffix == ".py" and f.parts[0] in roots and not VENDORED.intersection(f.parts)
+                 and not {"tests", "test"}.intersection(f.parts) and not f.name.startswith("test_")]
+        files = [(display, path) for display, path in files if path.is_file()]
+        if uses and not any(imports.search(path.read_text(encoding="utf-8", errors="replace"))
+                            for _, path in files):
+            continue
+        label = f"{dist.metadata['Name']}=={dist.version}"
+        for display, path in files:
+            count += 1
+            for f in check_file(env, path, tops, display):
+                target = owner.get(f.target.split(".")[0])
+                if target and target != name:
+                    findings.append(replace(f, message=f"{label}: {f.message}"))
     return findings, count
 
 

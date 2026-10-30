@@ -1,0 +1,65 @@
+== closeio__sync-engine__1207 deps-old: exit 1, 79s
+Checked 1808 file(s) against Python 3.11 at /usr/local/bin/python: 3 error(s), 5 warning(s).
+alembic/ddl/impl.py:17:1: warning API101 alembic==1.7.5: 'sqlalchemy.text' is deprecated 1.4  The "autocommit" execution option is deprecate
+alembic/ddl/postgresql.py:14:1: warning API101 alembic==1.7.5: 'sqlalchemy.text' is deprecated 1.4  The "autocommit" execution option is dep
+alembic/testing/fixtures.py:15:1: warning API101 alembic==1.7.5: 'sqlalchemy.text' is deprecated 1.4  The "autocommit" execution option is d
+alembic/testing/suite/_autogen_fixtures.py:17:1: warning API101 alembic==1.7.5: 'sqlalchemy.text' is deprecated 1.4  The "autocommit" execut
+alembic/util/sqla_compat.py:252:16: warning API101 alembic==1.7.5: 'Inspector.reflecttable' is deprecated 1.4 The :meth:`_reflection.Inspect
+cffi/cparser.py:23:5: error API001 cffi==2.1.1: module 'pycparser.yacctab' does not exist
+cffi/cparser.py:24:5: error API001 cffi==2.1.1: module 'pycparser.lextab' does not exist
+dateutil/tz/win.py:13:1: error API002 python-dateutil==2.8.2: 'six.moves' has no attribute 'winreg'
+== closeio__sync-engine__1207 deps-new: exit 1, 76s
+Checked 1825 file(s) against Python 3.11 at /usr/local/bin/python: 10 error(s), 2 warning(s).
+alembic/autogenerate/render.py:44:5: warning API101 alembic==1.7.5: 'sqlalchemy.sql.type_api.Variant' is deprecated deprecated.  symbol is p
+alembic/autogenerate/render.py:842:27: warning API101 alembic==1.7.5: 'sqltypes.Variant' is deprecated deprecated.  symbol is present for ba
+alembic/testing/assertions.py:89:22: error API002 alembic==1.7.5: 'util' has no attribute 'text_type'
+alembic/testing/assertions.py:93:15: error API002 alembic==1.7.5: 'util' has no attribute 'text_type'
+alembic/testing/assertions.py:171:29: error API002 alembic==1.7.5: 'sa_exc' has no attribute 'RemovedIn20Warning' Did you mean 'MovedIn20War
+alembic/testing/schemacompare.py:13:23: error API002 alembic==1.7.5: 'util' has no attribute 'zip_longest'
+alembic/testing/schemacompare.py:89:23: error API002 alembic==1.7.5: 'util' has no attribute 'zip_longest'
+alembic/testing/schemacompare.py:116:23: error API002 alembic==1.7.5: 'util' has no attribute 'zip_longest'
+alembic/testing/schemacompare.py:144:23: error API002 alembic==1.7.5: 'util' has no attribute 'zip_longest'
+cffi/cparser.py:23:5: error API001 cffi==2.1.1: module 'pycparser.yacctab' does not exist
+cffi/cparser.py:24:5: error API001 cffi==2.1.1: module 'pycparser.lextab' does not exist
+dateutil/tz/win.py:13:1: error API002 python-dateutil==2.8.2: 'six.moves' has no attribute 'winreg'
+== Septem151__gifsync__61 deps-old: exit 0, 36s
+Checked 890 file(s) against Python 3.11 at /usr/local/bin/python: 0 error(s), 2 warning(s).
+flask_sqlalchemy/extension.py:960:16: warning API101 Flask-SQLAlchemy==3.0.2: 'sa.orm.relation' is deprecated 1.4 The relation construct is 
+flask_sqlalchemy/query.py:31:14: warning API101 Flask-SQLAlchemy==3.0.2: 'Query.get' is deprecated 1.4 The :meth:`_orm.Query.get` method is 
+== Septem151__gifsync__61 deps-new: exit 1, 35s
+Checked 900 file(s) against Python 3.11 at /usr/local/bin/python: 8 error(s), 2 warning(s).
+flask/app.py:30:1: error API002 Flask==2.2.2: 'werkzeug.urls' has no attribute 'url_quote' Did you mean 'unquote'?
+flask/cli.py:250:21: error API002 Flask==2.2.2: 'werkzeug' has no attribute '__version__'
+flask/testing.py:10:1: error API002 Flask==2.2.2: 'werkzeug.urls' has no attribute 'url_parse'
+flask/testing.py:117:44: error API002 Flask==2.2.2: 'werkzeug' has no attribute '__version__'
+flask_login/utils.py:14:1: error API002 Flask-Login==0.6.2: 'werkzeug.urls' has no attribute 'url_decode' Did you mean 'urlencode'?
+flask_login/utils.py:15:1: error API002 Flask-Login==0.6.2: 'werkzeug.urls' has no attribute 'url_encode' Did you mean 'urlencode'?
+flask_sqlalchemy/extension.py:960:16: warning API101 Flask-SQLAlchemy==3.0.2: 'sa.orm.relation' is deprecated 1.4 The relation construct is 
+flask_sqlalchemy/query.py:31:14: warning API101 Flask-SQLAlchemy==3.0.2: 'Query.get' is deprecated 1.4 The :meth:`_orm.Query.get` method is 
+flask_wtf/recaptcha/validators.py:6:1: error API002 Flask-WTF==1.1.1: 'werkzeug.urls' has no attribute 'url_encode' Did you mean 'urlencode'
+flask_wtf/recaptcha/widgets.py:3:1: error API002 Flask-WTF==1.1.1: 'werkzeug.urls' has no attribute 'url_encode' Did you mean 'urlencode'?
+== IBM__ada__17 deps-old: exit 1, 72s
+Checked 1592 file(s) against Python 3.11 at /usr/local/bin/python: 1 error(s), 5 warning(s).
+pytest_mock/plugin.py:355:10: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:356:16: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:357:17: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:358:18: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:359:18: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+dateutil/tz/win.py:13:1: error API002 python-dateutil==2.8.2: 'six.moves' has no attribute 'winreg'
+== IBM__ada__17 deps-new: exit 1, 73s
+Checked 1602 file(s) against Python 3.11 at /usr/local/bin/python: 3 error(s), 5 warning(s).
+flask/cli.py:250:21: error API002 Flask==2.2.5: 'werkzeug' has no attribute '__version__'
+flask/testing.py:116:44: error API002 Flask==2.2.5: 'werkzeug' has no attribute '__version__'
+pytest_mock/plugin.py:355:10: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:356:16: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:357:17: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:358:18: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+pytest_mock/plugin.py:359:18: warning API101 pytest-mock==3.3.1: 'pytest.yield_fixture' is deprecated 3.0 Use :py:func:`pytest.fixture` dire
+dateutil/tz/win.py:13:1: error API002 python-dateutil==2.8.2: 'six.moves' has no attribute 'winreg'
+== KarelZe__tclf__289 deps-old: exit 1, 106s
+Checked 1724 file(s) against Python 3.11 at /usr/local/bin/python: 1 error(s), 0 warning(s).
+scipy/sparse/_coo.py:1516:23: error API002 scipy==1.17.1: 'np' has no attribute 'zeroslike' Did you mean 'zeros_like'?
+== KarelZe__tclf__289 deps-new: exit 1, 90s
+Checked 1720 file(s) against Python 3.11 at /usr/local/bin/python: 2 error(s), 0 warning(s).
+scipy/sparse/_coo.py:1516:23: error API002 scipy==1.17.1: 'np' has no attribute 'zeroslike' Did you mean 'zeros_like'?
+scipy/sparse/_dok.py:184:34: error API003 scipy==1.17.1: np.array() has no parameter 'stype' Did you mean 'dtype'?

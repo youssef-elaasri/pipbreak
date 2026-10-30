@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 from apicheck import check_source
-from apicheck.checker import check_paths
+from apicheck.checker import check_installed, check_paths
 from apicheck.cli import main
 
 
@@ -354,6 +354,20 @@ class Deprecations(unittest.TestCase):
                         Pass nothing instead.
                 """
 
+            def call_style(a, maxiter=None):
+                """Solve.
+
+                .. deprecated:: 1.18.0
+                    Use of argument(s) ``{'maxiter'}`` by position is deprecated.
+                """
+
+            def with_option(sql):
+                """Make a statement.
+
+                .. deprecated:: 1.4
+                    The "autocommit" execution option is deprecated.
+                """
+
             class Client:
                 @deprecated("use send() instead")
                 def post(self): pass
@@ -401,6 +415,9 @@ class Deprecations(unittest.TestCase):
     def test_deprecated_parameter_is_not_a_deprecated_function(self):
         self.assertEqual(codes("from oldlib import param_deprecated\n"), [])
 
+    def test_deprecated_calling_style_is_not_a_deprecated_function(self):
+        self.assertEqual(codes("from oldlib import call_style, with_option\n"), [])
+
     def test_sphinx_note_text_is_reported(self):
         [finding] = check_source("from oldlib import sphinx_old\n")
         self.assertIn("2.0", finding.message)
@@ -443,6 +460,63 @@ class VersionFallbacks(unittest.TestCase):
     def test_unrelated_except_still_checked(self):
         source = "try:\n    pass\nexcept ValueError:\n    from os import oldname\n"
         self.assertEqual(codes(source), ["API002"])
+
+
+def install(site: Path, dist: str, version: str, files: dict[str, str]):
+    """Lay out a distribution the way pip does: its files plus a .dist-info with RECORD."""
+    for name, source in files.items():
+        Path(site, name).parent.mkdir(parents=True, exist_ok=True)
+        Path(site, name).write_text(textwrap.dedent(source))
+    info = Path(site, f"{dist}-{version}.dist-info")
+    info.mkdir()
+    Path(info, "METADATA").write_text(f"Metadata-Version: 2.1\nName: {dist}\nVersion: {version}\n")
+    Path(info, "RECORD").write_text("".join(f"{name},,\n" for name in files))
+
+
+class InstalledPackages(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        site = Path(cls.tmp.name)
+        install(site, "Lib-New", "3.0", {"libnew/__init__.py": "def keep(): pass\n"})
+        install(site, "consumer", "1.0", {
+            "consumer/__init__.py": """
+                import os
+                import libnew
+                import optional_extra
+                from consumer import helpers
+                libnew.keep()
+                libnew.gone()
+                os.path.nope()
+                helpers.nothere()
+            """,
+            "consumer/helpers.py": "",
+        })
+        install(site, "bystander", "1.0", {"bystander.py": "import os\nos.path.nope()\n"})
+        install(site, "vendorer", "1.0", {
+            "vendorer/__init__.py": "",
+            "vendorer/_vendor/libnew/__init__.py": "import libnew\nlibnew.vendored_only()\n",
+            "vendorer/tests/test_it.py": "import libnew\nlibnew.only_in_old_versions()\n",
+        })
+        sys.path.insert(0, str(site))
+
+    @classmethod
+    def tearDownClass(cls):
+        sys.path.remove(cls.tmp.name)
+        for name in ("libnew", "consumer", "consumer.helpers", "optional_extra", "bystander", "vendorer"):
+            sys.modules.pop(name, None)
+        cls.tmp.cleanup()
+
+    def test_only_calls_into_other_packages(self):
+        findings, count = check_installed({"libnew"})
+        # consumer's two files; bystander doesn't import libnew; vendorer's vendored copy and tests are skipped
+        self.assertEqual(count, 2)
+        self.assertEqual([(f.path, f.code, f.target) for f in findings],
+                         [("consumer/__init__.py", "API002", "libnew")])
+        self.assertTrue(findings[0].message.startswith("consumer==1.0: 'libnew' has no attribute 'gone'"))
+
+    def test_distribution_name_selects_its_modules(self):
+        self.assertEqual(len(check_installed({"lib-new"})[0]), 1)
 
 
 class Cli(unittest.TestCase):

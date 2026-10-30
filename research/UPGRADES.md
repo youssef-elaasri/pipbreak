@@ -73,6 +73,27 @@ The sample is small (3 PRs with hard breaks, all Werkzeug 3 + old Flask), so thi
 proof. It points at a product shape: *"before you merge this bump, here's what in your installed
 dependencies will break"* - `apicheck --deps`, or a Dependabot companion check.
 
+## Follow-up: `apicheck --deps` on whole environments
+
+The dependency scan is now a CLI mode. Run with no `--uses` filter over the *entire* installed
+environment of four PRs (900-1,800 files, 35-110 s each), after skipping vendored copies, shipped
+test suites and platform-dependent `six.moves`:
+
+| environment | errors before the bump | errors after | new after the bump |
+|---|---|---|---|
+| gifsync (Werkzeug 3) | 0 | 8 | the 8 Flask / Flask-Login / Flask-WTF breaks |
+| IBM/ada (Werkzeug 3) | 0 | 2 | the 2 Flask breaks CI hit |
+| closeio (SQLAlchemy 2.1) | 2 | 9 | 7 in `alembic.testing` (alembic 1.7.5 vs SQLAlchemy 2) |
+| tclf (numpy 2) | 1 | 2 | scipy `np.array(stype=)` |
+
+The rest: dead code in cffi (`pycparser.yacctab`, in a function commented "never called") and
+`np.zeroslike` at `scipy/sparse/_coo.py:1516` - a real typo in scipy 1.17.1, present with any numpy.
+Warnings are genuine deprecations (pytest-mock's `yield_fixture`, Flask-SQLAlchemy's `Query.get`).
+`--uses <lib>` narrows the same check to seconds (32 files for IBM/ada).
+
+Comparing before and after the bump removes the pre-existing findings entirely - that's how a
+Dependabot check should run it.
+
 ## Bugs found in apicheck along the way
 
 - Live proxies (Flask's `request`) raised during introspection and crashed the run - now caught.

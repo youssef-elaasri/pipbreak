@@ -35,6 +35,27 @@ apicheck --format json src/            # machine-readable
 
 Exit code is 1 when there are errors (`--strict` makes warnings fail too).
 
+### Do my installed packages still work together? (`--deps`)
+
+pip only checks declared version ranges, and those are often open-ended: Flask 2.2 asks for
+`Werkzeug>=2.2.2`, so upgrading to Werkzeug 3 installs cleanly - and then fails at runtime.
+`--deps` checks the code of every installed package against the *other* installed packages:
+
+```text
+$ pip install -U werkzeug
+$ apicheck --deps --uses werkzeug
+flask/testing.py:116:44: error API002 Flask==2.2.5: 'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.
+flask/cli.py:250:21: error API002 Flask==2.2.5: 'werkzeug' has no attribute '__version__' in Werkzeug==3.1.9.
+
+Checked 32 file(s) against Python 3.11 at /usr/bin/python: 2 error(s), 0 warning(s).
+```
+
+- `--uses LIB` (repeatable; import or distribution name) narrows the check to packages that import
+  LIB - the one you just upgraded. That takes seconds; a whole environment takes a minute or more.
+- Only calls from one distribution into another count. A package's own internals, the stdlib,
+  missing optional extras, vendored copies and shipped test suites are skipped.
+- Combine with `--python .venv/bin/python` to check another environment, e.g. on a Dependabot PR.
+
 ### GitHub Actions
 
 ```yaml
