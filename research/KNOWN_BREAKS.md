@@ -8,12 +8,12 @@ October 2026. `research/known_breaks.py`, run in the Docker sandbox
 Each case pins a dependent package and moves one library from an old to a new version, like a
 Dependabot PR would. Ground truth comes from a **smoke script** that exercises the dependent
 (import it, build an app, call the function): it must pass before the update, and whether it fails
-after decides if the update is a break - independently of apicheck. Then `apicheck.compare` runs
+after decides if the update is a break - independently of pipbreak. Then `pipbreak.compare` runs
 on the two environments, exactly as the GitHub Action does.
 
 ## Results
 
-| Case | Smoke after the update | apicheck |
+| Case | Smoke after the update | pipbreak |
 |---|---|---|
 | Jinja2 2.11 + MarkupSafe 2.0 -> 2.1 | `cannot import name 'soft_unicode'` | **caught, exact** - `markupsafe.soft_unicode` in 3 files |
 | Flask 1.1 + Jinja2 2.11 -> 3.1 | `cannot import name 'escape' from 'jinja2'` | **caught, exact** - `jinja2.escape`, `jinja2.Markup` |
@@ -40,15 +40,15 @@ For the GitHub Action, which turns this into pass/fail on the PR, the verdict wa
   only because pandas also used removed Python APIs.
 - **Behaviour changes** with the same API - nothing static can see those.
 
-## Bug this found in apicheck
+## Bug this found in pipbreak
 
 On Python < 3.11, `importlib.metadata.packages_distributions()` only reads `top_level.txt`, which
 flit-built wheels (Jinja2 3.1, Werkzeug 3) don't have. `--deps` couldn't attribute `jinja2` to a
-distribution and dropped the findings: 2 real breaks were missed. apicheck now infers top-level
+distribution and dropped the findings: 2 real breaks were missed. pipbreak now infers top-level
 modules from `RECORD`, as Python 3.11+ does.
 
 ## Caveats
 
 12 cases, chosen by me from well-known breakages - so biased toward the import-and-attribute kind
-apicheck is built for. The smoke scripts exercise one path each; "quiet" means that path works, not
+pipbreak is built for. The smoke scripts exercise one path each; "quiet" means that path works, not
 that nothing anywhere changed.

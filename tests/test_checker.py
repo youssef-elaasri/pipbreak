@@ -7,9 +7,9 @@ import textwrap
 import unittest
 from pathlib import Path
 
-from apicheck import check_source, compare
-from apicheck.checker import check_installed, check_paths, packages_distributions
-from apicheck.cli import main
+from pipbreak import check_source, compare
+from pipbreak.checker import check_installed, check_paths, packages_distributions
+from pipbreak.cli import main
 
 
 def codes(source, **kwargs):
@@ -220,7 +220,7 @@ class NoFalsePositives(unittest.TestCase):
 
     def test_local_class_with_unknown_base(self):
         source = """
-            from somewhere_unknown_pkg import Base  # apicheck: ignore
+            from somewhere_unknown_pkg import Base  # pipbreak: ignore
             class Thing(Base):
                 pass
             Thing().anything
@@ -316,7 +316,7 @@ class NoFalsePositives(unittest.TestCase):
         self.assertEqual(codes("import json\njson = make_thing()\njson.parse\n"), [])
 
     def test_ignore_comment(self):
-        self.assertEqual(codes("import json\njson.parse('{}')  # apicheck: ignore\n"), [])
+        self.assertEqual(codes("import json\njson.parse('{}')  # pipbreak: ignore\n"), [])
 
     def test_local_modules_are_skipped(self):
         self.assertEqual(codes("import myproject.thing\n", local={"myproject"}), [])

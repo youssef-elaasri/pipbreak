@@ -1,4 +1,4 @@
-# Does apicheck catch what a major dependency bump breaks?
+# Does pipbreak catch what a major dependency bump breaks?
 
 October 2026. `research/upgrades.py`, run in the Docker sandbox (`run-docker.ps1 -Study upgrades -Python 3.11`).
 
@@ -6,7 +6,7 @@ October 2026. `research/upgrades.py`, run in the Docker sandbox (`run-docker.ps1
 
 40 Dependabot/Renovate PRs that bump pydantic, SQLAlchemy, numpy, marshmallow, httpx, openai,
 Werkzeug or pandas (repos with 10+ stars). For each one: check out the PR head and its parent,
-install each side's pinned dependencies (wheels only), and run apicheck twice on the same code -
+install each side's pinned dependencies (wheels only), and run pipbreak twice on the same code -
 once against the old environment, once against the new. A finding counts as *introduced* when it
 only appears against the new environment and names the bumped library. Then compare with the PR's CI.
 
@@ -60,20 +60,20 @@ Every remaining dependency finding is a symbol that really is gone (or deprecate
    hard API break in their own code. The hard breaks were all in *other installed packages* that use
    the bumped library and don't cap it - Flask 2.2 declares `Werkzeug>=2.2.2`, so pip happily
    installs Werkzeug 3 and `pip check` stays green.
-2. **apicheck pinpoints those breaks statically, before anything runs.** In the one PR where CI got
-   as far as running tests (IBM/ada), apicheck reported the exact line that failed. In gifsync it
+2. **pipbreak pinpoints those breaks statically, before anything runs.** In the one PR where CI got
+   as far as running tests (IBM/ada), pipbreak reported the exact line that failed. In gifsync it
    found the breaks hiding behind an unrelated CI failure, and in containerization-assist it found a
    break that CI passed.
 3. **Most CI failures on bump PRs aren't API breaks** - of 6, three were resolver conflicts, one CI
    config, one mypy.
-   pip already reports those; apicheck has nothing to add there.
+   pip already reports those; pipbreak has nothing to add there.
 4. **Deprecations in project code** (closeio) are a useful migration to-do list, not a blocker.
 
 The sample is small (3 PRs with hard breaks, all Werkzeug 3 + old Flask), so this is a signal, not
 proof. It points at a product shape: *"before you merge this bump, here's what in your installed
-dependencies will break"* - `apicheck --deps`, or a Dependabot companion check.
+dependencies will break"* - `pipbreak --deps`, or a Dependabot companion check.
 
-## Follow-up: `apicheck --deps` on whole environments
+## Follow-up: `pipbreak --deps` on whole environments
 
 The dependency scan is now a CLI mode. Run with no `--uses` filter over the *entire* installed
 environment of four PRs (900-1,800 files, 35-110 s each), after skipping vendored copies, shipped
@@ -94,7 +94,7 @@ Warnings are genuine deprecations (pytest-mock's `yield_fixture`, Flask-SQLAlche
 Comparing before and after the bump removes the pre-existing findings entirely - that's how a
 Dependabot check should run it.
 
-## Bugs found in apicheck along the way
+## Bugs found in pipbreak along the way
 
 - Live proxies (Flask's `request`) raised during introspection and crashed the run - now caught.
 - A deprecated *parameter* (`Session.flush(objects=)`) flagged the whole function - only top-level

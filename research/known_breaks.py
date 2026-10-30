@@ -1,8 +1,8 @@
-"""Benchmark: does apicheck catch documented "an update broke a package that didn't pin it" cases?
+"""Benchmark: does pipbreak catch documented "an update broke a package that didn't pin it" cases?
 
 Each case pins a dependent package and moves one library from an old to a new version. A smoke
 script that exercises the dependent must pass before the update; whether it fails after is the
-ground truth, independent of apicheck. Then `apicheck.compare` runs on the two environments:
+ground truth, independent of pipbreak. Then `pipbreak.compare` runs on the two environments:
 caught / missed for real breaks, quiet / flagged-no-break for updates that didn't break the smoke.
 
     known_breaks.py fetch     # container, online:  one venv per case and side (wheels only)
@@ -19,9 +19,9 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-WORK = Path(os.environ.get("APICHECK_WORK", HERE / "work")) / "known"
-RESULTS = Path(os.environ.get("APICHECK_RESULTS", HERE / "results-known"))
-APICHECK_ROOT = HERE.parent if (HERE.parent / "apicheck").is_dir() else Path("/app")
+WORK = Path(os.environ.get("PIPBREAK_WORK", HERE / "work")) / "known"
+RESULTS = Path(os.environ.get("PIPBREAK_RESULTS", HERE / "results-known"))
+PIPBREAK_ROOT = HERE.parent if (HERE.parent / "pipbreak").is_dir() else Path("/app")
 
 FLASK_1 = ["Flask==1.1.2", "Werkzeug==1.0.1", "itsdangerous==1.1.0", "click==7.1.2"]
 
@@ -114,9 +114,9 @@ def check(case: str) -> dict:
     record["smoke_base"], record["smoke_head"] = smoke(case, "base"), smoke(case, "head")
     if record["smoke_base"]:
         return dict(record, status="base-broken")  # the "before" side must work
-    env = dict(os.environ, PYTHONPATH=str(APICHECK_ROOT))
+    env = dict(os.environ, PYTHONPATH=str(PIPBREAK_ROOT))
     out = WORK / case / "report.md"
-    result = subprocess.run([sys.executable, "-m", "apicheck.compare", "--base", str(python(case, "base")),
+    result = subprocess.run([sys.executable, "-m", "pipbreak.compare", "--base", str(python(case, "base")),
                              "--head", str(python(case, "head")), "--markdown", str(out)],
                             capture_output=True, text=True, env=env, timeout=1800)
     if result.returncode not in (0, 1):

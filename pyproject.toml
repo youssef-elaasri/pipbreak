@@ -1,16 +1,34 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "apicheck"
+name = "pipbreak"
 version = "0.1.0"
-description = "Catch hallucinated and deprecated API calls against the exact package versions you have installed."
+description = "Find the installed packages a dependency update breaks - the calls pip's version ranges let through."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Youssef Elaasri" }]
 requires-python = ">=3.10"
 dependencies = []
+keywords = ["dependencies", "dependabot", "renovate", "upgrade", "compatibility", "static-analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: System :: Software Distribution",
+]
+
+[project.urls]
+Homepage = "https://github.com/youssef-elaasri/pipbreak"
+Issues = "https://github.com/youssef-elaasri/pipbreak/issues"
 
 [project.scripts]
-apicheck = "apicheck.cli:main"
+pipbreak = "pipbreak.cli:main"
 
 [tool.setuptools]
-packages = ["apicheck"]
+packages = ["pipbreak"]

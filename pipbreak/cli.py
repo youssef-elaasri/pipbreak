@@ -14,7 +14,7 @@ from .checker import check_installed, check_paths
 
 def parse_args(argv):
     parser = argparse.ArgumentParser(
-        prog="apicheck",
+        prog="pipbreak",
         description="Flag calls to APIs that don't exist in your installed package versions.")
     parser.add_argument("paths", nargs="*", default=["."], help="files or directories to check")
     parser.add_argument("--python", help="interpreter of the environment to check against "
@@ -50,7 +50,7 @@ def run_in(python: str, argv: list[str]) -> int:
     env = dict(os.environ)
     package_root = str(Path(__file__).resolve().parent.parent)
     env["PYTHONPATH"] = os.pathsep.join(filter(None, [package_root, env.get("PYTHONPATH")]))
-    return subprocess.call([python, "-m", "apicheck", *forwarded], env=env)
+    return subprocess.call([python, "-m", "pipbreak", *forwarded], env=env)
 
 
 def main(argv=None) -> int:

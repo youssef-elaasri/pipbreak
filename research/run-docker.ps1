@@ -5,7 +5,7 @@
 #   ./research/run-docker.ps1 -Only "BerriAI/litellm#48945"            # one PR
 #
 # Stage 1 (fetch) has network access to clone repos and pip-install wheels.
-# Stage 2 (check) runs apicheck - which imports those packages - with no network at all.
+# Stage 2 (check) runs pipbreak - which imports those packages - with no network at all.
 # Neither stage gets credentials or sees your files: only the sample (read-only), a Docker volume
 # for checkouts, and the results folder.
 param(
@@ -16,8 +16,8 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$image = "apicheck-miner:py$Python"
-$volume = "apicheck-work-py$Python"
+$image = "pipbreak-miner:py$Python"
+$volume = "pipbreak-work-py$Python"
 $script, $sample, $results = switch ($Study) {
     "agents"   { "/app/research/mine.py", "sample.json", "results" }
     "upgrades" { "/app/research/upgrades.py", "upgrades.json", "results-upgrades" }
@@ -47,5 +47,5 @@ if ($Study -eq "known") {
 Write-Host "== fetch (online: clone + install wheels) =="
 docker run @sandbox $image $script fetch @selection
 
-Write-Host "== check (offline: run apicheck) =="
+Write-Host "== check (offline: run pipbreak) =="
 docker run @sandbox --network=none -v "$root\research\${results}:/results" $image $script check @selection

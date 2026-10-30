@@ -1,15 +1,15 @@
-"""Mine public pull requests opened by AI coding agents and run apicheck on the lines they added.
+"""Mine public pull requests opened by AI coding agents and run pipbreak on the lines they added.
 
 Three stages, so untrusted code only ever touches a locked-down container (see run-docker.ps1):
 
     python research/mine.py collect --per-agent 15   # host: pick PRs          -> sample.json
     python research/mine.py prepare                  # host: fetch their diffs -> sample.json
     mine.py fetch                                    # container, online:  clone + install deps
-    mine.py check                                    # container, offline: run apicheck -> results/
+    mine.py check                                    # container, offline: run pipbreak -> results/
 
 `collect` and `prepare` only call the GitHub API (they need your gh login). `fetch` and `check`
 need no credentials. Nothing from a PR is ever executed: dependencies are installed as wheels only
-(no build scripts) and apicheck runs with the checkout kept off sys.path (see run_check.py).
+(no build scripts) and pipbreak runs with the checkout kept off sys.path (see run_check.py).
 Imported dependencies do run their own import-time code - that's what the container is for.
 """
 from __future__ import annotations
@@ -26,9 +26,9 @@ import tomllib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-SAMPLE = Path(os.environ.get("APICHECK_SAMPLE", HERE / "sample.json"))
-WORK = Path(os.environ.get("APICHECK_WORK", HERE / "work"))        # checkouts + installed deps
-RESULTS = Path(os.environ.get("APICHECK_RESULTS", HERE / "results"))
+SAMPLE = Path(os.environ.get("PIPBREAK_SAMPLE", HERE / "sample.json"))
+WORK = Path(os.environ.get("PIPBREAK_WORK", HERE / "work"))        # checkouts + installed deps
+RESULTS = Path(os.environ.get("PIPBREAK_RESULTS", HERE / "results"))
 GH = shutil.which("gh") or r"C:\Program Files\GitHub CLI\gh.exe"
 
 AGENTS = {
@@ -265,7 +265,7 @@ def local_packages(root: Path) -> set[str]:
     return names
 
 
-def run_apicheck(pr: dict, root: Path, files: list[str]) -> list[dict]:
+def run_pipbreak(pr: dict, root: Path, files: list[str]) -> list[dict]:
     cmd = [sys.executable, "-I", str(HERE / "run_check.py"), str(WORK / slug(pr) / "deps"), "--format", "json"]
     for name in sorted(local_packages(root)):
         cmd += ["--local", name]
@@ -274,7 +274,7 @@ def run_apicheck(pr: dict, root: Path, files: list[str]) -> list[dict]:
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError:
-        raise RuntimeError(f"apicheck failed: {result.stderr.strip()[-800:]}")
+        raise RuntimeError(f"pipbreak failed: {result.stderr.strip()[-800:]}")
 
 
 def check(pr: dict) -> dict:
@@ -292,7 +292,7 @@ def check(pr: dict) -> dict:
     root = WORK / slug(pr) / "src"
     present = [f for f in changed if (root / f).is_file()]
     try:
-        findings = run_apicheck(pr, root, present)
+        findings = run_pipbreak(pr, root, present)
     except Exception as exc:
         return dict(record, status="check-error", error=str(exc)[-800:])
     on_added = []

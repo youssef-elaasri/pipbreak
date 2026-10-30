@@ -1,7 +1,7 @@
-"""Does apicheck find code that a major dependency bump breaks - and does CI catch it?
+"""Does pipbreak find code that a major dependency bump breaks - and does CI catch it?
 
 For each Dependabot/Renovate PR that bumps a library across a major version, install the repo's
-dependencies twice (before and after the bump), run apicheck over the whole repo against each, and
+dependencies twice (before and after the bump), run pipbreak over the whole repo against each, and
 keep the findings that are new after the bump and come from the bumped library. Then compare with
 the PR's CI result.
 
@@ -24,9 +24,9 @@ from pathlib import Path
 
 from mine import HERE, declared_dependencies, gh_json, local_packages
 
-SAMPLE = Path(os.environ.get("APICHECK_SAMPLE", HERE / "upgrades.json"))
-WORK = Path(os.environ.get("APICHECK_WORK", HERE / "work"))
-RESULTS = Path(os.environ.get("APICHECK_RESULTS", HERE / "results-upgrades"))
+SAMPLE = Path(os.environ.get("PIPBREAK_SAMPLE", HERE / "upgrades.json"))
+WORK = Path(os.environ.get("PIPBREAK_WORK", HERE / "work"))
+RESULTS = Path(os.environ.get("PIPBREAK_RESULTS", HERE / "results-upgrades"))
 
 # (distribution, import name, old major as Dependabot writes it, new major for Renovate titles)
 LIBRARIES = [
@@ -196,7 +196,7 @@ def fetch(pr: dict) -> dict:
 VERSION = re.compile(r"==[\w.+!-]+|Python \d+\.\d+")
 
 
-def run_apicheck(tree: Path, deps: Path, local: bool = True) -> list[dict]:
+def run_pipbreak(tree: Path, deps: Path, local: bool = True) -> list[dict]:
     cmd = [sys.executable, "-I", str(HERE / "run_check.py"), str(deps), "--format", "json"]
     for name in sorted(local_packages(tree)) if local else ():
         cmd += ["--local", name]
@@ -205,14 +205,14 @@ def run_apicheck(tree: Path, deps: Path, local: bool = True) -> list[dict]:
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError:
-        raise RuntimeError(f"apicheck failed: {result.stderr.strip()[-800:]}")
+        raise RuntimeError(f"pipbreak failed: {result.stderr.strip()[-800:]}")
 
 
 def introduced_findings(pr: dict, tree: Path, local: bool = True) -> tuple[list[dict], int, int]:
     """Check `tree` against the old and the new dependencies; keep what's new and from the library."""
     deps = WORK / slug(pr)
-    before = run_apicheck(tree, deps / "deps-old", local)
-    after = run_apicheck(tree, deps / "deps-new", local)
+    before = run_pipbreak(tree, deps / "deps-old", local)
+    after = run_pipbreak(tree, deps / "deps-new", local)
 
     def key(f):
         return f["path"], f["line"], f["code"], VERSION.sub("", f["message"])

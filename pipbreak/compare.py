@@ -1,9 +1,9 @@
 """What does an update break? Compare two environments - before and after a dependency bump.
 
-    python -m apicheck.compare --base venv-base/bin/python --head venv-head/bin/python \
+    python -m pipbreak.compare --base venv-base/bin/python --head venv-head/bin/python \
         --markdown report.md
 
-Finds the distributions whose version changed, runs `apicheck --deps --uses <changed>` in both
+Finds the distributions whose version changed, runs `pipbreak --deps --uses <changed>` in both
 environments, and reports only the findings the update introduced: calls that installed packages
 make into the updated ones and that no longer exist. Exit code 1 when the update breaks something.
 """
@@ -19,7 +19,7 @@ from pathlib import Path
 
 from .checker import canonical
 
-MARKER = "<!-- apicheck -->"
+MARKER = "<!-- pipbreak -->"
 PACKAGE_ROOT = str(Path(__file__).resolve().parent.parent)
 VERSIONS = re.compile(r"==[\w.+!-]+")
 
@@ -54,12 +54,12 @@ def changed_distributions(base: dict, head: dict) -> list[tuple[str, str | None,
 
 
 def scan(python: str, uses: list[str]) -> list[dict]:
-    args = ["-m", "apicheck", "--deps", "--format", "json"]
+    args = ["-m", "pipbreak", "--deps", "--format", "json"]
     for name in uses:
         args += ["--uses", name]
     result = run(python, *args)
     if result.returncode not in (0, 1):
-        raise RuntimeError(f"apicheck failed with {python}: {result.stderr.strip()[-2000:]}")
+        raise RuntimeError(f"pipbreak failed with {python}: {result.stderr.strip()[-2000:]}")
     return json.loads(result.stdout)
 
 
@@ -86,12 +86,12 @@ def markdown(changes: list[tuple], new: list[dict]) -> str:
     warnings = [f for f in new if f["severity"] != "error"]
     lines = [MARKER]
     if errors:
-        lines.append(f"### apicheck: this update breaks {len(errors)} call(s) in installed packages")
+        lines.append(f"### pipbreak: this update breaks {len(errors)} call(s) in installed packages")
     elif warnings:
-        lines.append("### apicheck: no breaking calls, but this update deprecates "
+        lines.append("### pipbreak: no breaking calls, but this update deprecates "
                      f"{len(warnings)} API(s) installed packages use")
     else:
-        lines.append("### apicheck: no installed package uses an API this update removed")
+        lines.append("### pipbreak: no installed package uses an API this update removed")
     lines.append("")
     updated = [f"{name} {old or '(new)'} → {new or '(removed)'}" for name, old, new in changes]
     lines.append("Changed: " + (", ".join(updated) if updated else "nothing"))
@@ -116,7 +116,7 @@ def markdown(changes: list[tuple], new: list[dict]) -> str:
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(prog="python -m apicheck.compare", description=__doc__.split("\n")[0])
+    parser = argparse.ArgumentParser(prog="python -m pipbreak.compare", description=__doc__.split("\n")[0])
     parser.add_argument("--base", required=True, help="interpreter of the environment before the update")
     parser.add_argument("--head", required=True, help="interpreter of the environment after the update")
     parser.add_argument("--markdown", help="also write the report as Markdown to this file")

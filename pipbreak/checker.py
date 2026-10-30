@@ -25,7 +25,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 
-IGNORE_MARKER = "# apicheck: ignore"
+IGNORE_MARKER = "# pipbreak: ignore"
 GUARD_ERRORS = {"ImportError", "ModuleNotFoundError", "AttributeError", "NameError", "TypeError",
                 "Exception", "BaseException"}
 FALLBACK_ERRORS = {"ImportError", "ModuleNotFoundError", "AttributeError"}
@@ -1027,7 +1027,7 @@ def check_file(env: Environment, file: Path, local: set[str], display: str | Non
         return [Finding(display, exc.lineno or 1, exc.offset or 1, "error", "API000",
                         f"could not parse: {exc.msg}")]
     except Exception as exc:  # introspecting arbitrary packages; one odd file mustn't sink the run
-        return [Finding(display, 1, 1, "error", "API000", f"apicheck failed on this file: {exc!r}")]
+        return [Finding(display, 1, 1, "error", "API000", f"pipbreak failed on this file: {exc!r}")]
 
 
 def check_paths(paths: list[Path], extra_local: set[str] = frozenset()) -> tuple[list[Finding], int]:
@@ -1082,7 +1082,7 @@ def check_installed(uses: set[str] = frozenset()) -> tuple[list[Finding], int]:
     findings: list[Finding] = []
     count = 0
     for name, (dist, tops) in sorted(dists.items()):
-        if name == "apicheck" or uses & tops:
+        if name == "pipbreak" or uses & tops:
             continue
         roots = tops | {f"{t}.py" for t in tops}
         # Vendored copies (setuptools/_vendor/wheel) import themselves by their original names
