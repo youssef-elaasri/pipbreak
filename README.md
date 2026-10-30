@@ -23,6 +23,10 @@ after, and tells you exactly what the update breaks:
 > These packages accept the new version in their metadata but call APIs it no longer has, so pip
 > installs them without complaint and they fail at runtime. Upgrade them too, or hold this update back.
 
+**See it live:** [a real Dependabot PR](https://github.com/youssef-elaasri/pipbreak-demo/pull/1) in
+[pipbreak-demo](https://github.com/youssef-elaasri/pipbreak-demo), a Flask 2.2 app whose only setup
+is one workflow file.
+
 No configuration, no type stubs, zero dependencies. Python 3.10+.
 
 ## How well does it work?
