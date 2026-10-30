@@ -26,7 +26,7 @@ inputs:
     description: Fail the job when the update breaks a call in an installed package.
     default: "true"
   github-token:
-    description: Token for the PR comment; needs `pull-requests: write`.
+    description: "Token for the PR comment; needs `pull-requests: write`."
     default: ${{ github.token }}
 
 outputs:

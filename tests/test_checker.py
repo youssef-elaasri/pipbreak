@@ -543,6 +543,17 @@ class Compare(unittest.TestCase):
         self.assertIn("no installed package uses an API", compare.markdown([], []))
 
 
+class Action(unittest.TestCase):
+    def test_action_yml_is_valid_yaml(self):
+        try:
+            import yaml
+        except ImportError:
+            self.skipTest("PyYAML not installed")
+        action = yaml.safe_load(Path(__file__).parent.parent.joinpath("action.yml").read_text(encoding="utf-8"))
+        self.assertEqual(action["runs"]["using"], "composite")
+        self.assertTrue(all(isinstance(v["description"], str) for v in action["inputs"].values()))
+
+
 class Cli(unittest.TestCase):
     def test_json_survives_a_package_that_prints_on_import(self):
         with tempfile.TemporaryDirectory() as tmp:
