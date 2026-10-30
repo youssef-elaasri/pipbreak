@@ -86,7 +86,7 @@ class Instances(unittest.TestCase):
         self.assertIn("Did you mean 'encoding'?", msg)
 
     def test_bound_method_positional_count_excludes_self(self):
-        self.assertEqual(codes("from pathlib import Path\nPath('x').read_text('utf-8', 'strict', None)\n"), [])
+        self.assertEqual(codes("from pathlib import Path\nPath('x').read_text('utf-8', 'strict')\n"), [])
         self.assertEqual(codes("from pathlib import Path\nPath('x').exists(1, 2)\n"), ["API004"])
 
     def test_inside_function_scope(self):
@@ -333,7 +333,14 @@ class Deprecations(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
         Path(cls.tmp.name, "oldlib.py").write_text(textwrap.dedent('''
-            from warnings import deprecated
+            try:
+                from warnings import deprecated
+            except ImportError:  # Python < 3.13: the PEP 702 marker is all that matters here
+                def deprecated(message):
+                    def mark(obj):
+                        obj.__deprecated__ = message
+                        return obj
+                    return mark
 
             @deprecated("use new_func instead")
             def old_func(): pass
@@ -391,17 +398,14 @@ class Deprecations(unittest.TestCase):
         sys.path.remove(cls.tmp.name)
         cls.tmp.cleanup()
 
-    @unittest.skipIf(sys.version_info < (3, 13), "warnings.deprecated is new in 3.13")
     def test_pep702_marker(self):
         findings = check_source("import oldlib\noldlib.old_func()\n")
         self.assertEqual([(f.code, f.severity) for f in findings], [("API101", "warning")])
         self.assertIn("use new_func instead", findings[0].message)
 
-    @unittest.skipIf(sys.version_info < (3, 13), "warnings.deprecated is new in 3.13")
     def test_sphinx_note_and_clean_function(self):
         self.assertEqual(codes("from oldlib import sphinx_old, fine\n"), ["API101"])
 
-    @unittest.skipIf(sys.version_info < (3, 13), "warnings.deprecated is new in 3.13")
     def test_deprecated_method_via_annotation(self):
         source = """
             import oldlib
@@ -432,11 +436,9 @@ class Deprecations(unittest.TestCase):
         """
         self.assertEqual(codes(source), [])
 
-    @unittest.skipIf(sys.version_info < (3, 13), "warnings.deprecated is new in 3.13")
     def test_return_annotation(self):
         self.assertEqual(codes("import oldlib\noldlib.make().post()\n"), ["API101"])
 
-    @unittest.skipIf(sys.version_info < (3, 13), "warnings.deprecated is new in 3.13")
     def test_deprecated_method_inherited_by_local_class(self):
         source = """
             import oldlib
