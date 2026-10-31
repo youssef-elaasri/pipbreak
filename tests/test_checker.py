@@ -368,6 +368,12 @@ class Deprecations(unittest.TestCase):
                     Use of argument(s) ``{'maxiter'}`` by position is deprecated.
                 """
 
+            def define(cls=None, hash=None, unsafe_hash=None):
+                """Define a class.
+
+                .. deprecated:: 24.1.0 *hash* is deprecated in favor of *unsafe_hash*.
+                """
+
             def with_option(sql):
                 """Make a statement.
 
@@ -420,7 +426,7 @@ class Deprecations(unittest.TestCase):
         self.assertEqual(codes("from oldlib import param_deprecated\n"), [])
 
     def test_deprecated_calling_style_is_not_a_deprecated_function(self):
-        self.assertEqual(codes("from oldlib import call_style, with_option\n"), [])
+        self.assertEqual(codes("from oldlib import call_style, with_option, define\n"), [])
 
     def test_sphinx_note_text_is_reported(self):
         [finding] = check_source("from oldlib import sphinx_old\n")
@@ -457,6 +463,12 @@ class VersionFallbacks(unittest.TestCase):
     def test_library_version_branch(self):
         source = ("import os\nif np_version >= parse_version('2'):\n    os.path.newname()\n"
                   "else:\n    os.path.oldname()\n")
+        self.assertEqual(codes(source), [])
+
+    def test_version_tuple_and_major_checks(self):
+        # alembic: `sqla_2 = _vers >= (2,)`; flask-restx: `if werkzeug_major < 2:`
+        source = ("import os\nsqla_2 = _vers >= (2,)\nif sqla_2:\n    from os import newname\n"
+                  "if werkzeug_major < 2:\n    os.path.oldname()\n")
         self.assertEqual(codes(source), [])
 
     def test_unrelated_except_still_checked(self):

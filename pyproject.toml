@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pipbreak"
-version = "0.1.1"
+version = "0.1.2"
 description = "Find the installed packages a dependency update breaks - the calls pip's version ranges let through."
 readme = "README.md"
 license = "MIT"

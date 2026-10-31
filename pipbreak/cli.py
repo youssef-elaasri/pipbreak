@@ -4,6 +4,7 @@ import argparse
 import contextlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 from dataclasses import asdict
@@ -53,6 +54,14 @@ def run_in(python: str, argv: list[str]) -> int:
     return subprocess.call([python, "-m", "pipbreak", *forwarded], env=env)
 
 
+def progress(done: int, total: int, package: str | None = None):
+    """One status line, rewritten in place (spaces, not ANSI codes: old Windows consoles show those raw)."""
+    width = shutil.get_terminal_size().columns - 1
+    text = f"checking {package} ({done + 1}/{total})" if package else ""
+    sys.stderr.write("\r" + text[:width].ljust(width) + ("" if package else "\r"))
+    sys.stderr.flush()
+
+
 def main(argv=None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     args = parse_args(argv)
@@ -63,7 +72,11 @@ def main(argv=None) -> int:
     # banner) - keep that off stdout, or it corrupts --format json.
     with contextlib.redirect_stdout(sys.stderr):
         if args.deps:
-            findings, file_count = check_installed(set(args.uses))
+            # A whole environment takes a minute or more; without this it looks frozen.
+            show = sys.stderr.isatty()
+            findings, file_count = check_installed(set(args.uses), progress if show else None)
+            if show:
+                progress(0, 0)  # clear the status line
         else:
             findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
     errors = sum(f.severity == "error" for f in findings)

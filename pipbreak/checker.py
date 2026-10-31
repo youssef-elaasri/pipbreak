@@ -201,10 +201,21 @@ def _deprecation_note(obj) -> str | None:
             note = " ".join(filter(None, body))
             # "Use of argument(s) {'maxiter'} by position is deprecated", "The "autocommit" execution
             # option is deprecated" - a way of calling it, not the object itself.
-            if re.search(r"\b(argument|parameter|keyword|option)", note, re.I):
+            if re.search(r"\b(argument|parameter|keyword|option)", note, re.I) or quotes_a_parameter(obj, note):
                 return None
             return note
     return None
+
+
+def quotes_a_parameter(obj, note: str) -> bool:
+    """attrs.define: "*hash* is deprecated in favor of *unsafe_hash*"; sqlalchemy.orm.join: "a string
+    relationship name for the "onclause" is deprecated" - the note names one of its parameters."""
+    try:
+        params = inspect.signature(obj).parameters
+    except (TypeError, ValueError):
+        return False
+    quoted = set(re.findall(r"""[*`"']+(\w+)[*`"']+""", note))
+    return bool(quoted & set(params))
 
 
 def suggest(name: str, candidates) -> str:
@@ -401,10 +412,23 @@ def is_feature_probe(test: ast.AST, flags: set[str] = frozenset()) -> bool:
                 return True
             if (n.value.id, n.attr) == ("os", "name") or n.value.id == "platform":
                 return True
-        # Library version checks: `np_version >= parse_version("1.25")`, `__version__ < (2,)`...
-        if isinstance(n, ast.Compare) and any(
-                "version" in (getattr(v, "id", None) or getattr(v, "attr", None) or "").lower()
-                for o in (n.left, *n.comparators) for v in ast.walk(o)):
+        # Library version checks: `np_version >= parse_version("1.25")`, `_vers >= (2,)`,
+        # `werkzeug_major < 2`...
+        if isinstance(n, ast.Compare) and any(is_version_operand(o) for o in (n.left, *n.comparators)):
+            return True
+    return False
+
+
+VERSION_WORDS = {"version", "vers", "ver", "major", "minor"}
+
+
+def is_version_operand(node: ast.AST) -> bool:
+    if (isinstance(node, ast.Tuple) and node.elts
+            and all(isinstance(e, ast.Constant) and type(e.value) is int for e in node.elts)):
+        return True  # (2,), (1, 4)
+    for v in ast.walk(node):
+        name = (getattr(v, "id", None) or getattr(v, "attr", None) or "").lower()
+        if "version" in name or VERSION_WORDS & set(name.split("_")):
             return True
     return False
 
@@ -1064,14 +1088,15 @@ def canonical(name: str) -> str:
     return name.lower().replace("-", "_").replace(".", "_")
 
 
-def check_installed(uses: set[str] = frozenset()) -> tuple[list[Finding], int]:
+def check_installed(uses: set[str] = frozenset(), progress=None) -> tuple[list[Finding], int]:
     """Check every installed package's code against the *other* installed packages.
 
     pip only checks declared version ranges, and those are often open-ended (Flask 2.2 asks for
     Werkzeug>=2.2.2), so a set of packages can install cleanly and still not work together. Only
     calls into another distribution count - a package's own internals and the stdlib are its
     maintainers' business - and missing optional dependencies are ignored. With `uses`, only
-    packages that import one of those modules are checked.
+    packages that import one of those modules are checked. `progress(done, total, package)` is
+    called before each package.
     """
     env = Environment()
     dists = installed_distributions()
@@ -1081,9 +1106,11 @@ def check_installed(uses: set[str] = frozenset()) -> tuple[list[Finding], int]:
     imports = re.compile(r"^\s*(?:import|from)\s+(" + "|".join(map(re.escape, sorted(uses))) + r")\b", re.M)
     findings: list[Finding] = []
     count = 0
-    for name, (dist, tops) in sorted(dists.items()):
+    for done, (name, (dist, tops)) in enumerate(sorted(dists.items())):
         if name == "pipbreak" or uses & tops:
             continue
+        if progress:
+            progress(done, len(dists), f"{dist.metadata['Name']} {dist.version}")
         roots = tops | {f"{t}.py" for t in tops}
         # Vendored copies (setuptools/_vendor/wheel) import themselves by their original names
         # through sys.path tricks, so they'd be checked against the separately installed package.
