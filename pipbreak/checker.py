@@ -203,8 +203,19 @@ def _deprecation_note(obj) -> str | None:
             # option is deprecated" - a way of calling it, not the object itself.
             if re.search(r"\b(argument|parameter|keyword|option)", note, re.I) or quotes_a_parameter(obj, note):
                 return None
+            # attr.s: ".. deprecated:: 18.2.0 ``__lt__`` ... now raise a DeprecationWarning if the
+            # classes compared are subclasses" - a changelog entry about behaviour, not the object.
+            # Real notes say what to do instead, or nothing beyond the version.
+            if not re.fullmatch(r"[\d.]*", note) and not DEPRECATION_SIGNAL.search(note):
+                return None
             return note
     return None
+
+
+DEPRECATION_SIGNAL = re.compile(
+    r"remov|instead|in favou?r of|available as|legacy|should not be used|obsolete|replac|supersed"
+    r"|no longer|not recommended|\buse\b|\b(is|are|has been|have been) deprecated|deprecated (since|in|and)",
+    re.I)
 
 
 def quotes_a_parameter(obj, note: str) -> bool:
@@ -447,9 +458,20 @@ def caught_names(node: ast.Try) -> set[str]:
 
 
 def feature_flags(tree: ast.Module) -> set[str]:
-    """Names assigned from a feature probe, followed through chains like `B = A and x`."""
+    """Names assigned from a feature probe, followed through chains like `B = A and x`.
+
+    Names an `except ImportError:` fallback assigns count too: Flask-Limiter sets
+    `request_ctx = None` there, then uses the old API under `if request_ctx is None:`.
+    """
     assigns = [n for n in ast.walk(tree) if isinstance(n, (ast.Assign, ast.AnnAssign)) and n.value]
     flags: set[str] = set()
+    for handler in ast.walk(tree):
+        if (isinstance(handler, ast.ExceptHandler) and handler.type is not None
+                and {"ImportError", "ModuleNotFoundError"} & {getattr(t, "id", None) or getattr(t, "attr", None)
+                                                              for t in ast.walk(handler.type)}):
+            for node in ast.walk(handler):
+                if isinstance(node, ast.Assign):
+                    flags |= {t.id for t in node.targets if isinstance(t, ast.Name)}
     while True:
         found = set()
         for node in assigns:

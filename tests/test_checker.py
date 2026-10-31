@@ -374,6 +374,15 @@ class Deprecations(unittest.TestCase):
                 .. deprecated:: 24.1.0 *hash* is deprecated in favor of *unsafe_hash*.
                 """
 
+            def changelog(cls=None):
+                """Decorate a class.
+
+                .. versionadded:: 18.2.0 *weakref_slot*
+                .. deprecated:: 18.2.0
+                   ``__lt__`` and ``__gt__`` now raise a `DeprecationWarning` if the classes
+                   compared are subclasses of each other.
+                """
+
             def with_option(sql):
                 """Make a statement.
 
@@ -426,7 +435,7 @@ class Deprecations(unittest.TestCase):
         self.assertEqual(codes("from oldlib import param_deprecated\n"), [])
 
     def test_deprecated_calling_style_is_not_a_deprecated_function(self):
-        self.assertEqual(codes("from oldlib import call_style, with_option, define\n"), [])
+        self.assertEqual(codes("from oldlib import call_style, with_option, define, changelog\n"), [])
 
     def test_sphinx_note_text_is_reported(self):
         [finding] = check_source("from oldlib import sphinx_old\n")
@@ -469,6 +478,12 @@ class VersionFallbacks(unittest.TestCase):
         # alembic: `sqla_2 = _vers >= (2,)`; flask-restx: `if werkzeug_major < 2:`
         source = ("import os\nsqla_2 = _vers >= (2,)\nif sqla_2:\n    from os import newname\n"
                   "if werkzeug_major < 2:\n    os.path.oldname()\n")
+        self.assertEqual(codes(source), [])
+
+    def test_name_set_in_import_fallback_guards_later_use(self):
+        # Flask-Limiter: request_ctx = None on ImportError, old API only `if request_ctx is None`
+        source = ("import os\ntry:\n    from os import newname as ctx\nexcept ImportError:\n    ctx = None\n"
+                  "def get():\n    if ctx is None:\n        return os.path.oldname()\n    return ctx\n")
         self.assertEqual(codes(source), [])
 
     def test_uncalled_import_hint_function(self):
