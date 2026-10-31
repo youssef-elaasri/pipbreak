@@ -125,12 +125,13 @@ class Environment:
         if top in sys.stdlib_module_names or top == "builtins":
             return f"Python {sys.version_info.major}.{sys.version_info.minor}"
         if self._dists is None:
-            self._dists = packages_distributions()
-        for dist in self._dists.get(top, []):
+            self._dists = module_distributions()
+        dist = distribution_of(self._dists, module_name)
+        if dist:
             try:
                 return f"{dist}=={importlib.metadata.version(dist)}"
             except importlib.metadata.PackageNotFoundError:
-                continue
+                pass
         return top
 
 
@@ -155,6 +156,36 @@ def packages_distributions() -> dict[str, list[str]]:
             if name not in found[top]:
                 found[top].append(name)
     return dict(found)
+
+
+def module_distributions() -> dict[str, list[str]]:
+    """Every package path ("zope", "zope.interface") -> distributions providing files under it.
+
+    Namespace packages are shared: zope.event and zope.interface both install under `zope`, so
+    only the full dotted path says which one a module belongs to.
+    """
+    found = {top: list(dists) for top, dists in packages_distributions().items()}
+    for dist in importlib.metadata.distributions():
+        name = dist.metadata["Name"]
+        for path in dist.files or ():
+            if not name or path.suffix != ".py" or "." in path.parts[0]:
+                continue
+            parts = path.parts[:-1] if path.stem == "__init__" else (*path.parts[:-1], path.stem)
+            for i in range(2, len(parts) + 1):
+                dists = found.setdefault(".".join(parts[:i]), [])
+                if name not in dists:
+                    dists.append(name)
+    return found
+
+
+def distribution_of(dists: dict[str, list[str]], module_name: str) -> str | None:
+    """The distribution a module comes from: the longest package path only one distribution provides."""
+    parts = module_name.split(".")
+    for i in range(len(parts), 0, -1):
+        candidates = dists.get(".".join(parts[:i]))
+        if candidates and (len(candidates) == 1 or i == 1):
+            return candidates[0]
+    return None
 
 
 def owner_module(obj) -> str:
@@ -648,7 +679,9 @@ class FileChecker(ast.NodeVisitor):
     # -- imports --------------------------------------------------------------------------
 
     def is_local(self, module_name: str) -> bool:
-        return module_name.split(".")[0] in self.local
+        # Entries may be dotted: a distribution in a shared namespace owns `zope.interface`, not `zope`.
+        parts = module_name.split(".")
+        return any(".".join(parts[:i]) in self.local for i in range(1, len(parts) + 1))
 
     def check_import(self, node: ast.Import, guarded: bool):
         for alias in node.names:
@@ -1129,6 +1162,25 @@ def installed_distributions() -> dict[str, tuple[importlib.metadata.Distribution
 VENDORED = {"_vendor", "vendor", "_vendored", "vendored", "extern", "_extern"}
 
 
+def own_packages(dist, tops: set[str], modules: dict[str, list[str]]) -> set[str]:
+    """The modules that are this distribution's own code, so it isn't checked against itself.
+
+    Usually its top-level names; but a top-level namespace shared with other distributions
+    (`zope`) is narrowed to the shortest paths only this one provides (`zope.interface`).
+    """
+    name = dist.metadata["Name"]
+    own = {top for top in tops if len(modules.get(top, [])) <= 1}
+    for path in dist.files or ():
+        if path.suffix != ".py" or path.parts[0] not in tops - own:
+            continue
+        parts = path.parts[:-1] if path.stem == "__init__" else (*path.parts[:-1], path.stem)
+        for i in range(2, len(parts) + 1):
+            if modules.get(".".join(parts[:i])) == [name]:
+                own.add(".".join(parts[:i]))
+                break
+    return own
+
+
 def canonical(name: str) -> str:
     return name.lower().replace("-", "_").replace(".", "_")
 
@@ -1145,14 +1197,17 @@ def check_installed(uses: set[str] = frozenset(), progress=None) -> tuple[list[F
     """
     env = Environment()
     dists = installed_distributions()
-    owner = {top: name for name, (_, tops) in dists.items() for top in tops}
-    # Accept distribution names too: --uses Werkzeug means the `werkzeug` module.
-    uses = {top for u in uses for top in (dists[canonical(u)][1] if canonical(u) in dists else {u})}
+    modules = module_distributions()
+    owns = {name: own_packages(dist, tops, modules) for name, (dist, tops) in dists.items()}
+    # Accept distribution names too: --uses Werkzeug means the `werkzeug` module. A dotted module
+    # name (nsp.one) is a module even when it normalizes to a distribution's name (nsp-one).
+    uses = {m for u in uses for m in (owns[canonical(u)] if canonical(u) in dists and "." not in u else {u})}
     imports = re.compile(r"^\s*(?:import|from)\s+(" + "|".join(map(re.escape, sorted(uses))) + r")\b", re.M)
     findings: list[Finding] = []
     count = 0
     for done, (name, (dist, tops)) in enumerate(sorted(dists.items())):
-        if name == "pipbreak" or uses & tops:
+        own = owns[name]
+        if name == "pipbreak" or uses & own:
             continue
         if progress:
             progress(done, len(dists), f"{dist.metadata['Name']} {dist.version}")
@@ -1171,9 +1226,14 @@ def check_installed(uses: set[str] = frozenset(), progress=None) -> tuple[list[F
         label = f"{dist.metadata['Name']}=={dist.version}"
         for display, path in files:
             count += 1
-            for f in check_file(env, path, tops, display):
-                target = owner.get(f.target.split(".")[0])
-                if target and target != name:
+            file_findings = check_file(env, path, own, display)
+            # pysaml2's s2repoze plugins start with `from repoze.who... import`, an optional extra:
+            # where it isn't installed the module can't be imported, so nothing else in it matters.
+            if any(f.code == "API001" and f.col == 1 and "is not installed" in f.message for f in file_findings):
+                continue
+            for f in file_findings:
+                target = distribution_of(modules, f.target) if f.target else None
+                if target and canonical(target) != name:
                     findings.append(replace(f, message=f"{label}: {f.message}"))
     return findings, count
 

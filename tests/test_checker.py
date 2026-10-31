@@ -505,7 +505,7 @@ def install(site: Path, dist: str, version: str, files: dict[str, str]):
     for name, source in files.items():
         Path(site, name).parent.mkdir(parents=True, exist_ok=True)
         Path(site, name).write_text(textwrap.dedent(source))
-    info = Path(site, f"{dist}-{version}.dist-info")
+    info = Path(site, f"{dist.replace('-', '_')}-{version}.dist-info")  # pip normalizes the folder name
     info.mkdir()
     Path(info, "METADATA").write_text(f"Metadata-Version: 2.1\nName: {dist}\nVersion: {version}\n")
     Path(info, "RECORD").write_text("".join(f"{name},,\n" for name in files))
@@ -521,15 +521,25 @@ class InstalledPackages(unittest.TestCase):
             "consumer/__init__.py": """
                 import os
                 import libnew
-                import optional_extra
                 from consumer import helpers
                 libnew.keep()
                 libnew.gone()
                 os.path.nope()
                 helpers.nothere()
+
+                def extra():
+                    import optional_extra
             """,
             "consumer/helpers.py": "",
         })
+        # Like pysaml2's s2repoze plugins: needs an extra that isn't installed, so it can't import.
+        install(site, "plugin-host", "1.0", {
+            "plugin_host/__init__.py": "",
+            "plugin_host/plugins.py": "from missing_extra.interfaces import IPlugin\nimport libnew\nlibnew.gone()\n",
+        })
+        # Two distributions sharing a namespace package, like zope.event and zope.interface.
+        install(site, "nsp-one", "1.0", {"nsp/one/__init__.py": "def here(): pass\n"})
+        install(site, "nsp-two", "2.0", {"nsp/two/__init__.py": "import nsp.one\nnsp.one.gone()\n"})
         install(site, "bystander", "1.0", {"bystander.py": "import os\nos.path.nope()\n"})
         install(site, "vendorer", "1.0", {
             "vendorer/__init__.py": "",
@@ -541,17 +551,24 @@ class InstalledPackages(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         sys.path.remove(cls.tmp.name)
-        for name in ("libnew", "consumer", "consumer.helpers", "optional_extra", "bystander", "vendorer"):
+        for name in ("libnew", "consumer", "consumer.helpers", "optional_extra", "bystander", "vendorer",
+                     "plugin_host", "plugin_host.plugins", "nsp", "nsp.one", "nsp.two"):
             sys.modules.pop(name, None)
         cls.tmp.cleanup()
 
     def test_only_calls_into_other_packages(self):
         findings, count = check_installed({"libnew"})
-        # consumer's two files; bystander doesn't import libnew; vendorer's vendored copy and tests are skipped
-        self.assertEqual(count, 2)
+        # consumer's and plugin_host's two files each; bystander doesn't import libnew; vendorer's
+        # vendored copy and tests are skipped; plugin_host/plugins.py can't import without its extra
+        self.assertEqual(count, 4)
         self.assertEqual([(f.path, f.code, f.target) for f in findings],
                          [("consumer/__init__.py", "API002", "libnew")])
         self.assertTrue(findings[0].message.startswith("consumer==1.0: 'libnew' has no attribute 'gone'"))
+
+    def test_namespace_packages_are_told_apart(self):
+        [finding] = check_installed({"nsp.one"})[0]
+        self.assertEqual(finding.path, "nsp/two/__init__.py")
+        self.assertIn("in nsp-one==1.0", finding.message)  # not the namespace's other distribution
 
     def test_modules_found_without_top_level_txt(self):
         # flit-built wheels (Jinja2 3.1, Werkzeug 3) ship no top_level.txt; Python < 3.11 can't map them.

@@ -7,6 +7,7 @@ import os
 import shutil
 import subprocess
 import sys
+import warnings
 from dataclasses import asdict
 from pathlib import Path
 
@@ -69,8 +70,11 @@ def main(argv=None) -> int:
         return run_in(args.python, argv)
 
     # Introspection imports the checked code's dependencies, and some print on import (pygame's
-    # banner) - keep that off stdout, or it corrupts --format json.
-    with contextlib.redirect_stdout(sys.stderr):
+    # banner) - keep that off stdout, or it corrupts --format json. Their warnings (cryptography's
+    # deprecations on attribute access, SyntaxWarnings from parsing old code) are noise here:
+    # deprecations we report come from the APIs' own markers.
+    with contextlib.redirect_stdout(sys.stderr), warnings.catch_warnings():
+        warnings.simplefilter("ignore")
         if args.deps:
             # A whole environment takes a minute or more; without this it looks frozen.
             show = sys.stderr.isatty()
@@ -80,7 +84,7 @@ def main(argv=None) -> int:
         else:
             findings, file_count = check_paths([Path(p) for p in args.paths], set(args.local))
     errors = sum(f.severity == "error" for f in findings)
-    warnings = len(findings) - errors
+    warning_count = len(findings) - errors
 
     if args.format == "json":
         print(json.dumps([asdict(f) for f in findings], indent=2))
@@ -92,6 +96,6 @@ def main(argv=None) -> int:
             print(f"{f.path}:{f.line}:{f.col}: {f.severity} {f.code} {f.message}")
         version = f"{sys.version_info.major}.{sys.version_info.minor}"
         print(f"\nChecked {file_count} file(s) against Python {version} at {sys.executable}: "
-              f"{errors} error(s), {warnings} warning(s).")
+              f"{errors} error(s), {warning_count} warning(s).")
 
-    return 1 if errors or (args.strict and warnings) else 0
+    return 1 if errors or (args.strict and warning_count) else 0
