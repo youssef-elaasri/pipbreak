@@ -487,7 +487,30 @@ def guarded_nodes(tree: ast.Module) -> set[ast.AST]:
                 if FALLBACK_ERRORS & {getattr(t, "id", None) or getattr(t, "attr", None)
                                       for t in (ast.walk(handler.type) if handler.type else ())}:
                     guarded.update(ast.walk(handler))
+    for func in import_hints(tree):
+        guarded.update(ast.walk(func))
     return guarded
+
+
+def import_hints(tree: ast.Module) -> list[ast.FunctionDef]:
+    """Module-level functions that only import things and that nothing in the module calls.
+
+    They exist for freezers like PyInstaller and cx_Freeze, which follow static imports - cffi's
+    `_workaround_for_static_import_finders()` imports pycparser modules that pycparser 3 removed,
+    but "this function is never called".
+    """
+    used = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name)}
+    used |= {n.attr for n in ast.walk(tree) if isinstance(n, ast.Attribute)}
+    used |= {n.value for n in ast.walk(tree) if isinstance(n, ast.Constant) and isinstance(n.value, str)}  # __all__
+    hints = []
+    for stmt in tree.body:
+        if not isinstance(stmt, ast.FunctionDef) or stmt.name in used or stmt.decorator_list:
+            continue
+        body = [s for s in stmt.body
+                if not (isinstance(s, ast.Expr) and isinstance(s.value, ast.Constant)) and not isinstance(s, ast.Pass)]
+        if body and all(isinstance(s, (ast.Import, ast.ImportFrom)) for s in body):
+            hints.append(stmt)
+    return hints
 
 
 def store_counts(tree: ast.AST) -> Counter:

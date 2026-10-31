@@ -471,6 +471,15 @@ class VersionFallbacks(unittest.TestCase):
                   "if werkzeug_major < 2:\n    os.path.oldname()\n")
         self.assertEqual(codes(source), [])
 
+    def test_uncalled_import_hint_function(self):
+        # cffi: an import-only function for freezers, "never called"
+        hint = ("def _workaround_for_static_import_finders():\n"
+                "    '''Never called.'''\n    import os.nothere\n")
+        self.assertEqual(codes(hint), [])
+        self.assertEqual(codes(hint + "_workaround_for_static_import_finders()\n"), ["API001"])
+        self.assertEqual(codes(hint.replace("_workaround", "load") + "__all__ = ['load_for_static_import_finders']\n"),
+                         ["API001"])
+
     def test_unrelated_except_still_checked(self):
         source = "try:\n    pass\nexcept ValueError:\n    from os import oldname\n"
         self.assertEqual(codes(source), ["API002"])
