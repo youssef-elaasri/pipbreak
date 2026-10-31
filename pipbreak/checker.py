@@ -34,6 +34,9 @@ PLAIN_METACLASSES = {"type", "ABCMeta"}
 
 MISSING = object()  # attribute does not exist
 UNKNOWN = object()  # module exists but could not be imported; don't guess
+# What an attribute access that raises says when the name really is gone, e.g. pydantic's
+# "`BaseSettings` has been moved to the `pydantic-settings` package".
+MOVED_SIGNAL = re.compile(r"mov(ed|ing)\b|remov|renamed|no longer|deprecat|instead|in favou?r of", re.I)
 UNTYPED = object()  # a name in scope whose value we can't infer
 
 
@@ -106,16 +109,21 @@ class Environment:
         return self._modules[name]
 
     def member(self, obj, name: str):
-        """Look up `obj.name`, falling back to importing a submodule when obj is a package."""
+        """Look up `obj.name`, falling back to importing a submodule when obj is a package.
+
+        UNKNOWN when the lookup crashed for a reason other than the name being gone, e.g. a
+        Django module that needs settings, or a submodule that needs a system library (GDAL).
+        """
         try:
             return getattr(obj, name)
         except AttributeError:
             pass
         except Exception as exc:
-            return Removed(str(exc).strip().splitlines()[0] if str(exc).strip() else type(exc).__name__)
+            reason = str(exc).strip().splitlines()[0] if str(exc).strip() else type(exc).__name__
+            return Removed(reason) if MOVED_SIGNAL.search(reason) else UNKNOWN
         if inspect.ismodule(obj):
             sub = self.module(f"{obj.__name__}.{name}")
-            if sub is not None and sub is not UNKNOWN:
+            if sub is not None:
                 return sub
         return MISSING
 
@@ -716,6 +724,8 @@ class FileChecker(ast.NodeVisitor):
             if alias.name == "*":
                 continue
             value = self.env.member(mod, alias.name)
+            if value is UNKNOWN:
+                continue
             if value is MISSING or type(value) is Removed:
                 if not guarded:
                     self.report_missing_member(node, mod, alias.name, value, node.module)
@@ -774,7 +784,7 @@ class FileChecker(ast.NodeVisitor):
                     return state, value, owner
                 continue
             value = self.env.member(base, attr)
-            if type(value) is Removed:
+            if value is UNKNOWN or type(value) is Removed:
                 return "unknown", None, None
             if value is not MISSING:
                 return "found", value, base
@@ -948,6 +958,8 @@ class FileChecker(ast.NodeVisitor):
         attr = expr.attr
         if inspect.ismodule(base) or inspect.isclass(base):
             value = self.env.member(base, attr)
+            if value is UNKNOWN:
+                return None
             if value is MISSING or type(value) is Removed:
                 self.report_missing_member(expr, base, attr, value, ast.unparse(expr.value))
                 return None
@@ -982,7 +994,7 @@ class FileChecker(ast.NodeVisitor):
         if is_proxy(cls):
             return None
         value = self.env.member(cls, attr)
-        if type(value) is Removed:
+        if value is UNKNOWN or type(value) is Removed:
             return None
         if value is not MISSING:
             self.check_deprecated(expr, value, f"{cls.__name__}.{attr}")

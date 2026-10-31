@@ -500,6 +500,46 @@ class VersionFallbacks(unittest.TestCase):
         self.assertEqual(codes(source), ["API002"])
 
 
+class ImportsThatNeedSetup(unittest.TestCase):
+    """Django code imported without settings, GIS code without GDAL: unknowable, not missing."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        files = {
+            "needsetup/__init__.py": '''
+                def __getattr__(name):
+                    if name == "Inline":
+                        raise RuntimeError("Requested setting INSTALLED_APPS, but settings are not configured.")
+                    if name == "Settings":
+                        raise ImportError("`Settings` has been moved to the `needsetup-settings` package.")
+                    raise AttributeError(name)
+            ''',
+            "needsetup/gis/__init__.py": "",
+            "needsetup/gis/models.py": "raise OSError('Could not find the GDAL library')\n",
+        }
+        for name, source in files.items():
+            Path(cls.tmp.name, name).parent.mkdir(parents=True, exist_ok=True)
+            Path(cls.tmp.name, name).write_text(textwrap.dedent(source))
+        sys.path.insert(0, cls.tmp.name)
+
+    @classmethod
+    def tearDownClass(cls):
+        sys.path.remove(cls.tmp.name)
+        cls.tmp.cleanup()
+
+    def test_attribute_needing_configuration(self):
+        self.assertEqual(codes("import needsetup\nneedsetup.Inline\nfrom needsetup import Inline\n"), [])
+
+    def test_submodule_crashing_on_import(self):
+        self.assertEqual(codes("from needsetup.gis import models\nimport needsetup.gis\nneedsetup.gis.models\n"),
+                         [])
+
+    def test_moved_error_still_reported(self):
+        [msg] = messages("from needsetup import Settings\n")
+        self.assertIn("has been moved to the `needsetup-settings` package", msg)
+
+
 def install(site: Path, dist: str, version: str, files: dict[str, str]):
     """Lay out a distribution the way pip does: its files plus a .dist-info with RECORD."""
     for name, source in files.items():
