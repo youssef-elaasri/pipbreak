@@ -412,9 +412,19 @@ def bind(cls, attr: str, value):
         return BoundMethod(value, drop_first=False)
     if isinstance(raw, property):
         return return_type(raw.fget) if raw.fget else None
-    if inspect.isfunction(raw) or inspect.ismethoddescriptor(raw):
+    if inspect.isfunction(raw):
         return BoundMethod(value, drop_first=True)
+    if inspect.ismethoddescriptor(raw):
+        # C methods usually list self, but some extensions' (PyO3's) signatures leave it out
+        return BoundMethod(value, drop_first=first_parameter(value) in ("self", "cls"))
     return None
+
+
+def first_parameter(func) -> str | None:
+    try:
+        return next(iter(inspect.signature(func).parameters), None)
+    except (TypeError, ValueError):
+        return "self"  # unknown: check_call can't read it either
 
 
 _return_cache: dict = {}

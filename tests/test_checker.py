@@ -89,6 +89,29 @@ class Instances(unittest.TestCase):
         self.assertEqual(codes("from pathlib import Path\nPath('x').read_text('utf-8', 'strict')\n"), [])
         self.assertEqual(codes("from pathlib import Path\nPath('x').exists(1, 2)\n"), ["API004"])
 
+    def test_c_method_signatures_with_and_without_self(self):
+        self.assertEqual(codes("import io\nio.StringIO().write('a', 'b')\n"), ["API004"])
+        with tempfile.TemporaryDirectory() as tmp:
+            # PyO3 methods (css_inline.CSSInliner.inline) report (html), not (self, html)
+            Path(tmp, "pyo3like.py").write_text(textwrap.dedent('''
+                import inspect
+                class NoSelfSignature:
+                    __signature__ = inspect.Signature([inspect.Parameter("html", inspect.Parameter.POSITIONAL_ONLY)])
+                    def __get__(self, obj, cls=None):
+                        return self
+                    def __call__(self, html):
+                        return html
+                class Inliner:
+                    inline = NoSelfSignature()
+            '''))
+            sys.path.insert(0, tmp)
+            try:
+                self.assertEqual(codes("import pyo3like\npyo3like.Inliner().inline('<p>')\n"), [])
+                self.assertEqual(codes("import pyo3like\npyo3like.Inliner().inline('<p>', 1)\n"), ["API004"])
+            finally:
+                sys.path.remove(tmp)
+                sys.modules.pop("pyo3like", None)
+
     def test_inside_function_scope(self):
         source = """
             from pathlib import Path
