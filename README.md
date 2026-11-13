@@ -155,6 +155,7 @@ In CI, after installing your pinned dependencies: `pip install pipbreak && pipbr
 | API003 | error    | Call uses a keyword argument the function doesn't accept |
 | API004 | error    | Call passes more positional arguments than the function accepts |
 | API005 | warning  | Attribute is never assigned anywhere in the object's class (instances with a `__dict__`) |
+| API006 | warning  | Method called on a value whose type the code declares (type hint, return annotation, `isinstance`) doesn't exist on that type |
 | API101 | warning  | API is deprecated (PEP 702 `@deprecated` or a `.. deprecated::` docstring note) |
 
 ## What it knows about your variables
@@ -164,15 +165,22 @@ A light, flow-insensitive inference tracks what each name holds, per function sc
 | Code | Inferred as | Checks |
 |------|-------------|--------|
 | `p = Path(name)`, `Path(name).read_text()` | a `Path`, exactly | missing attributes, method signatures, deprecations |
-| `def f(user: User)`, `x: Client \| None` | a `User` or subclass | method signatures, deprecations |
-| `client.get(url)` with `-> Response` | a `Response` or subclass | method signatures, deprecations |
+| `def f(user: User)`, `x: Client \| None` | a `User` or subclass | missing methods, method signatures, deprecations |
+| `client.get(url)` with `-> Response` | a `Response` or subclass | missing methods, method signatures, deprecations |
+| `if isinstance(con, Engine):` | an `Engine` or subclass, inside that block | missing methods, method signatures, deprecations |
+| `importlib.import_module("x")`, `import_optional_dependency("x")` | module `x` | everything a plain `import x` gets |
 | `self` in a method | the class or a subclass | method signatures, deprecations |
 | `class Job: ...` in your file | modelled from its source and its real base classes | all of the above |
 
-Missing attributes are only reported for objects we saw constructed: an annotated parameter may be a
-subclass with more attributes. For classes whose instances have no `__dict__` (`__slots__`, builtins)
-that's an **error**. Otherwise attributes are read from the assignments in the class source, so it's a
-**warning** (API005): code elsewhere could still set the attribute.
+Missing attributes are reported for objects we saw constructed. For classes whose instances have no
+`__dict__` (`__slots__`, builtins) that's an **error**. Otherwise attributes are read from the
+assignments in the class source, so it's a **warning** (API005): code elsewhere could still set the
+attribute.
+
+When the code only *declares* a type (a type hint, a return annotation, an `isinstance` check), the
+value may be a subclass, and frameworks attach data to instances from outside the class (Django's
+`request.user`). So only **method calls** are checked there, as a **warning** (API006): `engine.execute()`
+on a parameter typed `Engine`, after SQLAlchemy 2 removed `Engine.execute`.
 
 ## Avoiding false positives
 
@@ -194,8 +202,9 @@ environment: Unix-only APIs (`os.fork`, `socket.AF_UNIX`) in modules that only r
 
 - **Imports installed modules** to inspect them, so their import-time code runs. Use it on
   environments you'd run anyway (the action only installs what your PR already would).
-- Inference is per scope and doesn't follow `isinstance` narrowing, container contents (`users[0].x`),
-  or return types without annotations.
+- Inference is per scope. It follows `isinstance(name, C)` only inside that `if` block (not
+  `isinstance(self.x, C)`, tuples of classes, or early `return`s), and doesn't follow container
+  contents (`users[0].x`), return types without annotations, or values passed in without a type hint.
 - Python only.
 
 ## Development

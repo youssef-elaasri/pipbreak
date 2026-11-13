@@ -683,6 +683,152 @@ class ImportsThatNeedSetup(unittest.TestCase):
         self.assertIn("has been moved to the `needsetup-settings` package", msg)
 
 
+class DeclaredTypes(unittest.TestCase):
+    """Type hints, return annotations and isinstance checks say what a value is (0.2.0)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        Path(cls.tmp.name, "typedlib.py").write_text(textwrap.dedent('''
+            import abc
+            import importlib
+            import typing
+
+            class Engine:
+                def __init__(self):
+                    self.callback = None
+                    self.url = "x"
+                def connect(self): pass
+                def execution_options(self, **opt) -> "OptionEngine":
+                    return OptionEngine()
+
+            class OptionEngine(Engine):
+                pass
+
+            T = typing.TypeVar("T")
+
+            class Pool(typing.Generic[T], abc.ABC):
+                def __init__(self):
+                    self.size = 1
+                def get(self): pass
+
+            class Lazy:
+                def __getattr__(self, name):
+                    return lambda: name
+
+            def import_optional_dependency(name, errors="raise"):
+                return importlib.import_module(name)
+        '''))
+        sys.path.insert(0, cls.tmp.name)
+
+    @classmethod
+    def tearDownClass(cls):
+        sys.path.remove(cls.tmp.name)
+        sys.modules.pop("typedlib", None)
+        cls.tmp.cleanup()
+
+    def test_method_missing_from_a_type_hint(self):
+        source = """
+            from typedlib import Engine
+            def run(engine: Engine):
+                engine.connect()
+                engine.execute("select 1")
+        """
+        [finding] = check_source(textwrap.dedent(source))
+        self.assertEqual((finding.code, finding.severity, finding.line, finding.target),
+                         ("API006", "warning", 5, "typedlib"))
+        self.assertIn("'Engine' has no method 'execute'", finding.message)
+
+    def test_return_annotation_is_followed(self):
+        # pandas 1.5 on SQLAlchemy 2: engine.execution_options().execute(...)
+        source = """
+            from typedlib import Engine
+            def run(engine: Engine):
+                return engine.execution_options().execute("select 1")
+        """
+        self.assertEqual(codes(source), ["API006"])
+
+    def test_generic_and_abc_bases_are_not_a_dead_end(self):
+        # SQLAlchemy's Engine derives from typing.Generic, which has no source on Python 3.12+.
+        source = """
+            from typedlib import Pool
+            def f(pool: Pool):
+                pool.get(), pool.size
+                pool.acquire()
+        """
+        self.assertEqual(codes(source), ["API006"])
+
+    def test_data_attributes_are_not_reported(self):
+        # Frameworks attach data to instances from outside the class: Django's request.user.
+        source = """
+            from typedlib import Engine
+            def run(engine: Engine):
+                return engine.user, engine.url, engine.callback()
+        """
+        self.assertEqual(codes(source), [])
+
+    def test_dynamic_attributes_are_not_reported(self):
+        self.assertEqual(codes("from typedlib import Lazy\ndef f(x: Lazy):\n    x.anything()\n"), [])
+
+    def test_isinstance_narrows_inside_the_block(self):
+        source = """
+            from typedlib import Engine
+            def run(con):
+                if isinstance(con, Engine) and con is not None:
+                    con.execute("select 1")
+                con.execute("select 1")
+        """
+        self.assertEqual([(f.code, f.line) for f in check_source(textwrap.dedent(source))], [("API006", 5)])
+
+    def test_isinstance_not_trusted_when_reassigned_or_a_tuple(self):
+        source = """
+            from typedlib import Engine
+            def run(con, other):
+                if isinstance(con, Engine):
+                    con = other
+                    con.execute("select 1")
+                if isinstance(other, (Engine, str)):
+                    other.execute("select 1")
+        """
+        self.assertEqual(codes(source), [])
+
+    def test_hasattr_guard(self):
+        source = """
+            from typedlib import Engine
+            def run(engine: Engine):
+                if hasattr(engine, "execute"):
+                    engine.execute("select 1")
+        """
+        self.assertEqual(codes(source), [])
+
+    def test_import_module_resolves(self):
+        source = """
+            import importlib
+            def f():
+                j = importlib.import_module("json")
+                return j.parse("{}")
+        """
+        self.assertEqual(codes(source), ["API002"])
+
+    def test_optional_dependency_helper_resolves(self):
+        source = """
+            from typedlib import import_optional_dependency
+            def f():
+                json = import_optional_dependency("json", errors="ignore")
+                return json.loads("{}"), json.parse("{}")
+        """
+        self.assertEqual(codes(source), ["API002"])
+
+    def test_dynamic_import_of_a_missing_module_is_quiet(self):
+        source = """
+            import importlib
+            def f():
+                m = importlib.import_module("definitely_not_a_real_pkg")
+                return m.anything()
+        """
+        self.assertEqual(codes(source), [])
+
+
 def install(site: Path, dist: str, version: str, files: dict[str, str]):
     """Lay out a distribution the way pip does: its files plus a .dist-info with RECORD."""
     for name, source in files.items():

@@ -1,6 +1,6 @@
 # Benchmark: known "the update broke a package that didn't pin it" cases
 
-October 2026. `research/known_breaks.py`, run in the Docker sandbox
+October 2026, rerun with 0.2.0 in November 2026 (same verdicts). `research/known_breaks.py`, run in the Docker sandbox
 (`run-docker.ps1 -Study known -Python 3.10`).
 
 ## Method
@@ -23,7 +23,7 @@ on the two environments, exactly as the GitHub Action does.
 | Flask-SQLAlchemy 2.5 + SQLAlchemy 1.4 -> 2.0 | `module 'sqlalchemy' has no attribute '__all__'` | **caught, other symptom** - `get_bind()` called with 3 positional args, 2 allowed; `__all__` is read from a loop variable |
 | openai 1.40 + httpx 0.27 -> 0.28 | `Client.__init__() got an unexpected keyword argument 'proxies'` | **caught, other call site** - `httpx.Client(proxies=)` in the openai CLI; the client's own path passes it through `**kwargs` |
 | pandas 1.5 + numpy 1.26 -> 2.0 | `numpy.dtype size changed` (binary) | **caught, other symptom** - ~15 removed numpy APIs (`np.NaN`, `np.float_`, `find_common_type`...) that would break pandas even without the binary problem |
-| pandas 1.5 + SQLAlchemy 1.4 -> 2.0 | `'OptionEngine' object has no attribute 'execute'` | **missed** - `self.con.execute()` on a user-supplied object; its type isn't knowable statically |
+| pandas 1.5 + SQLAlchemy 1.4 -> 2.0 | `'OptionEngine' object has no attribute 'execute'` | **missed** - `self.connectable.execution_options().execute()`, where `self.connectable` comes from an untyped parameter. 0.2.0 checks methods on declared types (type hints, `isinstance`), but pandas 1.5 declares none here |
 | Flask 2.0 + Werkzeug 2.0 -> 2.1 | works | quiet |
 | webargs 8.4 + marshmallow 3 -> 4 | works | quiet |
 | marshmallow-sqlalchemy 1.0 + marshmallow 3 -> 4 | works | quiet |
@@ -34,7 +34,9 @@ For the GitHub Action, which turns this into pass/fail on the PR, the verdict wa
 
 ## What it can't see
 
-- **Dynamically typed objects** - methods called on values passed in from outside (`con.execute`).
+- **Dynamically typed objects** - methods called on values passed in from outside without a type hint
+  (`con.execute`). Since 0.2.0, a type hint, return annotation or `isinstance` check on the value is enough:
+  `def run(engine: Engine): engine.execute(...)` is reported on SQLAlchemy 2.
 - **Arguments forwarded through `**kwargs`** into the changed library.
 - **Binary (ABI) breaks** - C extensions compiled against an older library. It caught pandas/numpy 2
   only because pandas also used removed Python APIs.

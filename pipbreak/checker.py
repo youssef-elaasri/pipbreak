@@ -75,12 +75,14 @@ class Instance:
     """An object of class `cls` (a real class or a LocalClass).
 
     `exact` means we saw it constructed, so it can't be a subclass with extra attributes - only
-    then do we report attributes as missing. Annotated or returned values only get deprecation
-    and signature checks.
+    then do we report attributes as missing. `declared` means the code itself says what it is (a
+    type hint, a return annotation, an `isinstance` check): a method missing from that class is
+    a warning, since the code promised that class.
     """
 
     cls: object
     exact: bool
+    declared: bool = False
 
 
 @dataclass(frozen=True)
@@ -486,7 +488,9 @@ def _instance_attrs(cls):
     if getattr(cls, "__dictoffset__", 1) == 0:
         return names, True
     for c in mro:
-        if c.__module__ == "builtins":
+        # typing.Generic/Protocol and abc.ABC set no instance attributes, and on Python 3.12+
+        # Generic has no source to read: SQLAlchemy's Engine derives from it.
+        if c.__module__ in ("builtins", "typing", "abc", "_collections_abc", "collections.abc"):
             continue
         try:
             found = assigned_attrs(ast.parse(textwrap.dedent(inspect.getsource(c))))
@@ -552,9 +556,19 @@ def return_type(func):
         ret = typing.get_type_hints(func).get("return")
     except Exception:
         ret = None
-    result = Instance(ret, exact=False) if inspect.isclass(ret) and ret is not type(None) else None
+    result = Instance(ret, exact=False, declared=True) if inspect.isclass(ret) and ret is not type(None) else None
     _return_cache[func] = result
     return result
+
+
+DYNAMIC_IMPORTS = {"import_module", "import_optional_dependency"}
+
+
+def is_dynamic_import(func) -> bool:
+    """importlib.import_module, or a project's own optional-import helper (pandas, xarray...)."""
+    if func is importlib.import_module:
+        return True
+    return inspect.isfunction(func) and func.__name__ in DYNAMIC_IMPORTS
 
 
 def plain_metaclass(cls) -> bool:
@@ -808,6 +822,7 @@ class FileChecker(ast.NodeVisitor):
         self.stores = store_counts(self.tree)
         self.use_builtins = not any(isinstance(n, ast.ImportFrom) and any(a.name == "*" for a in n.names)
                                     for n in ast.walk(self.tree))
+        self.call_funcs = {id(n.func) for n in ast.walk(self.tree) if isinstance(n, ast.Call)}
         self.quiet = 0  # >0 while inferring scopes: resolve without reporting
         self._memo: dict[int, object] = {}
         self._seen: set[tuple] = set()
@@ -1092,7 +1107,7 @@ class FileChecker(ast.NodeVisitor):
             return self.annotation_type(ann.slice)
         resolved = self.resolve(ann)
         if type(resolved) is LocalClass or inspect.isclass(resolved):
-            return Instance(resolved, exact=False)
+            return Instance(resolved, exact=False, declared=True)
         return UNTYPED
 
     def lookup_name(self, name: str):
@@ -1143,9 +1158,21 @@ class FileChecker(ast.NodeVisitor):
             return Instance(func, exact=type(func).__call__ is type.__call__)
         if type(func) is BoundMethod:
             return return_type(func.func)
+        if is_dynamic_import(func):
+            return self.dynamic_import(call)
         if func is not None and not type(func) is Instance and callable(func):
             return return_type(func)
         return None
+
+    def dynamic_import(self, call: ast.Call):
+        """`importlib.import_module("x")` or pandas' `import_optional_dependency("x")` gives module x."""
+        if not call.args or not isinstance(call.args[0], ast.Constant) or not isinstance(call.args[0].value, str):
+            return None
+        name = call.args[0].value
+        if name.startswith(".") or self.is_local(name) or any(k.arg == "package" for k in call.keywords):
+            return None
+        module = self.env.module(name)
+        return module if inspect.ismodule(module) else None
 
     def as_reference(self, value):
         if value is None:
@@ -1202,7 +1229,11 @@ class FileChecker(ast.NodeVisitor):
         if value is not MISSING:
             self.check_deprecated(expr, value, f"{cls.__name__}.{attr}")
             return bind(cls, attr, value)
-        known = instance_attrs(cls) if inst.exact and not attr.startswith("__") else None
+        if not inst.exact:
+            if inst.declared:
+                self.check_declared_method(expr, cls)
+            return None
+        known = instance_attrs(cls) if not attr.startswith("__") else None
         if known and attr not in known[0]:
             names, certain = known
             where = self.env.label(owner_module(cls))
@@ -1215,6 +1246,24 @@ class FileChecker(ast.NodeVisitor):
                             f"'{cls.__name__}' object may have no attribute '{attr}' in {where}: "
                             f"it is never assigned in the class.{hint}")
         return None
+
+    def check_declared_method(self, expr: ast.Attribute, cls):
+        """A method called on a value whose class the code declares, which that class doesn't have.
+
+        Only calls: frameworks attach data attributes to instances from outside the class
+        (Django's `request.user`), but hardly ever methods.
+        """
+        attr = expr.attr
+        if id(expr) not in self.call_funcs or attr.startswith("__"):
+            return
+        known = instance_attrs(cls)
+        if known is None or attr in known[0]:
+            return
+        module = owner_module(cls)
+        hint = suggest(attr, known[0])
+        self.report(expr, "warning", "API006",
+                    f"'{cls.__name__}' has no method '{attr}' in {self.env.label(module)}: "
+                    f"the code declares this type (a type hint or isinstance check).{hint}", module)
 
     # -- visiting -------------------------------------------------------------------------
 
@@ -1255,6 +1304,40 @@ class FileChecker(ast.NodeVisitor):
         self.scopes.append({p.arg: UNTYPED for p in params})
         self.visit(node.body)
         self.scopes.pop()
+
+    def visit_If(self, node: ast.If):
+        self.visit(node.test)
+        narrowed = self.isinstance_narrowing(node.test, node.body)
+        if narrowed:
+            self.scopes.append(narrowed)
+        for stmt in node.body:
+            self.visit(stmt)
+        if narrowed:
+            self.scopes.pop()
+        for stmt in node.orelse:
+            self.visit(stmt)
+
+    def isinstance_narrowing(self, test: ast.expr, body: list) -> dict:
+        """Names that `if isinstance(x, C):` (possibly inside an `and`) makes a C in the body."""
+        tests = test.values if isinstance(test, ast.BoolOp) and isinstance(test.op, ast.And) else [test]
+        assigned = {n.id for stmt in body for n in walk_scope([stmt])
+                    if isinstance(n, ast.Name) and not isinstance(n.ctx, ast.Load)}
+        narrowed = {}
+        for t in tests:
+            if not (isinstance(t, ast.Call) and isinstance(t.func, ast.Name) and t.func.id == "isinstance"
+                    and len(t.args) == 2 and not t.keywords and isinstance(t.args[0], ast.Name)):
+                continue
+            name = t.args[0].id
+            if name in assigned or self.lookup_name("isinstance") is not isinstance:
+                continue
+            self.quiet += 1
+            try:
+                cls = self.resolve(t.args[1])
+            finally:
+                self.quiet -= 1
+            if inspect.isclass(cls):
+                narrowed[name] = Instance(cls, exact=False, declared=True)
+        return narrowed
 
     def visit_Attribute(self, node: ast.Attribute):
         if isinstance(node.ctx, ast.Load):
