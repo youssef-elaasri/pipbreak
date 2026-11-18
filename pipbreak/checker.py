@@ -128,7 +128,7 @@ class Environment:
             sub = self.module(f"{obj.__name__}.{name}")
             if sub is not None:
                 return sub
-            if name in stub_names(obj):
+            if name in stub_names(obj) or name in conditional_names(obj) or name in assigned_from_outside(obj):
                 return UNKNOWN
         return MISSING
 
@@ -172,6 +172,92 @@ def stub_names(module) -> set[str]:
                 names |= {t.id for t in node.targets if isinstance(t, ast.Name)}
         _stub_cache[file] = names
     return _stub_cache[file]
+
+
+_conditional_cache: dict[str, set[str]] = {}
+
+
+def conditional_names(module) -> set[str]:
+    """Names a module only defines on some platforms or versions, so their absence here proves
+    nothing: tornado.netutil defines `bind_unix_socket` under `if hasattr(socket, "AF_UNIX"):`."""
+    file = getattr(module, "__file__", None)
+    if not isinstance(file, str) or not file.endswith(".py"):
+        return set()
+    if file not in _conditional_cache:
+        try:
+            with tokenize.open(file) as f:
+                tree = ast.parse(f.read())
+        except (OSError, SyntaxError, ValueError, UnicodeDecodeError):
+            tree = None
+        names: set[str] = set()
+        if tree is not None:
+            flags = feature_flags(tree)
+
+            def defined(stmts):
+                for stmt in stmts:
+                    if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                        names.add(stmt.name)
+                    elif isinstance(stmt, (ast.Assign, ast.AnnAssign)):
+                        targets = stmt.targets if isinstance(stmt, ast.Assign) else [stmt.target]
+                        names.update(n.id for t in targets for n in ast.walk(t) if isinstance(n, ast.Name))
+                    elif isinstance(stmt, (ast.Import, ast.ImportFrom)):
+                        names.update((a.asname or a.name).split(".")[0] for a in stmt.names)
+                    elif isinstance(stmt, ast.If):
+                        defined(stmt.body)
+                        defined(stmt.orelse)
+                    elif isinstance(stmt, ast.Try):
+                        defined(stmt.body)
+                        for handler in stmt.handlers:
+                            defined(handler.body)
+
+            def visit(stmts):
+                for stmt in stmts:
+                    if isinstance(stmt, ast.If):
+                        if is_feature_probe(stmt.test, flags):
+                            defined(stmt.body)
+                            defined(stmt.orelse)
+                        else:
+                            visit(stmt.body)
+                            visit(stmt.orelse)
+                    elif isinstance(stmt, ast.Try) and caught_names(stmt) & GUARD_ERRORS:
+                        defined(stmt.body)
+                        for handler in stmt.handlers:
+                            defined(handler.body)
+
+            visit(tree.body)
+        _conditional_cache[file] = names
+    return _conditional_cache[file]
+
+
+_assigned_cache: dict[str, dict[str, set[str]]] = {}
+ATTRIBUTE_STORE = re.compile(r"\b(\w+)\.(\w+)[ \t]*=(?!=)")
+
+
+def assigned_from_outside(module) -> set[str]:
+    """Attributes other modules of the same package set on this one at runtime: Django's test
+    setup does `mail.outbox = []`, so `django.core.mail.outbox` exists while tests run.
+
+    Each package is read once, into {module's last name: attributes stored on it}.
+    """
+    name = getattr(module, "__name__", "")
+    top, _, rest = name.partition(".")
+    if not rest:
+        return set()
+    if top not in _assigned_cache:
+        index: dict[str, set[str]] = defaultdict(set)
+        root = getattr(sys.modules.get(top), "__file__", None)
+        if isinstance(root, str) and os.path.basename(root) == "__init__.py":
+            for i, path in enumerate(Path(root).parent.rglob("*.py")):
+                if i >= 3000:  # huge packages (torch): not worth reading everything
+                    break
+                try:
+                    text = path.read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    continue
+                for owner, attr in ATTRIBUTE_STORE.findall(text):
+                    index[owner].add(attr)
+        _assigned_cache[top] = index
+    return _assigned_cache[top].get(name.rsplit(".", 1)[-1], set())
 
 
 def packages_distributions() -> dict[str, list[str]]:
@@ -460,6 +546,29 @@ def assigned_attrs(tree: ast.AST) -> set[str] | None:
 
 
 _instance_attrs_cache: dict = {}
+
+
+def subclass_defines(cls, attr: str, limit: int = 2000) -> bool:
+    """Whether a loaded subclass of cls has `attr`."""
+    seen: set[int] = set()
+    todo = [cls]
+    while todo and len(seen) < limit:
+        current = todo.pop()
+        try:
+            subs = type.__subclasses__(current) if isinstance(current, type) else []
+        except TypeError:
+            continue
+        for sub in subs:
+            if id(sub) in seen:
+                continue
+            seen.add(id(sub))
+            try:
+                if attr in vars(sub):
+                    return True
+            except TypeError:
+                pass
+            todo.append(sub)
+    return False
 
 
 def instance_attrs(cls) -> tuple[set[str], bool] | None:
@@ -1041,7 +1150,13 @@ class FileChecker(ast.NodeVisitor):
         if args is not None:
             positional = args.posonlyargs + args.args
             for a in positional + args.kwonlyargs:
-                sources[a.arg].append(self.annotation_type(a.annotation))
+                value = self.annotation_type(a.annotation)
+                if (positional and a is positional[0] and a.arg in ("self", "cls") and type(value) is Instance
+                        and not value.exact):
+                    # `def muldelete(self: BaseView, ...)` in a mixin: the methods it calls come
+                    # from the class it's mixed into, not from the annotated base.
+                    value = Instance(value.cls, exact=False)
+                sources[a.arg].append(value)
             for a in (args.vararg, args.kwarg):
                 if a:
                     sources[a.arg].append(UNTYPED)
@@ -1256,8 +1371,16 @@ class FileChecker(ast.NodeVisitor):
         attr = expr.attr
         if id(expr) not in self.call_funcs or attr.startswith("__"):
             return
+        # A Protocol only lists what the code needs; implementations have more (jsonschema's
+        # Validator and `descend`).
+        if getattr(cls, "_is_protocol", False):
+            return
         known = instance_attrs(cls)
         if known is None or attr in known[0]:
+            return
+        # A base class the real objects are subclasses of: parso's `Import` is always an
+        # `ImportName` or `ImportFrom`, which define `get_paths`.
+        if subclass_defines(cls, attr):
             return
         module = owner_module(cls)
         hint = suggest(attr, known[0])

@@ -56,7 +56,7 @@ No configuration, no type stubs, zero dependencies. Python 3.10+.
     ([pretix#6722](https://github.com/pretix/pretix/issues/6722))
 
   The other three apps were NetBox, FlaskBB and healthchecks. On paperless-ngx (17,000 files),
-  every error it reports is a real API mismatch: 7 on Linux, plus one Windows-only on Windows.
+  every error it reports is a real API mismatch: 7, on Windows and Linux alike.
 - **What it can't see:** arguments forwarded through `**kwargs`, methods on objects whose type is
   only known at runtime, binary (C extension) incompatibilities, and behaviour changes behind an
   unchanged API. It complements your tests; it doesn't replace them.
@@ -180,13 +180,18 @@ attribute.
 When the code only *declares* a type (a type hint, a return annotation, an `isinstance` check), the
 value may be a subclass, and frameworks attach data to instances from outside the class (Django's
 `request.user`). So only **method calls** are checked there, as a **warning** (API006): `engine.execute()`
-on a parameter typed `Engine`, after SQLAlchemy 2 removed `Engine.execute`.
+on a parameter typed `Engine`, after SQLAlchemy 2 removed `Engine.execute`. It stays quiet when a loaded
+subclass defines the method (parso's `Import` is always an `ImportName` or `ImportFrom`), for `Protocol`
+types, and for an annotated `self` in a mixin (`def delete(self: BaseView)`).
 
 ## Avoiding false positives
 
 - Imports and calls under feature probes are skipped: `if hasattr(...)`, `sys.platform`,
   `sys.version_info`, `os.name`, `TYPE_CHECKING`, `try/except ImportError|AttributeError`, and
   flags assigned from these (`HAVE_FORK = hasattr(os, "fork")`).
+- Names a library itself only defines under such a probe (tornado's `bind_unix_socket`, Unix only)
+  aren't reported as missing on other platforms, and neither are attributes the package sets on its
+  own modules at runtime (Django's test setup does `mail.outbox = []`).
 - Your own modules, relative imports, and names you reassign are never checked. A name bound to
   different things in one scope (or used as a loop/comprehension/lambda variable) isn't inferred.
 - Classes with a custom `__getattr__`/`__getattribute__`, a custom metaclass (ORMs, pydantic, enums),

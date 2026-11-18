@@ -718,14 +718,86 @@ class DeclaredTypes(unittest.TestCase):
 
             def import_optional_dependency(name, errors="raise"):
                 return importlib.import_module(name)
+
+            class Node:
+                def get_root(self): pass
+
+            class ImportNode(Node):
+                def get_paths(self): pass
+
+            class Validates(typing.Protocol):
+                def iter_errors(self): ...
         '''))
+        Path(cls.tmp.name, "condlib.py").write_text(textwrap.dedent('''
+            import sys
+            if sys.platform == "no-such-platform":
+                def unix_only(): pass
+        '''))
+        pkg = Path(cls.tmp.name, "outlib")
+        pkg.mkdir()
+        (pkg / "__init__.py").write_text("")
+        (pkg / "mail.py").write_text("def send(): pass\n")
+        (pkg / "testing.py").write_text("from outlib import mail\nmail.outbox = []\n")
         sys.path.insert(0, cls.tmp.name)
 
     @classmethod
     def tearDownClass(cls):
         sys.path.remove(cls.tmp.name)
-        sys.modules.pop("typedlib", None)
+        for name in ("typedlib", "condlib", "outlib", "outlib.mail", "outlib.testing"):
+            sys.modules.pop(name, None)
         cls.tmp.cleanup()
+
+    def test_method_a_subclass_defines_is_not_reported(self):
+        # jedi on parso: an `Import` node is always an ImportName or ImportFrom.
+        source = """
+            from typedlib import Node
+            def f(node: Node):
+                node.get_paths()
+                node.no_such_method()
+        """
+        self.assertEqual([(f.code, f.line) for f in check_source(textwrap.dedent(source))], [("API006", 5)])
+
+    def test_keyword_only_parameters_without_positional_ones(self):
+        source = """
+            from typedlib import Engine
+            def f(*, engine: Engine):
+                engine.execute()
+        """
+        self.assertEqual(codes(source), ["API006"])
+
+    def test_protocol_types_are_not_checked(self):
+        source = """
+            from typedlib import Validates
+            def f(v: Validates):
+                v.descend()
+        """
+        self.assertEqual(codes(source), [])
+
+    def test_annotated_self_in_a_mixin_is_not_checked(self):
+        source = """
+            from typedlib import Engine
+            class DeleteMixin:
+                def delete(self: Engine):
+                    self.post_delete()
+        """
+        self.assertEqual(codes(source), [])
+
+    def test_names_a_module_only_defines_on_some_platforms(self):
+        source = """
+            import condlib
+            condlib.unix_only()
+            condlib.nowhere()
+        """
+        self.assertEqual([(f.code, f.line) for f in check_source(textwrap.dedent(source))], [("API002", 4)])
+
+    def test_attributes_the_package_sets_at_runtime(self):
+        # Django's test setup does `mail.outbox = []`.
+        source = """
+            from outlib import mail
+            mail.outbox
+            mail.inbox
+        """
+        self.assertEqual([(f.code, f.line) for f in check_source(textwrap.dedent(source))], [("API002", 4)])
 
     def test_method_missing_from_a_type_hint(self):
         source = """

@@ -1,6 +1,6 @@
 # Benchmark: known "the update broke a package that didn't pin it" cases
 
-October 2026, rerun with 0.2.0 in November 2026 (same verdicts). `research/known_breaks.py`, run in the Docker sandbox
+October 2026, rerun with 0.2.0 and 0.2.1 in November 2026 (same verdicts). `research/known_breaks.py`, run in the Docker sandbox
 (`run-docker.ps1 -Study known -Python 3.10`).
 
 ## Method
