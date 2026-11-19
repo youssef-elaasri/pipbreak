@@ -1,0 +1,32 @@
+{
+  "lib": "sqlalchemy",
+  "import": "sqlalchemy",
+  "repo": "narevai/varne",
+  "number": 250,
+  "url": "https://github.com/narevai/varne/pull/250",
+  "title": "chore(deps): update dependency sqlalchemy to v2.1.9 (0.x)",
+  "old": {
+    "failed": [],
+    "declared": 23,
+    "version": "2.0.52"
+  },
+  "new": {
+    "failed": [],
+    "declared": 23,
+    "version": "2.1.9"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-05T00:11:35Z",
+  "ci": "success",
+  "head": "f45436d6fcab4129d1d1ce0c03ba6c2db31a9a01",
+  "dependency_files": [
+    "backend/requirements.txt"
+  ],
+  "stars": 30,
+  "status": "ok",
+  "findings_before": 74,
+  "findings_after": 74,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

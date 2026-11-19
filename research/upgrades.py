@@ -63,6 +63,74 @@ def ci_summary(rollup: list[dict]) -> str:
     return "pending"
 
 
+# Libraries whose major releases tend to remove APIs, for scanning PRs that are still open.
+OPEN_LIBRARIES = [
+    ("werkzeug", "werkzeug"), ("flask", "flask"), ("sqlalchemy", "sqlalchemy"), ("pydantic", "pydantic"),
+    ("numpy", "numpy"), ("pandas", "pandas"), ("marshmallow", "marshmallow"), ("httpx", "httpx"),
+    ("django", "django"), ("redis", "redis"), ("pyopenssl", "OpenSSL"), ("celery", "celery"),
+    ("alembic", "alembic"), ("urllib3", "urllib3"), ("starlette", "starlette"), ("fastapi", "fastapi"),
+    ("setuptools", "setuptools"), ("protobuf", "google"), ("openai", "openai"), ("jinja2", "jinja2"),
+    ("click", "click"), ("cryptography", "cryptography"), ("pytest", "pytest"), ("scipy", "scipy"),
+]
+
+
+def major_jump(old: str | None, new: str) -> bool:
+    """1.x -> 2.x, or 0.27 -> 0.28 (0.x minors break like majors)."""
+    def parts(v):
+        return [int(p) for p in re.findall(r"\d+", v)[:2]] + [0, 0]
+    if not old:
+        return True  # Renovate titles only give the new version; fetch checks it really changed
+    o, n = parts(old), parts(new)
+    return n[0] > o[0] or (o[0] == n[0] == 0 and n[1] > o[1])
+
+
+def collect_open(per_lib: int):
+    """Open Dependabot/Renovate PRs that cross a major version: breaks a maintainer can still avoid."""
+    sample = []
+    for dist, import_name in OPEN_LIBRARIES:
+        found = []
+        for query in ([f'"Bump {dist} from"', "--author=app/dependabot"],
+                      [f'"Update dependency {dist} to"', "--author=app/renovate"]):
+            time.sleep(10)  # the search API's burst limit is strict
+            try:
+                found += gh_json("search", "prs", *query, "--state=open", "--sort=created", "--limit=100",
+                                 "--json=repository,number,title,url")
+            except RuntimeError as exc:
+                print(f"{dist}: search failed: {exc}", flush=True)
+        picked = 0
+        for pr in found:
+            if picked >= per_lib:
+                break
+            repo = pr["repository"]["nameWithOwner"]
+            m = BUMP_TITLE.search(pr["title"]) or RENOVATE_TITLE.search(pr["title"])
+            if (not m or m["dist"].lower() != dist or not major_jump(m.groupdict().get("old"), m["new"])
+                    or any(s["repo"] == repo for s in sample)):
+                continue
+            try:
+                info = gh_json("api", f"repos/{repo}")
+                view = gh_json("pr", "view", str(pr["number"]), "-R", repo,
+                               "--json=state,mergedAt,headRefOid,statusCheckRollup,files,createdAt")
+            except RuntimeError:
+                continue
+            if (info.get("archived") or info.get("stargazers_count", 0) < MIN_STARS
+                    or info.get("size", 0) > MAX_REPO_KB or view["state"] != "OPEN"):
+                continue
+            dep_files = [f["path"] for f in view["files"] if DEPENDENCY_FILES.search(f["path"])]
+            if not dep_files:
+                continue
+            sample.append({
+                "lib": dist, "import": import_name, "repo": repo, "number": pr["number"], "url": pr["url"],
+                "title": pr["title"], "old": m.groupdict().get("old"), "new": m["new"],
+                "state": view["state"], "merged": False, "created": view["createdAt"],
+                "ci": ci_summary(view["statusCheckRollup"]), "head": view["headRefOid"],
+                "dependency_files": dep_files, "stars": info["stargazers_count"],
+            })
+            picked += 1
+        print(f"{dist}: {len(found)} open bump PRs found, {picked} picked", flush=True)
+    SAMPLE.write_text(json.dumps(sample, indent=2), encoding="utf-8")
+    print(f"wrote {len(sample)} PRs to {SAMPLE}")
+
+
 def collect(per_lib: int):
     repos: dict[str, dict | None] = {}
 
@@ -170,6 +238,12 @@ def install(deps: list[str], target: Path) -> list[str]:
     return failed
 
 
+def reproduced(status: dict) -> bool:
+    """Both sides installed the library, at different versions (a failed resolve leaves None)."""
+    old, new = status["old"]["version"], status["new"]["version"]
+    return bool(old and new and old != new)
+
+
 def fetch(pr: dict) -> dict:
     status_file = WORK / slug(pr) / "fetch.json"
     if status_file.exists():
@@ -182,7 +256,7 @@ def fetch(pr: dict) -> dict:
             target = WORK / slug(pr) / f"deps-{side}"
             status[side] = {"failed": install(deps, target), "declared": len(deps),
                             "version": installed_version(target, pr["lib"])}
-        if not status["old"]["version"] or status["old"]["version"] == status["new"]["version"]:
+        if not reproduced(status):
             status["status"] = "bump-not-reproduced"
     except Exception as exc:
         status = {"status": "fetch-error", "error": str(exc)[-800:]}
@@ -255,6 +329,8 @@ def check(pr: dict) -> dict:
     if not status_file.exists():
         return dict(record, status="not-fetched")
     record.update(json.loads(status_file.read_text(encoding="utf-8")))
+    if record["status"] == "ok" and not reproduced(record):  # fetched before reproduced() covered None
+        record["status"] = "bump-not-reproduced"
     if record["status"] != "ok":
         return record
     try:
@@ -294,14 +370,16 @@ def run_stage(stage: str, only: str | None, limit: int | None):
 def main():
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("collect").add_argument("--per-lib", type=int, default=6)
+    collect_parser = sub.add_parser("collect")
+    collect_parser.add_argument("--per-lib", type=int, default=6)
+    collect_parser.add_argument("--open", action="store_true", help="open PRs across OPEN_LIBRARIES")
     for stage in ("fetch", "check"):
         p = sub.add_parser(stage)
         p.add_argument("--only", help="owner/repo#number")
         p.add_argument("--limit", type=int)
     args = parser.parse_args()
     if args.cmd == "collect":
-        collect(args.per_lib)
+        (collect_open if args.open else collect)(args.per_lib)
     else:
         run_stage(args.cmd, args.only, args.limit)
 

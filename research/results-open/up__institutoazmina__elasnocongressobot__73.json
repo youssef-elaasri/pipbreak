@@ -1,0 +1,36 @@
+{
+  "lib": "redis",
+  "import": "redis",
+  "repo": "institutoazmina/elasnocongressobot",
+  "number": 73,
+  "url": "https://github.com/institutoazmina/elasnocongressobot/pull/73",
+  "title": "Update dependency redis to v5.3.1",
+  "old": {
+    "failed": [
+      "torch==2.6.0"
+    ],
+    "declared": 13,
+    "version": "5.2.1"
+  },
+  "new": {
+    "failed": [
+      "torch==2.6.0"
+    ],
+    "declared": 13,
+    "version": "5.3.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-08-30T21:48:57Z",
+  "ci": "success",
+  "head": "742ba8c1c09fa9835510fc4963f9e0c44c4d5c84",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 42,
+  "status": "ok",
+  "findings_before": 3,
+  "findings_after": 3,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

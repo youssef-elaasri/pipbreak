@@ -1,0 +1,32 @@
+{
+  "lib": "flask",
+  "import": "flask",
+  "repo": "IBM/MAX-Base",
+  "number": 82,
+  "url": "https://github.com/IBM/MAX-Base/pull/82",
+  "title": "Update dependency flask to v3 [SECURITY]",
+  "old": {
+    "failed": [],
+    "declared": 4,
+    "version": "2.0.1"
+  },
+  "new": {
+    "failed": [],
+    "declared": 4,
+    "version": "3.1.3"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-09-15T16:06:25Z",
+  "ci": "success",
+  "head": "937df46ea36776dc37a08434aac54ecafa31927b",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 12,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,28 @@
+{
+  "lib": "openai",
+  "import": "openai",
+  "repo": "etalab-ia/OpenGateLLM",
+  "number": 1441,
+  "url": "https://github.com/etalab-ia/OpenGateLLM/pull/1441",
+  "title": "chore(deps): bump openai from 2.15.0 to 3.42.1",
+  "old": {
+    "failed": [],
+    "declared": 6,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 6,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-17T12:37:46Z",
+  "ci": "success",
+  "head": "a502e16307ba5f57b15af742650c2f110290cb10",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 219,
+  "status": "bump-not-reproduced"
+}

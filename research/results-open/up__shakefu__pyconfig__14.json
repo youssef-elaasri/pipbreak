@@ -1,0 +1,28 @@
+{
+  "lib": "protobuf",
+  "import": "google",
+  "repo": "shakefu/pyconfig",
+  "number": 14,
+  "url": "https://github.com/shakefu/pyconfig/pull/14",
+  "title": "build(deps-dev): bump protobuf from 3.20.3 to 5.29.6",
+  "old": {
+    "failed": [],
+    "declared": 2,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 2,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-06T02:11:14Z",
+  "ci": "success",
+  "head": "5e8cc818f4dea4242a6a78525341ee7ec8ced011",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 28,
+  "status": "bump-not-reproduced"
+}

@@ -1,0 +1,32 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "env0/terratag",
+  "number": 265,
+  "url": "https://github.com/env0/terratag/pull/265",
+  "title": "chore(deps): Update dependency pandas to v3.1.1",
+  "old": {
+    "failed": [],
+    "declared": 4,
+    "version": "3.1.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 4,
+    "version": "3.1.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-08T02:09:58Z",
+  "ci": "success",
+  "head": "288b15daa8ba6a269a58e7871294217fd914b65f",
+  "dependency_files": [
+    "azapi/requirements.txt"
+  ],
+  "stars": 1059,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

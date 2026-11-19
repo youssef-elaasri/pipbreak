@@ -1,0 +1,28 @@
+{
+  "lib": "fastapi",
+  "import": "fastapi",
+  "repo": "MShekow/ng-outlook-google-calendar-sync",
+  "number": 260,
+  "url": "https://github.com/MShekow/ng-outlook-google-calendar-sync/pull/260",
+  "title": "Update dependency fastapi to v0.164.0",
+  "old": {
+    "failed": [],
+    "declared": 5,
+    "version": "0.165.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 5,
+    "version": "0.165.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T16:01:51Z",
+  "ci": "success",
+  "head": "46617dc4ee124f7b016d2f45005c16af614712e4",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 25,
+  "status": "bump-not-reproduced"
+}

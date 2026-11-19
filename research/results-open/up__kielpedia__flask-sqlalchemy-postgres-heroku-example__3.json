@@ -1,0 +1,45 @@
+{
+  "lib": "jinja2",
+  "import": "jinja2",
+  "repo": "kielpedia/flask-sqlalchemy-postgres-heroku-example",
+  "number": 3,
+  "url": "https://github.com/kielpedia/flask-sqlalchemy-postgres-heroku-example/pull/3",
+  "title": "Bump jinja2 from 2.6 to 3.1.6",
+  "old": {
+    "failed": [
+      "Flask==0.9",
+      "Flask-SQLAlchemy==0.16",
+      "Jinja2==2.6",
+      "SQLAlchemy==0.7.8",
+      "Werkzeug==0.8.3",
+      "argparse==1.2.1",
+      "psycopg2==2.4.5",
+      "wsgiref==0.1.2"
+    ],
+    "declared": 8,
+    "version": null
+  },
+  "new": {
+    "failed": [
+      "Flask==0.9",
+      "Flask-SQLAlchemy==0.16",
+      "SQLAlchemy==0.7.8",
+      "Werkzeug==0.8.3",
+      "argparse==1.2.1",
+      "psycopg2==2.4.5",
+      "wsgiref==0.1.2"
+    ],
+    "declared": 8,
+    "version": "3.1.6"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-07T07:26:54Z",
+  "ci": "none",
+  "head": "4ad762c09dbbbb2baafaa500551d03bab96df1f8",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 19,
+  "status": "bump-not-reproduced"
+}

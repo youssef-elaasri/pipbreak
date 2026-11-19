@@ -1,0 +1,28 @@
+{
+  "lib": "alembic",
+  "import": "alembic",
+  "repo": "Peopl3s/clean-architecture-fastapi-project-template",
+  "number": 95,
+  "url": "https://github.com/Peopl3s/clean-architecture-fastapi-project-template/pull/95",
+  "title": "chore(deps): Update dependency alembic to v1.20.1",
+  "old": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2025-11-15T22:04:02Z",
+  "ci": "success",
+  "head": "13bbb2ecf6af5f053ee3a3d63bc5569714014986",
+  "dependency_files": [
+    "{{cookiecutter.project_slug}}/pyproject.toml"
+  ],
+  "stars": 143,
+  "status": "bump-not-reproduced"
+}

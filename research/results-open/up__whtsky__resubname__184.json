@@ -1,0 +1,28 @@
+{
+  "lib": "pytest",
+  "import": "pytest",
+  "repo": "whtsky/resubname",
+  "number": 184,
+  "url": "https://github.com/whtsky/resubname/pull/184",
+  "title": "chore(dependencies): update dependency pytest to v9 [security]",
+  "old": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-16T00:08:15Z",
+  "ci": "failure",
+  "head": "d4233b4b094de7f997b4fb70571eb75dc8e5de48",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 15,
+  "status": "bump-not-reproduced"
+}

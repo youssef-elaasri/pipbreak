@@ -1,0 +1,43 @@
+{
+  "lib": "numpy",
+  "import": "numpy",
+  "repo": "microsoft/discovery",
+  "number": 341,
+  "url": "https://github.com/microsoft/discovery/pull/341",
+  "title": "chore(python): bump numpy from 1.26.4 to 2.5.4 in /agents/molecule-visualization/tools/molecule-visualization",
+  "old": {
+    "failed": [],
+    "declared": 4,
+    "version": "1.26.4"
+  },
+  "new": {
+    "failed": [],
+    "declared": 4,
+    "version": "2.5.4"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-17T08:11:52Z",
+  "ci": "success",
+  "head": "6d239c36c36970387946c09e3ac33435ff626ac6",
+  "dependency_files": [
+    "agents/molecule-visualization/tools/molecule-visualization/requirements.txt"
+  ],
+  "stars": 292,
+  "status": "ok",
+  "findings_before": 1127,
+  "findings_after": 1127,
+  "introduced": [],
+  "introduced_in_dependencies": [
+    {
+      "path": "plotly/express/imshow_utils.py",
+      "line": 112,
+      "col": 16,
+      "severity": "error",
+      "code": "API002",
+      "message": "'np' has no attribute 'float_' in numpy==2.5.4. Did you mean 'float64'?",
+      "target": "numpy",
+      "source": "return np.float_"
+    }
+  ]
+}

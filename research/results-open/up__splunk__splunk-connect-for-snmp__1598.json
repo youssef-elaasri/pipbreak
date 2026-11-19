@@ -1,0 +1,32 @@
+{
+  "lib": "celery",
+  "import": "celery",
+  "repo": "splunk/splunk-connect-for-snmp",
+  "number": 1598,
+  "url": "https://github.com/splunk/splunk-connect-for-snmp/pull/1598",
+  "title": "chore(deps): update dependency celery to v5.7.0",
+  "old": {
+    "failed": [
+      "mongolock"
+    ],
+    "declared": 28,
+    "version": "5.7.0"
+  },
+  "new": {
+    "failed": [
+      "mongolock"
+    ],
+    "declared": 28,
+    "version": "5.7.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-06T01:40:05Z",
+  "ci": "failure",
+  "head": "1b11e92aa19bf6619751b8ff83ccda0f52e81e52",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 42,
+  "status": "bump-not-reproduced"
+}

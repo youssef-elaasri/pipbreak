@@ -1,0 +1,32 @@
+{
+  "lib": "click",
+  "import": "click",
+  "repo": "crossplane-contrib/function-python",
+  "number": 67,
+  "url": "https://github.com/crossplane-contrib/function-python/pull/67",
+  "title": "Update dependency click to v8.5.1",
+  "old": {
+    "failed": [],
+    "declared": 4,
+    "version": "8.5.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 4,
+    "version": "8.5.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-06T18:24:49Z",
+  "ci": "success",
+  "head": "98f1e930e44e009690ff798384aa1337a4b99dfc",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 20,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,32 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "mshade/kronic",
+  "number": 199,
+  "url": "https://github.com/mshade/kronic/pull/199",
+  "title": "Update dependency Werkzeug to v3.1.9 [SECURITY]",
+  "old": {
+    "failed": [],
+    "declared": 33,
+    "version": "3.1.8"
+  },
+  "new": {
+    "failed": [],
+    "declared": 33,
+    "version": "3.1.9"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T05:33:31Z",
+  "ci": "failure",
+  "head": "45c09e17c605c4f9ac1c2a8e43cf1c9ec62eaab8",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 110,
+  "status": "ok",
+  "findings_before": 1,
+  "findings_after": 1,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

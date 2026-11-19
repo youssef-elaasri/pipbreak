@@ -1,0 +1,32 @@
+{
+  "lib": "pydantic",
+  "import": "pydantic",
+  "repo": "rclement/business-card-generator",
+  "number": 435,
+  "url": "https://github.com/rclement/business-card-generator/pull/435",
+  "title": "fix(deps): update dependency pydantic to v2.14.3",
+  "old": {
+    "failed": [],
+    "declared": 8,
+    "version": "2.14.1"
+  },
+  "new": {
+    "failed": [],
+    "declared": 8,
+    "version": "2.14.3"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-16T03:17:06Z",
+  "ci": "failure",
+  "head": "7177b4b0c3e5f3b22ada93a49b7a600c55d3a8ec",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 74,
+  "status": "ok",
+  "findings_before": 10,
+  "findings_after": 10,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,28 @@
+{
+  "lib": "pyopenssl",
+  "import": "OpenSSL",
+  "repo": "iroco-co/aioimaplib",
+  "number": 144,
+  "url": "https://github.com/iroco-co/aioimaplib/pull/144",
+  "title": "chore(deps-dev): bump pyopenssl from 24.3.0 to 26.0.0",
+  "old": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T04:05:58Z",
+  "ci": "success",
+  "head": "b520073155b11394b67f4d8ce0c83e23dae25031",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 171,
+  "status": "bump-not-reproduced"
+}

@@ -1,0 +1,32 @@
+{
+  "lib": "fastapi",
+  "import": "fastapi",
+  "repo": "neo4j-examples/movies-python-bolt",
+  "number": 423,
+  "url": "https://github.com/neo4j-examples/movies-python-bolt/pull/423",
+  "title": "Build(deps): bump fastapi from 0.162.0 to 0.163.1",
+  "old": {
+    "failed": [],
+    "declared": 6,
+    "version": "0.162.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 6,
+    "version": "0.163.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T15:32:43Z",
+  "ci": "failure",
+  "head": "eadb54ea184262ab2c78ef8a7a647570eb5e2e2f",
+  "dependency_files": [
+    "requirements-async.txt"
+  ],
+  "stars": 445,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 0,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

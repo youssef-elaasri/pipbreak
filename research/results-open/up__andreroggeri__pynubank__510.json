@@ -1,0 +1,79 @@
+{
+  "lib": "pyopenssl",
+  "import": "OpenSSL",
+  "repo": "andreroggeri/pynubank",
+  "number": 510,
+  "url": "https://github.com/andreroggeri/pynubank/pull/510",
+  "title": "chore(deps): bump pyopenssl from 23.2.0 to 26.4.0",
+  "old": {
+    "failed": [
+      "qrcode==7.3.1",
+      "coveralls==3.3.1"
+    ],
+    "declared": 10,
+    "version": "23.2.0"
+  },
+  "new": {
+    "failed": [
+      "qrcode==7.3.1",
+      "coveralls==3.3.1"
+    ],
+    "declared": 10,
+    "version": "26.4.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-02T00:42:48Z",
+  "ci": "failure",
+  "head": "f7a28f89b8d1f598ab872a27a6624f92376e8727",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 1198,
+  "status": "ok",
+  "findings_before": 3,
+  "findings_after": 7,
+  "introduced": [
+    {
+      "path": "new/pynubank/utils/certificate_generator.py",
+      "line": 69,
+      "col": 15,
+      "severity": "error",
+      "code": "API002",
+      "message": "'OpenSSL.crypto' has no attribute 'PKCS12' in pyOpenSSL==26.4.0.",
+      "target": "OpenSSL.crypto",
+      "source": "p12 = OpenSSL.crypto.PKCS12()"
+    },
+    {
+      "path": "new/pynubank/utils/certificate_generator.py",
+      "line": 77,
+      "col": 9,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'PKey.generate_key' is deprecated in pyOpenSSL==26.4.0: PKey.generate_key is deprecated. You should use the key generation APIs in cryptography instead.",
+      "target": "OpenSSL.crypto",
+      "source": "key.generate_key(OpenSSL.crypto.TYPE_RSA, 2048)"
+    },
+    {
+      "path": "new/tests/test_cli.py",
+      "line": 19,
+      "col": 5,
+      "severity": "warning",
+      "code": "API101",
+      "message": "'PKey.generate_key' is deprecated in pyOpenSSL==26.4.0: PKey.generate_key is deprecated. You should use the key generation APIs in cryptography instead.",
+      "target": "OpenSSL.crypto",
+      "source": "key.generate_key(OpenSSL.crypto.TYPE_RSA, 2048)"
+    },
+    {
+      "path": "new/tests/test_cli.py",
+      "line": 20,
+      "col": 11,
+      "severity": "error",
+      "code": "API002",
+      "message": "'OpenSSL.crypto' has no attribute 'PKCS12' in pyOpenSSL==26.4.0.",
+      "target": "OpenSSL.crypto",
+      "source": "p12 = OpenSSL.crypto.PKCS12()"
+    }
+  ],
+  "introduced_in_dependencies": []
+}

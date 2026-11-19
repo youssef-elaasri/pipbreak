@@ -1,0 +1,32 @@
+{
+  "lib": "openai",
+  "import": "openai",
+  "repo": "yegor256/gitted",
+  "number": 200,
+  "url": "https://github.com/yegor256/gitted/pull/200",
+  "title": "Update dependency openai to v3",
+  "old": {
+    "failed": [],
+    "declared": 3,
+    "version": "2.54.0"
+  },
+  "new": {
+    "failed": [],
+    "declared": 3,
+    "version": "3.55.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-17T03:33:49Z",
+  "ci": "failure",
+  "head": "02ca091ed32dc59481bb0466810efd02c9dde2fa",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 12,
+  "status": "ok",
+  "findings_before": 2,
+  "findings_after": 5,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,41 @@
+{
+  "lib": "pytest",
+  "import": "pytest",
+  "repo": "nikunjlad/Gender-and-Age-Prediction-from-Face-Images",
+  "number": 8,
+  "url": "https://github.com/nikunjlad/Gender-and-Age-Prediction-from-Face-Images/pull/8",
+  "title": "Bump pytest from 8.3.3 to 9.0.3",
+  "old": {
+    "failed": [
+      "nvidia-cudnn-cu12==9.1.0.70",
+      "torch==2.6.0",
+      "torchvision==0.21.0"
+    ],
+    "declared": 47,
+    "version": "8.3.3"
+  },
+  "new": {
+    "failed": [
+      "nvidia-cudnn-cu12==9.1.0.70",
+      "torch==2.6.0",
+      "torchvision==0.21.0"
+    ],
+    "declared": 47,
+    "version": "9.0.3"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T07:21:23Z",
+  "ci": "none",
+  "head": "90b2299ecacc05cdad8eeabb7e537b65561aa1c9",
+  "dependency_files": [
+    "pyproject.toml",
+    "requirements.txt"
+  ],
+  "stars": 17,
+  "status": "ok",
+  "findings_before": 53,
+  "findings_after": 53,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

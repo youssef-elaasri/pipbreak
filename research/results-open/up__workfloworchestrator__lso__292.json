@@ -1,0 +1,32 @@
+{
+  "lib": "celery",
+  "import": "celery",
+  "repo": "workfloworchestrator/lso",
+  "number": 292,
+  "url": "https://github.com/workfloworchestrator/lso/pull/292",
+  "title": "Update dependency celery to v5.7.0",
+  "old": {
+    "failed": [],
+    "declared": 8,
+    "version": "5.6.3"
+  },
+  "new": {
+    "failed": [],
+    "declared": 8,
+    "version": "5.7.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-09T00:42:52Z",
+  "ci": "success",
+  "head": "cb4e21e8361e23729f502ea116fcca9a830ad626",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 16,
+  "status": "ok",
+  "findings_before": 27,
+  "findings_after": 27,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

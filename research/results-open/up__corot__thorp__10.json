@@ -1,0 +1,45 @@
+{
+  "lib": "pyopenssl",
+  "import": "OpenSSL",
+  "repo": "corot/thorp",
+  "number": 10,
+  "url": "https://github.com/corot/thorp/pull/10",
+  "title": "Bump pyopenssl from 23.3.0 to 26.0.0 in /thorp_bringup/docker",
+  "old": {
+    "failed": [
+      "ratelimit",
+      "filterpy",
+      "tensorflow==2.10.1",
+      "numpy==1.23.5",
+      "scipy==1.10.1",
+      "matplotlib==3.7.5",
+      "Pillow==8.4.0"
+    ],
+    "declared": 12,
+    "version": "23.3.0"
+  },
+  "new": {
+    "failed": [
+      "ratelimit",
+      "filterpy",
+      "tensorflow==2.10.1",
+      "numpy==1.23.5",
+      "scipy==1.10.1",
+      "matplotlib==3.7.5",
+      "Pillow==8.4.0",
+      "pyOpenSSL==26.0.0"
+    ],
+    "declared": 12,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-09-14T23:11:29Z",
+  "ci": "none",
+  "head": "8e881706699bd070586c2bf13ca7afa479886b75",
+  "dependency_files": [
+    "thorp_bringup/docker/requirements.txt"
+  ],
+  "stars": 25,
+  "status": "bump-not-reproduced"
+}

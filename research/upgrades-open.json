@@ -1,0 +1,1016 @@
+[
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "14790897/handwriting-web",
+    "number": 112,
+    "url": "https://github.com/14790897/handwriting-web/pull/112",
+    "title": "chore(deps): bump werkzeug from 2.3.6 to 3.1.9",
+    "old": "2.3.6",
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-10T19:44:57Z",
+    "ci": "success",
+    "head": "5f63816e2712887a3e3cd9c80cf98941af83ee4f",
+    "dependency_files": [
+      "backend/requirements.txt"
+    ],
+    "stars": 1510
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "mshade/kronic",
+    "number": 199,
+    "url": "https://github.com/mshade/kronic/pull/199",
+    "title": "Update dependency Werkzeug to v3.1.9 [SECURITY]",
+    "old": null,
+    "new": "3.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T05:33:31Z",
+    "ci": "failure",
+    "head": "45c09e17c605c4f9ac1c2a8e43cf1c9ec62eaab8",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 110
+  },
+  {
+    "lib": "werkzeug",
+    "import": "werkzeug",
+    "repo": "yuiseki/NLP2025-tutorial-2",
+    "number": 139,
+    "url": "https://github.com/yuiseki/NLP2025-tutorial-2/pull/139",
+    "title": "Update dependency Werkzeug to v3.1.6 [SECURITY]",
+    "old": null,
+    "new": "3.1.6",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-23T17:45:19Z",
+    "ci": "none",
+    "head": "368ab11dc94e867a8cf4bccf594f54741f62fb24",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 17
+  },
+  {
+    "lib": "flask",
+    "import": "flask",
+    "repo": "NEONScience/NEON-IS-data-processing",
+    "number": 1485,
+    "url": "https://github.com/NEONScience/NEON-IS-data-processing/pull/1485",
+    "title": "Bump flask from 2.3.2 to 3.1.3 in /modules/csd_loader",
+    "old": "2.3.2",
+    "new": "3.1.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-12T19:11:17Z",
+    "ci": "success",
+    "head": "0a64b21e02d9cbffe7b95dfd1458816dd4f5660f",
+    "dependency_files": [
+      "modules/csd_loader/requirements.txt"
+    ],
+    "stars": 13
+  },
+  {
+    "lib": "flask",
+    "import": "flask",
+    "repo": "kodamap/object_detection_demo",
+    "number": 4,
+    "url": "https://github.com/kodamap/object_detection_demo/pull/4",
+    "title": "Bump flask from 2.3.2 to 3.1.3",
+    "old": "2.3.2",
+    "new": "3.1.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-11T23:23:16Z",
+    "ci": "none",
+    "head": "228d42c40824de6e1cbe0943bbc06c3035d8887b",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 27
+  },
+  {
+    "lib": "flask",
+    "import": "flask",
+    "repo": "IBM/MAX-Base",
+    "number": 82,
+    "url": "https://github.com/IBM/MAX-Base/pull/82",
+    "title": "Update dependency flask to v3 [SECURITY]",
+    "old": null,
+    "new": "3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-09-15T16:06:25Z",
+    "ci": "success",
+    "head": "937df46ea36776dc37a08434aac54ecafa31927b",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 12
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "TotallyNotRobots/CloudBot",
+    "number": 1038,
+    "url": "https://github.com/TotallyNotRobots/CloudBot/pull/1038",
+    "title": "chore(deps): update dependency sqlalchemy to v2.1.9",
+    "old": null,
+    "new": "2.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T17:03:57Z",
+    "ci": "failure",
+    "head": "ab821a608f39ea695e10d5031ef650857cf85315",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 183
+  },
+  {
+    "lib": "sqlalchemy",
+    "import": "sqlalchemy",
+    "repo": "narevai/varne",
+    "number": 250,
+    "url": "https://github.com/narevai/varne/pull/250",
+    "title": "chore(deps): update dependency sqlalchemy to v2.1.9 (0.x)",
+    "old": null,
+    "new": "2.1.9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-05T00:11:35Z",
+    "ci": "success",
+    "head": "f45436d6fcab4129d1d1ce0c03ba6c2db31a9a01",
+    "dependency_files": [
+      "backend/requirements.txt"
+    ],
+    "stars": 30
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "rclement/business-card-generator",
+    "number": 435,
+    "url": "https://github.com/rclement/business-card-generator/pull/435",
+    "title": "fix(deps): update dependency pydantic to v2.14.3",
+    "old": null,
+    "new": "2.14.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-16T03:17:06Z",
+    "ci": "failure",
+    "head": "7177b4b0c3e5f3b22ada93a49b7a600c55d3a8ec",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 74
+  },
+  {
+    "lib": "pydantic",
+    "import": "pydantic",
+    "repo": "IBM/qradar-mcp",
+    "number": 64,
+    "url": "https://github.com/IBM/qradar-mcp/pull/64",
+    "title": "Update dependency pydantic to v2.14.3",
+    "old": null,
+    "new": "2.14.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-30T10:38:37Z",
+    "ci": "success",
+    "head": "b729965cd91ba668eda854065d265cc028704898",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 13
+  },
+  {
+    "lib": "numpy",
+    "import": "numpy",
+    "repo": "microsoft/discovery",
+    "number": 341,
+    "url": "https://github.com/microsoft/discovery/pull/341",
+    "title": "chore(python): bump numpy from 1.26.4 to 2.5.4 in /agents/molecule-visualization/tools/molecule-visualization",
+    "old": "1.26.4",
+    "new": "2.5.4",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T08:11:52Z",
+    "ci": "success",
+    "head": "6d239c36c36970387946c09e3ac33435ff626ac6",
+    "dependency_files": [
+      "agents/molecule-visualization/tools/molecule-visualization/requirements.txt"
+    ],
+    "stars": 292
+  },
+  {
+    "lib": "numpy",
+    "import": "numpy",
+    "repo": "OpenMS/umetaflow",
+    "number": 78,
+    "url": "https://github.com/OpenMS/umetaflow/pull/78",
+    "title": "deps: bump numpy from 1.24.4 to 2.5.4",
+    "old": "1.24.4",
+    "new": "2.5.4",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-13T23:55:11Z",
+    "ci": "failure",
+    "head": "02de261f973c3b3f4ac6b1f5cbb8100c82bf58f5",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 13
+  },
+  {
+    "lib": "numpy",
+    "import": "numpy",
+    "repo": "Brajesh31/Email-Spam-Detection-system",
+    "number": 6,
+    "url": "https://github.com/Brajesh31/Email-Spam-Detection-system/pull/6",
+    "title": "chore(deps): bump numpy from 1.26.4 to 2.5.4",
+    "old": "1.26.4",
+    "new": "2.5.4",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-13T21:48:20Z",
+    "ci": "success",
+    "head": "2f8f637ed6c17817126f62664787913317793900",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 10
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "awslabs/aws-healthomics-tools",
+    "number": 373,
+    "url": "https://github.com/awslabs/aws-healthomics-tools/pull/373",
+    "title": "deps(deps): bump pandas from 2.3.3 to 3.1.1 in the data-processing group",
+    "old": "2.3.3",
+    "new": "3.1.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-16T09:05:02Z",
+    "ci": "failure",
+    "head": "4424b808a8c7d5bcd30c8cf67c99c56a235d5f08",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 43
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "IBM/ares",
+    "number": 764,
+    "url": "https://github.com/IBM/ares/pull/764",
+    "title": "Update dependency pandas to v3",
+    "old": null,
+    "new": "3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-12T16:17:21Z",
+    "ci": "failure",
+    "head": "dd593bef2bc534084705fa443dc8760112b0b83e",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 90
+  },
+  {
+    "lib": "pandas",
+    "import": "pandas",
+    "repo": "env0/terratag",
+    "number": 265,
+    "url": "https://github.com/env0/terratag/pull/265",
+    "title": "chore(deps): Update dependency pandas to v3.1.1",
+    "old": null,
+    "new": "3.1.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-08T02:09:58Z",
+    "ci": "success",
+    "head": "288b15daa8ba6a269a58e7871294217fd914b65f",
+    "dependency_files": [
+      "azapi/requirements.txt"
+    ],
+    "stars": 1059
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "arc53/DocsGPT",
+    "number": 3328,
+    "url": "https://github.com/arc53/DocsGPT/pull/3328",
+    "title": "chore(deps): bump marshmallow from 3.26.2 to 4.4.0",
+    "old": "3.26.2",
+    "new": "4.4.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-13T21:48:23Z",
+    "ci": "failure",
+    "head": "9a093ca852dc6fdb00f38093658bcffcc88160a1",
+    "dependency_files": [
+      "docsgpt/requirements-decisions-torch.txt",
+      "docsgpt/requirements-docling.txt",
+      "docsgpt/requirements-milvus.txt",
+      "docsgpt/requirements.txt",
+      "tests/requirements.txt"
+    ],
+    "stars": 18373
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "Azure-Samples/ai-rag-chat-evaluator",
+    "number": 186,
+    "url": "https://github.com/Azure-Samples/ai-rag-chat-evaluator/pull/186",
+    "title": "Bump marshmallow from 3.23.2 to 4.4.0",
+    "old": "3.23.2",
+    "new": "4.4.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-10T08:12:56Z",
+    "ci": "failure",
+    "head": "66b6803b06666899c9800292d7c659d85084c3e9",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 338
+  },
+  {
+    "lib": "marshmallow",
+    "import": "marshmallow",
+    "repo": "ideaportriga/magnet-ai",
+    "number": 196,
+    "url": "https://github.com/ideaportriga/magnet-ai/pull/196",
+    "title": "chore(deps): bump marshmallow from 3.26.1 to 4.3.1 in /api",
+    "old": "3.26.1",
+    "new": "4.3.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-12T19:50:39Z",
+    "ci": "failure",
+    "head": "c084c2fc17de1ce7555418786776d50c40f151a4",
+    "dependency_files": [
+      "api/requirements.txt"
+    ],
+    "stars": 12
+  },
+  {
+    "lib": "django",
+    "import": "django",
+    "repo": "itkinside/ufs",
+    "number": 155,
+    "url": "https://github.com/itkinside/ufs/pull/155",
+    "title": "build(deps): bump django from 4.2.28 to 6.1.3",
+    "old": "4.2.28",
+    "new": "6.1.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T04:02:52Z",
+    "ci": "success",
+    "head": "853f6f7cc817cfcb00b90b61b9726e88afc6cf93",
+    "dependency_files": [
+      "requirements.in",
+      "requirements.txt"
+    ],
+    "stars": 10
+  },
+  {
+    "lib": "django",
+    "import": "django",
+    "repo": "cbsshekhawat18-lab/social-stats-social-media-manager",
+    "number": 69,
+    "url": "https://github.com/cbsshekhawat18-lab/social-stats-social-media-manager/pull/69",
+    "title": "pip(deps): bump django from 5.2.19 to 6.1.3 in /backend",
+    "old": "5.2.19",
+    "new": "6.1.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-15T22:35:20Z",
+    "ci": "failure",
+    "head": "0575ec5a27b98a729ae9a525892870cd2e0ffe5a",
+    "dependency_files": [
+      "backend/requirements.txt"
+    ],
+    "stars": 32
+  },
+  {
+    "lib": "django",
+    "import": "django",
+    "repo": "RegioHelden/django-scrubber",
+    "number": 321,
+    "url": "https://github.com/RegioHelden/django-scrubber/pull/321",
+    "title": "Update dependency django to v6.1.3",
+    "old": null,
+    "new": "6.1.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-14T01:53:22Z",
+    "ci": "success",
+    "head": "134c41b50897eebdb2dd8f10c5d3bdccb49d7dff",
+    "dependency_files": [
+      "requirements-test.txt"
+    ],
+    "stars": 36
+  },
+  {
+    "lib": "redis",
+    "import": "redis",
+    "repo": "institutoazmina/elasnocongressobot",
+    "number": 73,
+    "url": "https://github.com/institutoazmina/elasnocongressobot/pull/73",
+    "title": "Update dependency redis to v5.3.1",
+    "old": null,
+    "new": "5.3.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-08-30T21:48:57Z",
+    "ci": "success",
+    "head": "742ba8c1c09fa9835510fc4963f9e0c44c4d5c84",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 42
+  },
+  {
+    "lib": "pyopenssl",
+    "import": "OpenSSL",
+    "repo": "andreroggeri/pynubank",
+    "number": 510,
+    "url": "https://github.com/andreroggeri/pynubank/pull/510",
+    "title": "chore(deps): bump pyopenssl from 23.2.0 to 26.4.0",
+    "old": "23.2.0",
+    "new": "26.4.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-02T00:42:48Z",
+    "ci": "failure",
+    "head": "f7a28f89b8d1f598ab872a27a6624f92376e8727",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 1198
+  },
+  {
+    "lib": "pyopenssl",
+    "import": "OpenSSL",
+    "repo": "iroco-co/aioimaplib",
+    "number": 144,
+    "url": "https://github.com/iroco-co/aioimaplib/pull/144",
+    "title": "chore(deps-dev): bump pyopenssl from 24.3.0 to 26.0.0",
+    "old": "24.3.0",
+    "new": "26.0.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T04:05:58Z",
+    "ci": "success",
+    "head": "b520073155b11394b67f4d8ce0c83e23dae25031",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 171
+  },
+  {
+    "lib": "pyopenssl",
+    "import": "OpenSSL",
+    "repo": "corot/thorp",
+    "number": 10,
+    "url": "https://github.com/corot/thorp/pull/10",
+    "title": "Bump pyopenssl from 23.3.0 to 26.0.0 in /thorp_bringup/docker",
+    "old": "23.3.0",
+    "new": "26.0.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-09-14T23:11:29Z",
+    "ci": "none",
+    "head": "8e881706699bd070586c2bf13ca7afa479886b75",
+    "dependency_files": [
+      "thorp_bringup/docker/requirements.txt"
+    ],
+    "stars": 25
+  },
+  {
+    "lib": "celery",
+    "import": "celery",
+    "repo": "mitodl/mitxpro",
+    "number": 4221,
+    "url": "https://github.com/mitodl/mitxpro/pull/4221",
+    "title": "fix(deps): update dependency celery to v5.7.0",
+    "old": null,
+    "new": "5.7.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-16T08:56:49Z",
+    "ci": "success",
+    "head": "ce2903d68b38024df4ff8d4a00efdb8991edac14",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 20
+  },
+  {
+    "lib": "celery",
+    "import": "celery",
+    "repo": "workfloworchestrator/lso",
+    "number": 292,
+    "url": "https://github.com/workfloworchestrator/lso/pull/292",
+    "title": "Update dependency celery to v5.7.0",
+    "old": null,
+    "new": "5.7.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-09T00:42:52Z",
+    "ci": "success",
+    "head": "cb4e21e8361e23729f502ea116fcca9a830ad626",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 16
+  },
+  {
+    "lib": "celery",
+    "import": "celery",
+    "repo": "splunk/splunk-connect-for-snmp",
+    "number": 1598,
+    "url": "https://github.com/splunk/splunk-connect-for-snmp/pull/1598",
+    "title": "chore(deps): update dependency celery to v5.7.0",
+    "old": null,
+    "new": "5.7.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-06T01:40:05Z",
+    "ci": "failure",
+    "head": "1b11e92aa19bf6619751b8ff83ccda0f52e81e52",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 42
+  },
+  {
+    "lib": "alembic",
+    "import": "alembic",
+    "repo": "bryanforbes/Erasmus",
+    "number": 864,
+    "url": "https://github.com/bryanforbes/Erasmus/pull/864",
+    "title": "chore(dev): update dependency alembic to v1.20.1",
+    "old": null,
+    "new": "1.20.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-06-27T05:50:49Z",
+    "ci": "success",
+    "head": "ceecbb39c3cfb74c623f86484b0979f01a4e0c83",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 24
+  },
+  {
+    "lib": "alembic",
+    "import": "alembic",
+    "repo": "Peopl3s/clean-architecture-litestar-project-template",
+    "number": 70,
+    "url": "https://github.com/Peopl3s/clean-architecture-litestar-project-template/pull/70",
+    "title": "chore(deps): Update dependency alembic to v1.20.1",
+    "old": null,
+    "new": "1.20.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-01-11T00:27:21Z",
+    "ci": "success",
+    "head": "9cdd8ec327426c830237ac73581109fd313b28b7",
+    "dependency_files": [
+      "{{cookiecutter.project_slug}}/pyproject.toml"
+    ],
+    "stars": 28
+  },
+  {
+    "lib": "alembic",
+    "import": "alembic",
+    "repo": "Peopl3s/clean-architecture-fastapi-project-template",
+    "number": 95,
+    "url": "https://github.com/Peopl3s/clean-architecture-fastapi-project-template/pull/95",
+    "title": "chore(deps): Update dependency alembic to v1.20.1",
+    "old": null,
+    "new": "1.20.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2025-11-15T22:04:02Z",
+    "ci": "success",
+    "head": "13bbb2ecf6af5f053ee3a3d63bc5569714014986",
+    "dependency_files": [
+      "{{cookiecutter.project_slug}}/pyproject.toml"
+    ],
+    "stars": 143
+  },
+  {
+    "lib": "urllib3",
+    "import": "urllib3",
+    "repo": "bio-tools/biotoolsRegistry",
+    "number": 760,
+    "url": "https://github.com/bio-tools/biotoolsRegistry/pull/760",
+    "title": "Bump urllib3 from 1.26.20 to 2.8.0 in /backend",
+    "old": "1.26.20",
+    "new": "2.8.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T20:20:29Z",
+    "ci": "failure",
+    "head": "203349a40508878be1c691cecfe525c9499dc06f",
+    "dependency_files": [
+      "backend/requirements.txt"
+    ],
+    "stars": 92
+  },
+  {
+    "lib": "fastapi",
+    "import": "fastapi",
+    "repo": "timoklimmer/powerproxy-aoai",
+    "number": 295,
+    "url": "https://github.com/timoklimmer/powerproxy-aoai/pull/295",
+    "title": "Bump fastapi from 0.141.1 to 0.163.1",
+    "old": "0.141.1",
+    "new": "0.163.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T18:03:17Z",
+    "ci": "none",
+    "head": "a7b977a31a66da4c4bfb97f08fad926969a92154",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 110
+  },
+  {
+    "lib": "fastapi",
+    "import": "fastapi",
+    "repo": "neo4j-examples/movies-python-bolt",
+    "number": 423,
+    "url": "https://github.com/neo4j-examples/movies-python-bolt/pull/423",
+    "title": "Build(deps): bump fastapi from 0.162.0 to 0.163.1",
+    "old": "0.162.0",
+    "new": "0.163.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T15:32:43Z",
+    "ci": "failure",
+    "head": "eadb54ea184262ab2c78ef8a7a647570eb5e2e2f",
+    "dependency_files": [
+      "requirements-async.txt"
+    ],
+    "stars": 445
+  },
+  {
+    "lib": "fastapi",
+    "import": "fastapi",
+    "repo": "MShekow/ng-outlook-google-calendar-sync",
+    "number": 260,
+    "url": "https://github.com/MShekow/ng-outlook-google-calendar-sync/pull/260",
+    "title": "Update dependency fastapi to v0.164.0",
+    "old": null,
+    "new": "0.164.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T16:01:51Z",
+    "ci": "success",
+    "head": "46617dc4ee124f7b016d2f45005c16af614712e4",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 25
+  },
+  {
+    "lib": "setuptools",
+    "import": "setuptools",
+    "repo": "ossobv/planb",
+    "number": 75,
+    "url": "https://github.com/ossobv/planb/pull/75",
+    "title": "build(deps-dev): bump setuptools from 82.0.1 to 84.1.0",
+    "old": "82.0.1",
+    "new": "84.1.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T10:38:33Z",
+    "ci": "success",
+    "head": "328e7ca251885358b9598d973ac7f5009d9992de",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 33
+  },
+  {
+    "lib": "setuptools",
+    "import": "setuptools",
+    "repo": "trillion-labs/trida-stack",
+    "number": 112,
+    "url": "https://github.com/trillion-labs/trida-stack/pull/112",
+    "title": "chore(deps): bump setuptools from 80.10.2 to 84.1.0 in /inference/zoro-1/vllm",
+    "old": "80.10.2",
+    "new": "84.1.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T01:53:02Z",
+    "ci": "success",
+    "head": "ada009db3421e00a541d55bf07e44e9925b12af9",
+    "dependency_files": [
+      "inference/zoro-1/vllm/requirements-decide-lock.txt"
+    ],
+    "stars": 23
+  },
+  {
+    "lib": "setuptools",
+    "import": "setuptools",
+    "repo": "NYU-DiffusionMRI/DESIGNER-v2",
+    "number": 143,
+    "url": "https://github.com/NYU-DiffusionMRI/DESIGNER-v2/pull/143",
+    "title": "Bump setuptools from 70.1.0 to 84.1.0",
+    "old": "70.1.0",
+    "new": "84.1.0",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T19:05:36Z",
+    "ci": "success",
+    "head": "5915f22303b2cb945308f90c40741c1125b027e0",
+    "dependency_files": [
+      "pyproject.toml",
+      "requirements.txt"
+    ],
+    "stars": 37
+  },
+  {
+    "lib": "protobuf",
+    "import": "google",
+    "repo": "GoogleCloudPlatform/LifeSciences",
+    "number": 260,
+    "url": "https://github.com/GoogleCloudPlatform/LifeSciences/pull/260",
+    "title": "build(deps): bump protobuf from 6.33.6 to 7.36.2 in /applications/open-agentic-science-engine/tools",
+    "old": "6.33.6",
+    "new": "7.36.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T15:25:38Z",
+    "ci": "failure",
+    "head": "93e223e5eef732465b7fac7191e9cb580d025f81",
+    "dependency_files": [
+      "applications/open-agentic-science-engine/tools/requirements.txt"
+    ],
+    "stars": 58
+  },
+  {
+    "lib": "protobuf",
+    "import": "google",
+    "repo": "guard-spec/guard-spec",
+    "number": 118,
+    "url": "https://github.com/guard-spec/guard-spec/pull/118",
+    "title": "chore(deps): Bump protobuf from 5.29.6 to 7.36.2 in /train",
+    "old": "5.29.6",
+    "new": "7.36.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-08T06:34:15Z",
+    "ci": "success",
+    "head": "8325a9cfa547adabf85531694b2e078508c32962",
+    "dependency_files": [
+      "train/pyproject.toml"
+    ],
+    "stars": 18
+  },
+  {
+    "lib": "protobuf",
+    "import": "google",
+    "repo": "shakefu/pyconfig",
+    "number": 14,
+    "url": "https://github.com/shakefu/pyconfig/pull/14",
+    "title": "build(deps-dev): bump protobuf from 3.20.3 to 5.29.6",
+    "old": "3.20.3",
+    "new": "5.29.6",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-06T02:11:14Z",
+    "ci": "success",
+    "head": "5e8cc818f4dea4242a6a78525341ee7ec8ced011",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 28
+  },
+  {
+    "lib": "openai",
+    "import": "openai",
+    "repo": "etalab-ia/OpenGateLLM",
+    "number": 1441,
+    "url": "https://github.com/etalab-ia/OpenGateLLM/pull/1441",
+    "title": "chore(deps): bump openai from 2.15.0 to 3.42.1",
+    "old": "2.15.0",
+    "new": "3.42.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T12:37:46Z",
+    "ci": "success",
+    "head": "a502e16307ba5f57b15af742650c2f110290cb10",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 219
+  },
+  {
+    "lib": "openai",
+    "import": "openai",
+    "repo": "kyaukyuai/chatDuck",
+    "number": 41,
+    "url": "https://github.com/kyaukyuai/chatDuck/pull/41",
+    "title": "chore(deps): update dependency openai to v0.28.1",
+    "old": null,
+    "new": "0.28.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T23:37:52Z",
+    "ci": "none",
+    "head": "6747bf1f66eb004ac00f2dee7c013f727f2843fc",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 13
+  },
+  {
+    "lib": "openai",
+    "import": "openai",
+    "repo": "yegor256/gitted",
+    "number": 200,
+    "url": "https://github.com/yegor256/gitted/pull/200",
+    "title": "Update dependency openai to v3",
+    "old": null,
+    "new": "3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T03:33:49Z",
+    "ci": "failure",
+    "head": "02ca091ed32dc59481bb0466810efd02c9dde2fa",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 12
+  },
+  {
+    "lib": "jinja2",
+    "import": "jinja2",
+    "repo": "kielpedia/flask-sqlalchemy-postgres-heroku-example",
+    "number": 3,
+    "url": "https://github.com/kielpedia/flask-sqlalchemy-postgres-heroku-example/pull/3",
+    "title": "Bump jinja2 from 2.6 to 3.1.6",
+    "old": "2.6",
+    "new": "3.1.6",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-07T07:26:54Z",
+    "ci": "none",
+    "head": "4ad762c09dbbbb2baafaa500551d03bab96df1f8",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 19
+  },
+  {
+    "lib": "click",
+    "import": "click",
+    "repo": "voicepaw/so-vits-svc-fork",
+    "number": 1628,
+    "url": "https://github.com/voicepaw/so-vits-svc-fork/pull/1628",
+    "title": "chore(deps): update dependency click to v8.5.1",
+    "old": null,
+    "new": "8.5.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-09T02:16:06Z",
+    "ci": "failure",
+    "head": "1eeed4b8c9e51e9396a3f4c4bb9d41378f21c698",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 9324
+  },
+  {
+    "lib": "click",
+    "import": "click",
+    "repo": "crossplane-contrib/function-python",
+    "number": 67,
+    "url": "https://github.com/crossplane-contrib/function-python/pull/67",
+    "title": "Update dependency click to v8.5.1",
+    "old": null,
+    "new": "8.5.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-06T18:24:49Z",
+    "ci": "success",
+    "head": "98f1e930e44e009690ff798384aa1337a4b99dfc",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 20
+  },
+  {
+    "lib": "click",
+    "import": "click",
+    "repo": "LeslieLeung/heimdallr",
+    "number": 281,
+    "url": "https://github.com/LeslieLeung/heimdallr/pull/281",
+    "title": "chore(deps): update dependency click to v8.5.1",
+    "old": null,
+    "new": "8.5.1",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-20T14:46:24Z",
+    "ci": "failure",
+    "head": "76987cf98aa870f336661c1e6d77bc6d96a62187",
+    "dependency_files": [
+      "requirements.txt"
+    ],
+    "stars": 813
+  },
+  {
+    "lib": "cryptography",
+    "import": "cryptography",
+    "repo": "calkit/calkit",
+    "number": 2084,
+    "url": "https://github.com/calkit/calkit/pull/2084",
+    "title": "\u2b06 Bump cryptography from 43.0.0 to 50.0.2",
+    "old": "43.0.0",
+    "new": "50.0.2",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-14T05:01:30Z",
+    "ci": "success",
+    "head": "3e68fc62d36c1cce018d70667ca587eaf854c2fc",
+    "dependency_files": [
+      "hub/backend/pyproject.toml"
+    ],
+    "stars": 63
+  },
+  {
+    "lib": "pytest",
+    "import": "pytest",
+    "repo": "nikunjlad/Gender-and-Age-Prediction-from-Face-Images",
+    "number": 8,
+    "url": "https://github.com/nikunjlad/Gender-and-Age-Prediction-from-Face-Images/pull/8",
+    "title": "Bump pytest from 8.3.3 to 9.0.3",
+    "old": "8.3.3",
+    "new": "9.0.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T07:21:23Z",
+    "ci": "none",
+    "head": "90b2299ecacc05cdad8eeabb7e537b65561aa1c9",
+    "dependency_files": [
+      "pyproject.toml",
+      "requirements.txt"
+    ],
+    "stars": 17
+  },
+  {
+    "lib": "pytest",
+    "import": "pytest",
+    "repo": "aws-samples/automated-ci-pipeline-creation",
+    "number": 4,
+    "url": "https://github.com/aws-samples/automated-ci-pipeline-creation/pull/4",
+    "title": "Bump pytest from 8.4.2 to 9.0.3 in /Solution-Templates/samplecode/python",
+    "old": "8.4.2",
+    "new": "9.0.3",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T06:41:26Z",
+    "ci": "success",
+    "head": "f63a9d59ed9cd4f4847876d927b517516010b4c7",
+    "dependency_files": [
+      "Solution-Templates/samplecode/python/requirements.txt"
+    ],
+    "stars": 10
+  },
+  {
+    "lib": "pytest",
+    "import": "pytest",
+    "repo": "whtsky/resubname",
+    "number": 184,
+    "url": "https://github.com/whtsky/resubname/pull/184",
+    "title": "chore(dependencies): update dependency pytest to v9 [security]",
+    "old": null,
+    "new": "9",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-16T00:08:15Z",
+    "ci": "failure",
+    "head": "d4233b4b094de7f997b4fb70571eb75dc8e5de48",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 15
+  }
+]

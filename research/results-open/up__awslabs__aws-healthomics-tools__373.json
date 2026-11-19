@@ -1,0 +1,32 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "awslabs/aws-healthomics-tools",
+  "number": 373,
+  "url": "https://github.com/awslabs/aws-healthomics-tools/pull/373",
+  "title": "deps(deps): bump pandas from 2.3.3 to 3.1.1 in the data-processing group",
+  "old": {
+    "failed": [
+      "docopt"
+    ],
+    "declared": 13,
+    "version": "3.1.1"
+  },
+  "new": {
+    "failed": [
+      "docopt"
+    ],
+    "declared": 13,
+    "version": "3.1.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-16T09:05:02Z",
+  "ci": "failure",
+  "head": "4424b808a8c7d5bcd30c8cf67c99c56a235d5f08",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 43,
+  "status": "bump-not-reproduced"
+}

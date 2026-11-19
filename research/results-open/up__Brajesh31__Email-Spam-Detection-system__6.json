@@ -1,0 +1,28 @@
+{
+  "lib": "numpy",
+  "import": "numpy",
+  "repo": "Brajesh31/Email-Spam-Detection-system",
+  "number": 6,
+  "url": "https://github.com/Brajesh31/Email-Spam-Detection-system/pull/6",
+  "title": "chore(deps): bump numpy from 1.26.4 to 2.5.4",
+  "old": {
+    "failed": [],
+    "declared": 9,
+    "version": "2.5.4"
+  },
+  "new": {
+    "failed": [],
+    "declared": 9,
+    "version": "2.5.4"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-13T21:48:20Z",
+  "ci": "success",
+  "head": "2f8f637ed6c17817126f62664787913317793900",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 10,
+  "status": "bump-not-reproduced"
+}

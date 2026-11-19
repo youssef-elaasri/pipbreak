@@ -1,0 +1,38 @@
+{
+  "lib": "setuptools",
+  "import": "setuptools",
+  "repo": "ossobv/planb",
+  "number": 75,
+  "url": "https://github.com/ossobv/planb/pull/75",
+  "title": "build(deps-dev): bump setuptools from 82.0.1 to 84.1.0",
+  "old": {
+    "failed": [
+      "dutree>=1.8,<2",
+      "pysigset~=0.4.0"
+    ],
+    "declared": 13,
+    "version": "82.0.1"
+  },
+  "new": {
+    "failed": [
+      "dutree>=1.8,<2",
+      "pysigset~=0.4.0"
+    ],
+    "declared": 13,
+    "version": "84.2.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T10:38:33Z",
+  "ci": "success",
+  "head": "328e7ca251885358b9598d973ac7f5009d9992de",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 33,
+  "status": "ok",
+  "findings_before": 11,
+  "findings_after": 11,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

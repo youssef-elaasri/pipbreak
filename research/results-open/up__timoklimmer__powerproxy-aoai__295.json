@@ -1,0 +1,32 @@
+{
+  "lib": "fastapi",
+  "import": "fastapi",
+  "repo": "timoklimmer/powerproxy-aoai",
+  "number": 295,
+  "url": "https://github.com/timoklimmer/powerproxy-aoai/pull/295",
+  "title": "Bump fastapi from 0.141.1 to 0.163.1",
+  "old": {
+    "failed": [],
+    "declared": 8,
+    "version": "0.141.1"
+  },
+  "new": {
+    "failed": [],
+    "declared": 8,
+    "version": "0.163.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T18:03:17Z",
+  "ci": "none",
+  "head": "a7b977a31a66da4c4bfb97f08fad926969a92154",
+  "dependency_files": [
+    "requirements.txt"
+  ],
+  "stars": 110,
+  "status": "ok",
+  "findings_before": 27,
+  "findings_after": 27,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

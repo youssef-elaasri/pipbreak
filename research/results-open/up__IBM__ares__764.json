@@ -1,0 +1,44 @@
+{
+  "lib": "pandas",
+  "import": "pandas",
+  "repo": "IBM/ares",
+  "number": 764,
+  "url": "https://github.com/IBM/ares/pull/764",
+  "title": "Update dependency pandas to v3",
+  "old": {
+    "failed": [
+      "torch==2.14.0",
+      "accelerate==1.16.0",
+      "sentence-transformers==6.3.0",
+      "peft==0.21.3",
+      "ibm_watsonx_ai==1.9.1"
+    ],
+    "declared": 26,
+    "version": "2.3.3"
+  },
+  "new": {
+    "failed": [
+      "torch==2.14.0",
+      "accelerate==1.16.0",
+      "sentence-transformers==6.3.0",
+      "peft==0.21.3",
+      "ibm_watsonx_ai==1.9.1"
+    ],
+    "declared": 26,
+    "version": "3.1.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-12T16:17:21Z",
+  "ci": "failure",
+  "head": "dd593bef2bc534084705fa443dc8760112b0b83e",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 90,
+  "status": "ok",
+  "findings_before": 235,
+  "findings_after": 235,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

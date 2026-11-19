@@ -1,0 +1,36 @@
+{
+  "lib": "protobuf",
+  "import": "google",
+  "repo": "guard-spec/guard-spec",
+  "number": 118,
+  "url": "https://github.com/guard-spec/guard-spec/pull/118",
+  "title": "chore(deps): Bump protobuf from 5.29.6 to 7.36.2 in /train",
+  "old": {
+    "failed": [
+      "torch==2.13.0"
+    ],
+    "declared": 13,
+    "version": "5.29.6"
+  },
+  "new": {
+    "failed": [
+      "torch==2.13.0"
+    ],
+    "declared": 13,
+    "version": "7.36.2"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-08T06:34:15Z",
+  "ci": "success",
+  "head": "8325a9cfa547adabf85531694b2e078508c32962",
+  "dependency_files": [
+    "train/pyproject.toml"
+  ],
+  "stars": 18,
+  "status": "ok",
+  "findings_before": 42,
+  "findings_after": 42,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

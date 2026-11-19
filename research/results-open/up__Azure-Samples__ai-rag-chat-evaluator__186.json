@@ -1,0 +1,34 @@
+{
+  "lib": "marshmallow",
+  "import": "marshmallow",
+  "repo": "Azure-Samples/ai-rag-chat-evaluator",
+  "number": 186,
+  "url": "https://github.com/Azure-Samples/ai-rag-chat-evaluator/pull/186",
+  "title": "Bump marshmallow from 3.23.2 to 4.4.0",
+  "old": {
+    "failed": [],
+    "declared": 11,
+    "version": "3.23.2"
+  },
+  "new": {
+    "failed": [
+      "azure-ai-evaluation==1.8.0"
+    ],
+    "declared": 11,
+    "version": "4.4.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-10T08:12:56Z",
+  "ci": "failure",
+  "head": "66b6803b06666899c9800292d7c659d85084c3e9",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 338,
+  "status": "ok",
+  "findings_before": 0,
+  "findings_after": 4,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

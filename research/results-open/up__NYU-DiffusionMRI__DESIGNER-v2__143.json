@@ -1,0 +1,37 @@
+{
+  "lib": "setuptools",
+  "import": "setuptools",
+  "repo": "NYU-DiffusionMRI/DESIGNER-v2",
+  "number": 143,
+  "url": "https://github.com/NYU-DiffusionMRI/DESIGNER-v2/pull/143",
+  "title": "Bump setuptools from 70.1.0 to 84.1.0",
+  "old": {
+    "failed": [
+      "antspyx==0.4.2"
+    ],
+    "declared": 52,
+    "version": "70.1.0"
+  },
+  "new": {
+    "failed": [
+      "antspyx==0.4.2"
+    ],
+    "declared": 52,
+    "version": "84.1.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-17T19:05:36Z",
+  "ci": "success",
+  "head": "5915f22303b2cb945308f90c40741c1125b027e0",
+  "dependency_files": [
+    "pyproject.toml",
+    "requirements.txt"
+  ],
+  "stars": 37,
+  "status": "ok",
+  "findings_before": 64,
+  "findings_after": 64,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

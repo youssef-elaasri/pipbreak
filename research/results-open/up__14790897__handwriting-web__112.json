@@ -1,0 +1,38 @@
+{
+  "lib": "werkzeug",
+  "import": "werkzeug",
+  "repo": "14790897/handwriting-web",
+  "number": 112,
+  "url": "https://github.com/14790897/handwriting-web/pull/112",
+  "title": "chore(deps): bump werkzeug from 2.3.6 to 3.1.9",
+  "old": {
+    "failed": [
+      "python-docx",
+      "python-docx==0.8.11"
+    ],
+    "declared": 33,
+    "version": "2.3.6"
+  },
+  "new": {
+    "failed": [
+      "python-docx",
+      "python-docx==0.8.11"
+    ],
+    "declared": 33,
+    "version": "3.1.9"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-10T19:44:57Z",
+  "ci": "success",
+  "head": "5f63816e2712887a3e3cd9c80cf98941af83ee4f",
+  "dependency_files": [
+    "backend/requirements.txt"
+  ],
+  "stars": 1510,
+  "status": "ok",
+  "findings_before": 37,
+  "findings_after": 37,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

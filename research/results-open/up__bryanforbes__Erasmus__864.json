@@ -1,0 +1,32 @@
+{
+  "lib": "alembic",
+  "import": "alembic",
+  "repo": "bryanforbes/Erasmus",
+  "number": 864,
+  "url": "https://github.com/bryanforbes/Erasmus/pull/864",
+  "title": "chore(dev): update dependency alembic to v1.20.1",
+  "old": {
+    "failed": [],
+    "declared": 6,
+    "version": "1.18.4"
+  },
+  "new": {
+    "failed": [],
+    "declared": 6,
+    "version": "1.20.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-06-27T05:50:49Z",
+  "ci": "success",
+  "head": "ceecbb39c3cfb74c623f86484b0979f01a4e0c83",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 24,
+  "status": "ok",
+  "findings_before": 80,
+  "findings_after": 80,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

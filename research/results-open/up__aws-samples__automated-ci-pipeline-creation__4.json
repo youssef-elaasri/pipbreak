@@ -1,0 +1,32 @@
+{
+  "lib": "pytest",
+  "import": "pytest",
+  "repo": "aws-samples/automated-ci-pipeline-creation",
+  "number": 4,
+  "url": "https://github.com/aws-samples/automated-ci-pipeline-creation/pull/4",
+  "title": "Bump pytest from 8.4.2 to 9.0.3 in /Solution-Templates/samplecode/python",
+  "old": {
+    "failed": [],
+    "declared": 1,
+    "version": "8.4.2"
+  },
+  "new": {
+    "failed": [],
+    "declared": 1,
+    "version": "9.0.3"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T06:41:26Z",
+  "ci": "success",
+  "head": "f63a9d59ed9cd4f4847876d927b517516010b4c7",
+  "dependency_files": [
+    "Solution-Templates/samplecode/python/requirements.txt"
+  ],
+  "stars": 10,
+  "status": "ok",
+  "findings_before": 1,
+  "findings_after": 1,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

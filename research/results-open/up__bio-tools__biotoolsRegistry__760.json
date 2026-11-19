@@ -1,0 +1,41 @@
+{
+  "lib": "urllib3",
+  "import": "urllib3",
+  "repo": "bio-tools/biotoolsRegistry",
+  "number": 760,
+  "url": "https://github.com/bio-tools/biotoolsRegistry/pull/760",
+  "title": "Bump urllib3 from 1.26.20 to 2.8.0 in /backend",
+  "old": {
+    "failed": [
+      "django-compat==1.0.15",
+      "dj-rest-auth==7.1.1",
+      "mysqlclient==2.0.1"
+    ],
+    "declared": 32,
+    "version": "1.26.20"
+  },
+  "new": {
+    "failed": [
+      "django-compat==1.0.15",
+      "dj-rest-auth==7.1.1",
+      "elasticsearch==7.12.1",
+      "mysqlclient==2.0.1"
+    ],
+    "declared": 32,
+    "version": "2.8.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-17T20:20:29Z",
+  "ci": "failure",
+  "head": "203349a40508878be1c691cecfe525c9499dc06f",
+  "dependency_files": [
+    "backend/requirements.txt"
+  ],
+  "stars": 92,
+  "status": "ok",
+  "findings_before": 273,
+  "findings_after": 287,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,28 @@
+{
+  "lib": "alembic",
+  "import": "alembic",
+  "repo": "Peopl3s/clean-architecture-litestar-project-template",
+  "number": 70,
+  "url": "https://github.com/Peopl3s/clean-architecture-litestar-project-template/pull/70",
+  "title": "chore(deps): Update dependency alembic to v1.20.1",
+  "old": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "new": {
+    "failed": [],
+    "declared": 0,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-01-11T00:27:21Z",
+  "ci": "success",
+  "head": "9cdd8ec327426c830237ac73581109fd313b28b7",
+  "dependency_files": [
+    "{{cookiecutter.project_slug}}/pyproject.toml"
+  ],
+  "stars": 28,
+  "status": "bump-not-reproduced"
+}
