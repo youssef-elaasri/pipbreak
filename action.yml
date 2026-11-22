@@ -1,5 +1,5 @@
 name: pipbreak dependency update
-description: Catch installed packages a Dependabot or Renovate update breaks - calls to APIs the new version removed.
+description: Catch breaking changes in Python dependency update PRs from Dependabot or Renovate - calls to APIs the new version removed.
 branding:
   icon: package
   color: orange
