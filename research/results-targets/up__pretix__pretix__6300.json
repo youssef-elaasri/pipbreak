@@ -1,0 +1,32 @@
+{
+  "lib": "mt-940",
+  "import": "mt940",
+  "repo": "pretix/pretix",
+  "number": 6300,
+  "url": "https://github.com/pretix/pretix/pull/6300",
+  "title": "Update mt-940 requirement from ==4.30.* to ==5.0.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 75,
+    "version": "5.0.0"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 75,
+    "version": "5.0.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-06-22T18:13:05Z",
+  "ci": "failure",
+  "head": "d42d8bf1c0d3f8dc4dd0cf31a4e8ee0628d0637e",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "bump-not-reproduced"
+}

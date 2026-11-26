@@ -230,7 +230,9 @@ def install(deps: list[str], target: Path) -> list[str]:
         # exact pins as constraints, or a later package drags in the newest version of the
         # library being compared (e.g. alembic pulling SQLAlchemy 2 into the "before" env).
         constraints = target.parent / f"{target.name}-constraints.txt"
-        constraints.write_text("\n".join(d for d in deps if "==" in d) + "\n", encoding="utf-8")
+        # pip rejects constraints with extras ("Django[argon2]==5.2.*"), which would fail every install
+        pins = (re.sub(r"\[[^\]]*\]", "", d) for d in deps if "==" in d)
+        constraints.write_text("\n".join(pins) + "\n", encoding="utf-8")
         for d in deps:
             cmd = [*pip, "--upgrade", "-c", str(constraints), d]
             if subprocess.run(cmd, capture_output=True, text=True, timeout=900).returncode:

@@ -1,0 +1,33 @@
+{
+  "lib": "celery",
+  "import": "celery",
+  "repo": "pretix/pretix",
+  "number": 6805,
+  "url": "https://github.com/pretix/pretix/pull/6805",
+  "title": "Update celery requirement from ==5.6.* to ==5.7.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 74,
+    "version": "5.6.3"
+  },
+  "new": {
+    "failed": [
+      "celery==5.7.*",
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 74,
+    "version": null
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-20T18:13:20Z",
+  "ci": "failure",
+  "head": "da3710cf95113e393a29588fedf16c6d23acab4b",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "bump-not-reproduced"
+}

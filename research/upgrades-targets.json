@@ -1,0 +1,173 @@
+[
+  {
+    "lib": "celery",
+    "import": "celery",
+    "repo": "pretix/pretix",
+    "number": 6805,
+    "url": "https://github.com/pretix/pretix/pull/6805",
+    "title": "Update celery requirement from ==5.6.* to ==5.7.*",
+    "old": "5.6.*",
+    "new": "5.7.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-20T18:13:20Z",
+    "ci": "failure",
+    "head": "da3710cf95113e393a29588fedf16c6d23acab4b",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "pycryptodome",
+    "import": "Crypto",
+    "repo": "pretix/pretix",
+    "number": 6793,
+    "url": "https://github.com/pretix/pretix/pull/6793",
+    "title": "Update pycryptodome requirement from ==3.24.* to ==4.5.*",
+    "old": "3.24.*",
+    "new": "4.5.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T18:14:43Z",
+    "ci": "success",
+    "head": "767344b52f4c7692078aa1b871c11fc23a6b5bf2",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "django-scopes",
+    "import": "django_scopes",
+    "repo": "pretix/pretix",
+    "number": 6791,
+    "url": "https://github.com/pretix/pretix/pull/6791",
+    "title": "Update django-scopes requirement from ==2.1.* to ==2.2.*",
+    "old": "2.1.*",
+    "new": "2.2.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-18T18:13:02Z",
+    "ci": "failure",
+    "head": "a60cdeee5e902cf90c0dee7b462dd22dded44568",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "stripe",
+    "import": "stripe",
+    "repo": "pretix/pretix",
+    "number": 6785,
+    "url": "https://github.com/pretix/pretix/pull/6785",
+    "title": "Update stripe requirement from ==7.9.* to ==17.0.*",
+    "old": "7.9.*",
+    "new": "17.0.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-11-17T18:16:17Z",
+    "ci": "success",
+    "head": "53175c9c539487052aa584a33709c3d8470ce8d0",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "django-phonenumber-field",
+    "import": "phonenumber_field",
+    "repo": "pretix/pretix",
+    "number": 6702,
+    "url": "https://github.com/pretix/pretix/pull/6702",
+    "title": "Update django-phonenumber-field requirement from ==8.5.* to ==9.0.*",
+    "old": "8.5.*",
+    "new": "9.0.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-26T18:14:01Z",
+    "ci": "success",
+    "head": "b9799a85740a957fdd845ec212f446405b33ad52",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "oauthlib",
+    "import": "oauthlib",
+    "repo": "pretix/pretix",
+    "number": 6633,
+    "url": "https://github.com/pretix/pretix/pull/6633",
+    "title": "Update oauthlib requirement from ==3.3.* to ==4.0.*",
+    "old": "3.3.*",
+    "new": "4.0.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-10-01T18:14:13Z",
+    "ci": "success",
+    "head": "038aed319331a704dc40f684e6e0f25528128ed9",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "redis",
+    "import": "redis",
+    "repo": "pretix/pretix",
+    "number": 6444,
+    "url": "https://github.com/pretix/pretix/pull/6444",
+    "title": "Update redis requirement from ==7.4.* to ==8.1.*",
+    "old": "7.4.*",
+    "new": "8.1.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-08-03T18:16:01Z",
+    "ci": "success",
+    "head": "e405f0f6d4e0af1c80f2db72cc09d739c6adf2b9",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "django-oauth-toolkit",
+    "import": "oauth2_provider",
+    "repo": "pretix/pretix",
+    "number": 6422,
+    "url": "https://github.com/pretix/pretix/pull/6422",
+    "title": "Update django-oauth-toolkit requirement from ==2.3.* to ==3.4.*",
+    "old": "2.3.*",
+    "new": "3.4.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-07-24T18:13:51Z",
+    "ci": "failure",
+    "head": "6343c5c245c0067b1411a59bca85db1c52be8b76",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  },
+  {
+    "lib": "mt-940",
+    "import": "mt940",
+    "repo": "pretix/pretix",
+    "number": 6300,
+    "url": "https://github.com/pretix/pretix/pull/6300",
+    "title": "Update mt-940 requirement from ==4.30.* to ==5.0.*",
+    "old": "4.30.*",
+    "new": "5.0.*",
+    "state": "OPEN",
+    "merged": false,
+    "created": "2026-06-22T18:13:05Z",
+    "ci": "failure",
+    "head": "d42d8bf1c0d3f8dc4dd0cf31a4e8ee0628d0637e",
+    "dependency_files": [
+      "pyproject.toml"
+    ],
+    "stars": 2581
+  }
+]

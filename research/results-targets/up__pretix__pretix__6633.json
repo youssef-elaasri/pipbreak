@@ -1,0 +1,36 @@
+{
+  "lib": "oauthlib",
+  "import": "oauthlib",
+  "repo": "pretix/pretix",
+  "number": 6633,
+  "url": "https://github.com/pretix/pretix/pull/6633",
+  "title": "Update oauthlib requirement from ==3.3.* to ==4.0.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "3.3.1"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "4.0.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-01T18:14:13Z",
+  "ci": "success",
+  "head": "038aed319331a704dc40f684e6e0f25528128ed9",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "ok",
+  "findings_before": 208,
+  "findings_after": 208,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

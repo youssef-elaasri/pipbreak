@@ -1,0 +1,36 @@
+{
+  "lib": "django-scopes",
+  "import": "django_scopes",
+  "repo": "pretix/pretix",
+  "number": 6791,
+  "url": "https://github.com/pretix/pretix/pull/6791",
+  "title": "Update django-scopes requirement from ==2.1.* to ==2.2.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 74,
+    "version": "2.1.0"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 74,
+    "version": "2.2.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-18T18:13:02Z",
+  "ci": "failure",
+  "head": "a60cdeee5e902cf90c0dee7b462dd22dded44568",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "ok",
+  "findings_before": 206,
+  "findings_after": 206,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

@@ -1,0 +1,36 @@
+{
+  "lib": "django-phonenumber-field",
+  "import": "phonenumber_field",
+  "repo": "pretix/pretix",
+  "number": 6702,
+  "url": "https://github.com/pretix/pretix/pull/6702",
+  "title": "Update django-phonenumber-field requirement from ==8.5.* to ==9.0.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "8.5.0"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "9.0.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-10-26T18:14:01Z",
+  "ci": "success",
+  "head": "b9799a85740a957fdd845ec212f446405b33ad52",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "ok",
+  "findings_before": 208,
+  "findings_after": 208,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

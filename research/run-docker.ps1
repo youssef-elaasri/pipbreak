@@ -9,7 +9,7 @@
 # Neither stage gets credentials or sees your files: only the sample (read-only), a Docker volume
 # for checkouts, and the results folder.
 param(
-    [ValidateSet("agents", "upgrades", "open", "known")][string]$Study = "agents",
+    [ValidateSet("agents", "upgrades", "open", "targets", "known")][string]$Study = "agents",
     [string]$Python = "3.13",
     [string]$Only,
     [int]$Limit
@@ -22,6 +22,7 @@ $script, $sample, $results = switch ($Study) {
     "agents"   { "/app/research/mine.py", "sample.json", "results" }
     "upgrades" { "/app/research/upgrades.py", "upgrades.json", "results-upgrades" }
     "open"     { "/app/research/upgrades.py", "upgrades-open.json", "results-open" }  # still-open bump PRs
+    "targets"  { "/app/research/upgrades.py", "upgrades-targets.json", "results-targets" }  # hand-picked PRs
     "known"    { "/app/research/known_breaks.py", "known_breaks.py", "results-known" }  # cases live in the script
 }
 

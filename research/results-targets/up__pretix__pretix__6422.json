@@ -1,0 +1,36 @@
+{
+  "lib": "django-oauth-toolkit",
+  "import": "oauth2_provider",
+  "repo": "pretix/pretix",
+  "number": 6422,
+  "url": "https://github.com/pretix/pretix/pull/6422",
+  "title": "Update django-oauth-toolkit requirement from ==2.3.* to ==3.4.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "2.3.0"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "3.4.1"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-07-24T18:13:51Z",
+  "ci": "failure",
+  "head": "6343c5c245c0067b1411a59bca85db1c52be8b76",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "ok",
+  "findings_before": 208,
+  "findings_after": 208,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

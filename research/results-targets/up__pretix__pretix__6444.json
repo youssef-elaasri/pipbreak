@@ -1,0 +1,36 @@
+{
+  "lib": "redis",
+  "import": "redis",
+  "repo": "pretix/pretix",
+  "number": 6444,
+  "url": "https://github.com/pretix/pretix/pull/6444",
+  "title": "Update redis requirement from ==7.4.* to ==8.1.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "7.4.1"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 76,
+    "version": "8.1.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-08-03T18:16:01Z",
+  "ci": "success",
+  "head": "e405f0f6d4e0af1c80f2db72cc09d739c6adf2b9",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "ok",
+  "findings_before": 208,
+  "findings_after": 208,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}

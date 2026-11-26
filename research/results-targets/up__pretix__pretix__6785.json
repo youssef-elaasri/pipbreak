@@ -1,0 +1,36 @@
+{
+  "lib": "stripe",
+  "import": "stripe",
+  "repo": "pretix/pretix",
+  "number": 6785,
+  "url": "https://github.com/pretix/pretix/pull/6785",
+  "title": "Update stripe requirement from ==7.9.* to ==17.0.*",
+  "old": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 74,
+    "version": "7.9.0"
+  },
+  "new": {
+    "failed": [
+      "django-formset-js-improved==0.5.0.5"
+    ],
+    "declared": 74,
+    "version": "17.0.0"
+  },
+  "state": "OPEN",
+  "merged": false,
+  "created": "2026-11-17T18:16:17Z",
+  "ci": "success",
+  "head": "53175c9c539487052aa584a33709c3d8470ce8d0",
+  "dependency_files": [
+    "pyproject.toml"
+  ],
+  "stars": 2581,
+  "status": "ok",
+  "findings_before": 206,
+  "findings_after": 206,
+  "introduced": [],
+  "introduced_in_dependencies": []
+}
